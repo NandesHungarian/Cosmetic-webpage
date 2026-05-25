@@ -1,0 +1,143 @@
+<!-- Scroll-reveal + Count-up + Marquee JS -->
+<script>
+// ══ 1. SCROLL REVEAL ══
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('revealed');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// ══ 2. COUNT-UP ══
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+function countUp(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 2000;
+  let start = null;
+  function frame(ts) {
+    if (!start) start = ts;
+    const progress = Math.min((ts - start) / duration, 1);
+    const val = Math.floor(easeOut(progress) * target);
+    el.textContent = val + suffix;
+    if (progress < 1) requestAnimationFrame(frame);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(frame);
+}
+const countEls = document.querySelectorAll('[data-target]');
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      countUp(e.target);
+      countObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+countEls.forEach(el => countObs.observe(el));
+
+// ══ 3. STAGGERED GALLERY ══
+const galleryItems = document.querySelectorAll('.gallery-item');
+const galleryObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('gallery-visible');
+      galleryObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+galleryItems.forEach(el => galleryObs.observe(el));
+</script>
+
+<style is:global>
+/* ══ SCROLL REVEAL ══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal-left.revealed { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal-right.revealed { opacity: 1; transform: translateX(0); }
+
+/* ══ STAGGERED GALLERY ══ */
+.gallery-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.gallery-item:nth-child(1) { transition-delay: 0ms; }
+.gallery-item:nth-child(2) { transition-delay: 120ms; }
+.gallery-item:nth-child(3) { transition-delay: 240ms; }
+.gallery-item:nth-child(4) { transition-delay: 360ms; }
+.gallery-item:nth-child(5) { transition-delay: 480ms; }
+.gallery-item:nth-child(6) { transition-delay: 600ms; }
+.gallery-item:nth-child(7) { transition-delay: 720ms; }
+.gallery-item.gallery-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══ MARQUEE ══ */
+.marquee-wrap {
+  overflow: hidden;
+  width: 100%;
+  background: var(--beige);
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(168,201,106,0.25);
+  border-bottom: 1px solid rgba(168,201,106,0.25);
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 2.5rem;
+  font-family: var(--f-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  white-space: nowrap;
+}
+.marquee-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+</style>
