@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const locale = 'en';
+
+const posts = [
+  {
+    id: 'trends-2026',
+    img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&q=85',
+    tag: 'Trends',
+    date: 'May 25, 2026',
+    readTime: '5 min read',
+    title: 'Where is Cosmetology Headed in 2026?',
+    excerpt: 'Skinimalism, personalisation and smart technology are reshaping the beauty industry. Here is what it means for your skin.',
+    body: [
+      'Cosmetology today is far more than choosing the right cream. Over the past few years, the profession has shifted decisively toward skincare that is more conscious, more personalised, and more scientifically grounded. This shift is visible to everyday clients: more and more people are looking for solutions that do not promise overnight miracles, but genuinely adapt to their skin type, lifestyle and sensitivities.',
+      'One of the strongest emerging trends is skinimalism — the philosophy of using fewer, but more intentionally chosen products. Instead of the old "more is more" approach, many professionals today advocate for a simpler, well-considered routine. The logic is sound: too many ingredients, too many layers or incompatible products can easily irritate the skin, compromise its barrier, and ultimately achieve the opposite of what was intended.',
+      'Alongside this, personalisation is becoming increasingly important. The same cream, the same treatment or the same active ingredient does not work the same way for everyone. The profession is therefore moving toward routines that take into account a client\'s skin type, specific concerns, age, sensitivity and daily habits.',
+      'Technology is also making a more visible entrance. Digital skin assessment tools, smarter diagnostic systems and innovations in targeted ingredient delivery are all entering the picture. Crucially, however, these tools complement rather than replace the skilled aesthetician.',
+      'The future of cosmetology is not about excess. It is about intention. Fewer promises, more real care — and that is where a skilled aesthetician truly makes a difference.',
+    ],
+    sources: [
+      { label: 'Artificial intelligence in cosmetic dermatology (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/39188183/' },
+      { label: 'Nanocarriers in skincare: current trends (PubMed, 2025)', url: 'https://pubmed.ncbi.nlm.nih.gov/41014067/' },
+      { label: 'Evaluating efficacy and innovation in skin care (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12408269/' },
+    ]
+  },
+  {
+    id: 'efficacy',
+    img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=1200&q=85',
+    tag: 'Science',
+    date: 'May 25, 2026',
+    readTime: '6 min read',
+    title: 'How Effective Are Cosmetic Products, Really?',
+    excerpt: 'There is often a significant gap between marketing claims and scientific evidence. Here is what actually matters when choosing skincare.',
+    body: [
+      'Many people still buy cosmetic products as if the promise on the packaging were itself a guarantee of results. The reality is considerably more complex: a product\'s effectiveness depends not only on what it contains, but on the concentration, the formulation, and the skin type it is used on.',
+      'Scientific studies increasingly show that certain ingredients genuinely can improve skin hydration, elasticity or the appearance of fine lines — but visible results take time, consistency and the right placement within a routine. This is especially important to understand when clients expect fast, immediate change.',
+      'The role of the aesthetician is therefore not simply to recommend a product, but to explain that measurable improvement requires patience, regular use, and thoughtful integration into a daily routine. In many cases, the best outcome comes not from a "miracle cream", but from a well-designed home care routine combined with professional treatment.',
+      'One particularly active area of research is botanical and fermented ingredients — multiple studies show promising improvements in hydration, texture and elasticity. However, it is always worth distinguishing between marketing language and verified evidence.',
+      'So next time you choose a product, ask: is there real evidence behind it, and does it suit my skin\'s current condition? A skilled aesthetician who knows your skin is the most reliable guide.',
+    ],
+    sources: [
+      { label: 'Efficacy of fermented lysate in anti-aging cosmetics (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/37977853/' },
+      { label: 'Anti-wrinkle efficacy of phenolic acids (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/38943252/' },
+      { label: 'Efficacy and Safety of Plant-Based Products (PubMed, 2025)', url: 'https://pubmed.ncbi.nlm.nih.gov/39654386/' },
+    ]
+  },
+  {
+    id: 'sustainability',
+    img: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=1200&q=85',
+    tag: 'Sustainability',
+    date: 'May 25, 2026',
+    readTime: '5 min read',
+    title: 'Sustainable Cosmetics: A Passing Trend or a Lasting Direction?',
+    excerpt: 'The words "natural" and "organic" do not always mean what we think. Let us look at what responsible skincare actually means.',
+    body: [
+      'Sustainability is no longer an optional "beauty extra" — it has become one of the industry\'s most serious directions of development. Recent reviews show that the profession is paying increasing attention to lower environmental impact, ethical sourcing of ingredients, energy-efficient operations and recyclable packaging.',
+      'This shift affects not only manufacturers, but salons and clients alike. More and more consumers are asking whether a product is environmentally responsible, where its ingredients come from, and whether it is safe over the long term.',
+      'It is important, however, not to conflate sustainability with the labels "natural" or "organic". An ingredient can be plant-derived and still be irritating or poorly tolerated — and a well-designed synthetic ingredient can be safer and more stable. One does not automatically imply the other.',
+      'Modern cosmetology therefore no longer thinks in black-and-white terms. The real question is how to use products that are simultaneously effective, safe, and responsibly produced.',
+      'When a salon works with sustainable products and communicates this transparently, it is also a competitive advantage — because the conscious consumer is actively looking for exactly this.',
+    ],
+    sources: [
+      { label: 'Sustainability in Cosmetic Dermatology (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12454804/' },
+      { label: 'Sustainable cosmetic ingredient alternatives (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12877994/' },
+      { label: 'From plant genetic resources to cosmetic active ingredients (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12495392/' },
+    ]
+  },
+];
+---
+
+<Layout locale={locale} title="Blog — Skincare Tips & Trends" description="Expert tips, treatment guides and skincare trends straight from the treatment room.">
+
+  <section class="blog-hero">
+    <div class="bh-inner">
+      <span class="sec-label">Tips & Guides</span>
+      <h1>Skincare Blog</h1>
+      <div class="bh-line"></div>
+      <p>Expert tips, treatment guides and skincare trends straight from the treatment room.</p>
+    </div>
+  </section>
+
+  <section class="blog-list-sec">
+    <div class="blog-list-inner">
+      {posts.map((p, i) => (
+        <article class="bpost" id={p.id}>
+          <div class="bpost-img">
+            <img src={p.img} alt={p.title} loading={i === 0 ? 'eager' : 'lazy'} />
+            <span class="bpost-tag">{p.tag}</span>
+          </div>
+          <div class="bpost-content">
+            <div class="bpost-meta">
+              <span class="bpost-date">{p.date}</span>
+              <span class="bpost-sep">·</span>
+              <span class="bpost-read">{p.readTime}</span>
+            </div>
+            <h2 class="bpost-title">{p.title}</h2>
+            <p class="bpost-excerpt">{p.excerpt}</p>
+            <div class="bpost-body">
+              {p.body.map((para: string) => <p>{para}</p>)}
+            </div>
+            <div class="bpost-sources">
+              <p class="sources-label">Scientific sources</p>
+              <ul>
+                {p.sources.map((s: any) => (
+                  <li><a href={s.url} target="_blank" rel="noopener noreferrer">{s.label} ↗</a></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="blog-cta-sec">
+    <div class="blog-cta-inner">
+      <p class="blog-cta-label">Personal consultation</p>
+      <h2>Have a question about your skin?</h2>
+      <p class="blog-cta-sub">Book a free consultation and we will put together a personalised skincare plan just for you.</p>
+      <a href="/en#contact" class="btn-primary">Book an appointment</a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+.blog-hero {
+  background: var(--beige);
+  padding: clamp(4rem, 9vw, 8rem) 2rem clamp(3rem, 6vw, 6rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.blog-hero::before {
+  content: '';
+  position: absolute;
+  top: -40%; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,201,106,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bh-inner { max-width: 640px; margin: 0 auto; position: relative; }
+.bh-inner h1 { font-size: clamp(2.4rem, 6vw, 4rem); color: var(--sage); margin: 0.5rem 0; }
+.bh-line { width: 50px; height: 2px; background: var(--green); margin: 1.25rem auto; border-radius: 2px; }
+.bh-inner p { color: var(--muted); font-size: 1rem; line-height: 1.75; max-width: 480px; margin: 0 auto; }
+.blog-list-sec { background: var(--cream); padding: clamp(3rem, 7vw, 6rem) 2rem; }
+.blog-list-inner { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+.bpost { display: grid; grid-template-columns: 1fr 1.4fr; gap: 0; border-bottom: 1px solid rgba(110,132,103,0.15); padding: clamp(2.5rem, 5vw, 4rem) 0; align-items: start; }
+.bpost:first-child { padding-top: 0; }
+.bpost:last-child { border-bottom: none; }
+.bpost-img { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; margin-right: 3rem; flex-shrink: 0; }
+.bpost-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.bpost:hover .bpost-img img { transform: scale(1.04); }
+.bpost-tag { position: absolute; top: 0.75rem; left: 0.75rem; background: var(--green); color: #fff; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 3px; }
+.bpost-content { padding: 0.25rem 0; }
+.bpost-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+.bpost-date, .bpost-read { font-size: 0.72rem; color: var(--muted); font-weight: 400; }
+.bpost-sep { color: var(--green); font-size: 0.9rem; }
+.bpost-title { font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--sage); line-height: 1.25; margin-bottom: 0.85rem; }
+.bpost-excerpt { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.5rem; font-style: italic; }
+.bpost-body { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+.bpost-body p { font-size: 0.92rem; color: var(--ink); line-height: 1.85; font-weight: 300; }
+.bpost-sources { padding-top: 1.25rem; border-top: 1px solid rgba(110,132,103,0.15); }
+.sources-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+.bpost-sources ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+.bpost-sources li a { font-size: 0.75rem; color: var(--sage); text-decoration: none; transition: color var(--ease); }
+.bpost-sources li a:hover { color: var(--green); }
+.blog-cta-sec { background: var(--sage); padding: clamp(3.5rem, 7vw, 6rem) 2rem; text-align: center; }
+.blog-cta-inner { max-width: 560px; margin: 0 auto; }
+.blog-cta-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 0.75rem; }
+.blog-cta-inner h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; margin-bottom: 1rem; }
+.blog-cta-sub { color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.75; margin-bottom: 2rem; }
+@media (max-width: 680px) {
+  .bpost { grid-template-columns: 1fr; gap: 1.5rem; }
+  .bpost-img { margin-right: 0; aspect-ratio: 16/9; }
+  .blog-hero { padding: 3rem 1.25rem 2.5rem; }
+  .blog-list-sec { padding: 2.5rem 1.25rem; }
+}
+</style>
