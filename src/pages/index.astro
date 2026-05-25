@@ -1,4 +1,3 @@
----
 import Layout from '../layouts/Layout.astro';
 import Animations from '../components/Animations.astro';
 import { getSection } from '../i18n/utils';
@@ -19,9 +18,69 @@ const steps = [
 ];
 
 const posts = [
-  { img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80', tag: 'Bőrápolás', title: 'Miért fontos a napi hidratálás?', excerpt: 'A megfelelő nedvességtartalom az egészséges bőr alapja. Megmutatjuk, hogyan érd el otthon is.', date: '2025. máj. 10.' },
-  { img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80', tag: 'QMS Medicosmetics', title: 'A QMS technológia titka', excerpt: 'Hogyan működik a kollagénalapokra épülő kozmetikai rendszer, és miért ad látható eredményt?', date: '2025. ápr. 22.' },
-  { img: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80', tag: 'Tanácsok', title: 'Tavasz után: bőrmegújulás', excerpt: 'A teli hónapok után bőröd megkívánja a feltöltődést. Íme a legjobb tavaszi rutinok.', date: '2025. márc. 5.' },
+  {
+    img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80',
+    tag: 'Trendek',
+    date: '2026. máj. 25.',
+    title: 'Hová tart a kozmetika 2026-ban?',
+    excerpt: 'A szakma ma már nem csak krémekről szól — a személyre szabás, a skinimalizmus és az okos technológia együtt formálja a bőrápolás jövőjét.',
+    body: `A kozmetika ma már messze nem csak a „szépítő kezelésekről" szól. Az elmúlt években a szakma látványosan elmozdult abba az irányba, hogy a bőrápolás egyszerre legyen tudatosabb, személyre szabottabb és tudományosabban megalapozott. Ez a változás a hétköznapi vendégek számára is jól látható: egyre többen keresnek olyan megoldásokat, amelyek nem ígérnek csodát egyik napról a másikra, hanem valóban a bőr állapotához, életmódjához és érzékenységéhez igazodnak.
+
+Az egyik legerősebb irány a skinimalizmus, vagyis a kevesebb, de okosan megválasztott termékek használata. A korábbi „minél több, annál jobb" szemlélet helyett ma sok szakember azt vallja, hogy a bőr gyakran jobban reagál egy egyszerűbb, átgondolt rutinra. Ennek van is logikája: ha túl sok hatóanyagot, túl sok réteget vagy egymással nehezen összeegyeztethető terméket használunk, a bőr könnyen irritálttá válhat, a barrierje sérülhet, és végül pont az ellenkező hatást érjük el, mint amit szerettünk volna.
+
+Ezzel párhuzamosan egyre fontosabbá válik a személyre szabás. Ugyanaz a krém, ugyanaz a kezelés vagy ugyanaz a hatóanyag nem működik mindenkinél egyformán. A szakma ezért ma már sokkal inkább arra törekszik, hogy a vendég bőrtípusát, bőrproblémáját, életkorát, érzékenységét és napi szokásait is figyelembe vegye.
+
+A technológia közben egyre látványosabban belép ebbe a világba. A bőrértékelésben megjelentek a digitális eszközök, az intelligensebb diagnosztikai rendszerek és a hatóanyagok célzottabb bejuttatására szolgáló fejlesztések is. Fontos azonban látni, hogy ezek nem helyettesítik a kozmetikust, hanem segítik őt.
+
+A kozmetika jövője tehát nem a túlzásokról szól, hanem a tudatosságról. Kevesebb ígéret, több valódi figyelem — és ez az, amiben egy jó kozmetikus igazán számít.`,
+    sources: [
+      { label: 'Artificial intelligence in cosmetic dermatology (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/39188183/' },
+      { label: 'Nanocarriers in skincare: current trends (PubMed, 2025)', url: 'https://pubmed.ncbi.nlm.nih.gov/41014067/' },
+      { label: 'Evaluating efficacy and innovation in skin care (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12408269/' },
+    ]
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80',
+    tag: 'Szakmai',
+    date: '2026. máj. 25.',
+    title: 'Mennyire hatásosak valójában a kozmetikai termékek?',
+    excerpt: 'A dobozon szereplő ígéret és a valódi tudományos bizonyíték között sokszor komoly a szakadék. Mutatjuk, mire érdemes figyelni.',
+    body: `Sokan ma is úgy vesznek kozmetikumot, mintha a dobozon szereplő ígéret önmagában garancia lenne az eredményre. A valóság ennél jóval összetettebb: egy termék hatásossága nemcsak attól függ, mi van benne, hanem attól is, milyen koncentrációban, milyen formulában, és milyen bőrtípuson használják.
+
+A tudományos vizsgálatok egyre gyakrabban mutatják meg, hogy bizonyos összetevők valóban képesek javítani a bőr hidratáltságát, rugalmasságát vagy a ráncok megjelenését — de az eredmény nem mindig látványos az első napon vagy akár az első héten. Ez különösen fontos akkor, amikor a vendégek gyors, azonnali változást várnak.
+
+A kozmetikus szerepe ezért nem egyszerűen az, hogy terméket ajánljon, hanem az, hogy elmagyarázza: a bőrön mérhető javulás időt, következetes használatot és megfelelő rutinba illesztést igényel. Sok esetben a legjobb eredmény nem egy „csodakrémből", hanem egy jól felépített otthoni ápolási rendszerből és a professzionális kezelésből együtt születik.
+
+Különösen érdekes terület a botanikai eredetű hatóanyagok és a fermentált összetevők kutatása — több tanulmány ígéretes javulást mutat hidratáltság, textúra és rugalmasság terén. Ugyanakkor a marketing szöveg és a bizonyíték között mindig érdemes különbséget tenni, mert nem minden „természetes" formula egyformán jól vizsgált.
+
+Ha tehát legközelebb terméket választasz, érdemes megkérdezni: van-e mögötte valódi vizsgálat, és illik-e az én bőröm aktuális állapotához? Ebben pontosan az a kozmetikus tud segíteni, aki ismeri a bőrödet.`,
+    sources: [
+      { label: 'Efficacy of fermented lysate in anti-aging cosmetics (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/37977853/' },
+      { label: 'Anti-wrinkle efficacy of phenolic acids (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/38943252/' },
+      { label: 'Efficacy and Safety of Plant-Based Products (PubMed, 2025)', url: 'https://pubmed.ncbi.nlm.nih.gov/39654386/' },
+    ]
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',
+    tag: 'Fenntarthatóság',
+    date: '2026. máj. 25.',
+    title: 'Fenntartható kozmetika: divat vagy tartós irány?',
+    excerpt: 'A „természetes" és „bio" jelzők mögött nem mindig van, amit gondolunk. Nézzük meg, mit jelent valójában a felelős bőrápolás.',
+    body: `A fenntarthatóság ma már nem külön „szépészeti extra", hanem a kozmetikai ipar egyik komoly fejlődési iránya. A friss áttekintések szerint a szakma egyre nagyobb figyelmet fordít az alacsonyabb környezeti terhelésre, az etikus alapanyag-beszerzésre, az energiahatékony működésre és az újrahasznosítható csomagolásokra.
+
+Ez a változás nemcsak a gyártókat érinti, hanem a szalonokat és a vendégeket is. Egyre több fogyasztó kérdez rá arra, hogy egy termék mennyire környezetbarát, honnan származik az összetevő, és mennyire biztonságos hosszú távon.
+
+Fontos azonban, hogy a fenntarthatóságot ne keverjük össze automatikusan a „természetes" vagy „bio" jelzővel. Egy alapanyag lehet növényi eredetű, de ettől még nem feltétlenül jobb vagy kevésbé irritáló — és egy jól megtervezett szintetikus összetevő is lehet biztonságosabb és stabilabb.
+
+A modern kozmetika ezért ma már nem fekete-fehér módon gondolkodik. A kérdés inkább az, hogyan lehet egyszerre hatékony, biztonságos és felelősen előállított termékeket használni. Ez a szemlélet hosszú távon valószínűleg még fontosabb lesz, mert a piac és a fogyasztók is egyre inkább ebbe az irányba mozdulnak.
+
+Ha egy szalon fenntartható termékekkel dolgozik és ezt átláthatóan kommunikálja, az ma már versenyelőnyt is jelent — mert a tudatos vásárló pontosan ezt keresi.`,
+    sources: [
+      { label: 'Sustainability in Cosmetic Dermatology (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12454804/' },
+      { label: 'Sustainable cosmetic ingredient alternatives (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12877994/' },
+      { label: 'From plant genetic resources to cosmetic active ingredients (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12495392/' },
+    ]
+  },
 ];
 ---
 
@@ -182,7 +241,7 @@ const posts = [
         <p class="reveal reveal-delay-2">Szakmai tippek, kezelési útmutatók és bőrápolási trendek közvetlenül a rendelőből.</p>
       </div>
       <div class="blog-grid">
-        {posts.map((p) => (
+        {posts.map((p, i) => (
           <article class="blog-card gallery-item">
             <div class="blog-img-wrap">
               <img src={p.img} alt={p.title} loading="lazy" />
@@ -192,13 +251,37 @@ const posts = [
               <p class="blog-date">{p.date}</p>
               <h3>{p.title}</h3>
               <p class="blog-excerpt">{p.excerpt}</p>
-              <a href="#" class="blog-link">Tovább olvasom →</a>
+              <button class="blog-link" onclick={`document.getElementById('modal-${i}').showModal()`}>Tovább olvasom →</button>
             </div>
           </article>
         ))}
       </div>
     </div>
   </section>
+
+  <!-- BLOG MODALS -->
+  {posts.map((p, i) => (
+    <dialog id={`modal-${i}`} class="blog-modal">
+      <div class="modal-inner">
+        <button class="modal-close" onclick={`document.getElementById('modal-${i}').close()`} aria-label="Bezárás">✕</button>
+        <span class="blog-tag modal-tag">{p.tag}</span>
+        <p class="blog-date">{p.date}</p>
+        <h2 class="modal-title">{p.title}</h2>
+        <img src={p.img} alt={p.title} class="modal-img" loading="lazy" />
+        <div class="modal-body">
+          {p.body.split('\n\n').map((para: string) => <p>{para}</p>)}
+        </div>
+        <div class="modal-sources">
+          <h4>Források</h4>
+          <ul>
+            {p.sources.map((s: any) => (
+              <li><a href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </dialog>
+  ))}
 
   <!-- VÉLEMÉNYEK -->
   <section class="sec testi-sec">
@@ -341,8 +424,23 @@ const posts = [
 .blog-date { font-size: 0.7rem; color: var(--muted); }
 .blog-body h3 { font-size: 1.1rem; color: var(--sage); line-height: 1.3; }
 .blog-excerpt { font-size: 0.85rem; color: var(--muted); line-height: 1.6; flex: 1; }
-.blog-link { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-top: 0.5rem; transition: color var(--ease); }
+.blog-link { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-top: 0.5rem; transition: color var(--ease); background: none; border: none; cursor: pointer; padding: 0; font-family: inherit; }
 .blog-link:hover { color: var(--sage); }
+/* MODAL */
+.blog-modal { border: none; border-radius: 12px; padding: 0; max-width: 680px; width: 92vw; max-height: 88vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.18); }
+.blog-modal::backdrop { background: rgba(60,75,60,0.45); backdrop-filter: blur(3px); }
+.modal-inner { padding: 2.5rem 2rem 2rem; position: relative; }
+.modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--muted); transition: color var(--ease); }
+.modal-close:hover { color: var(--sage); }
+.modal-tag { position: static; display: inline-block; margin-bottom: 0.5rem; }
+.modal-title { font-size: clamp(1.4rem,3vw,2rem); color: var(--sage); margin: 0.5rem 0 1rem; line-height: 1.3; }
+.modal-img { width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 1.5rem; }
+.modal-body p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+.modal-sources { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(110,132,103,0.2); }
+.modal-sources h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+.modal-sources ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.modal-sources li a { font-size: 0.78rem; color: var(--green); text-decoration: underline; word-break: break-all; }
+.modal-sources li a:hover { color: var(--sage); }
 .testi-sec { background: var(--sage); }
 .testi-sec .sec-label { color: rgba(255,255,255,0.7); }
 .testi-sec .sec-head h2 { color: #fff; }
@@ -381,5 +479,6 @@ const posts = [
 }
 @media (max-width: 480px) {
   .hm-logo-wrap { height: 55vw; }
+  .modal-inner { padding: 2rem 1.25rem 1.5rem; }
 }
 </style>
