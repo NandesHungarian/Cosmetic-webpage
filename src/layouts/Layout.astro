@@ -15,13 +15,13 @@ const footer = getSection<any>(locale, 'footer');
 const schema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'BeautySalon',
-  name: 'Hancz Marianna Sz\u00e9ps\u00e9gterapeuta',
+  name: 'Hancz Marianna Szépségterapeuta',
   url: 'https://szepsegterapeuta.hu',
   telephone: '+36-20-339-3399',
   email: 'info@szepsegterapeuta.hu',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Dolgos utca 2. 6B l\u00e9pcs\u0151h\u00e1z',
+    streetAddress: 'Dolgos utca 2. 6B lépcsőház',
     addressLocality: 'Budapest',
     postalCode: '1126',
     addressCountry: 'HU'
@@ -40,50 +40,36 @@ const schema = JSON.stringify({
   <title>{title}</title>
   <link rel="canonical" href={`https://szepsegterapeuta.hu${localePath(locale)}`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <script type="application/ld+json" set:html={schema} />
 </head>
 
 <body>
-
-  <!-- NAV -->
   <header class="site-nav" id="site-nav">
     <div class="nav-wrap">
-
-      <!-- Bal: hamburger (csak mobilon) -->
-      <button class="burger" id="burger" aria-label="Men\u00fc" aria-expanded="false" aria-controls="mobile-menu">
+      <button class="burger" id="burger" aria-label="Menü" aria-expanded="false" aria-controls="mobile-menu">
         <span></span><span></span><span></span>
       </button>
-
-      <!-- K\u00f6z\u00e9p: nav linkek (desktop) -->
-      <nav class="desktop-nav" aria-label="F\u0151navig\u00e1ci\u00f3">
+      <a href={localePath(locale)} class="nav-logo" aria-label="Főoldal">
+        <img src="/logo.svg" alt="Szépségterapeuta" width="160" height="44" />
+      </a>
+      <nav class="desktop-nav" aria-label="Főnavigáció">
         <ul>
           <li><a href={`${localePath(locale)}#services`}>{nav.services}</a></li>
           <li><a href={`${localePath(locale)}#about`}>{nav.about}</a></li>
           <li><a href={`${localePath(locale)}#contact`}>{nav.contact}</a></li>
         </ul>
       </nav>
-
-      <!-- Jobb: logo -->
-      <a href={localePath(locale)} class="nav-logo" aria-label="F\u0151oldal">
-        <img src="/logo.svg" alt="Sz\u00e9ps\u00e9gterapeuta" width="150" height="42" />
-      </a>
-
-      <!-- Jobb: nyelvv\u00e1lt\u00f3 + CTA (desktop) -->
       <div class="nav-end">
         <div class="lang-row">
           {SUPPORTED_LOCALES.map(l => (
-            <a href={localePath(l)} class={`lbtn${l === locale ? ' on' : ''}`} hreflang={l}>
-              {l.toUpperCase()}
-            </a>
+            <a href={localePath(l)} class={`lbtn${l === locale ? ' on' : ''}`} hreflang={l}>{l.toUpperCase()}</a>
           ))}
         </div>
-        <a href={`${localePath(locale)}#contact`} class="cta-pill">{nav.book}</a>
+        <a href={`${localePath(locale)}#contact`} class="btn-primary">{nav.book}</a>
       </div>
-
     </div>
-
-    <!-- Mobil men\u00fc (burger megnyom\u00e1sra cs\u00faszik le) -->
     <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
       <ul>
         <li><a href={`${localePath(locale)}#services`}>{nav.services}</a></li>
@@ -92,27 +78,31 @@ const schema = JSON.stringify({
       </ul>
       <div class="mobile-lang">
         {SUPPORTED_LOCALES.map(l => (
-          <a href={localePath(l)} class={`lbtn${l === locale ? ' on' : ''}`} hreflang={l}>
-            {l.toUpperCase()}
-          </a>
+          <a href={localePath(l)} class={`lbtn${l === locale ? ' on' : ''}`} hreflang={l}>{l.toUpperCase()}</a>
         ))}
       </div>
-      <a href={`${localePath(locale)}#contact`} class="cta-pill mobile-cta">{nav.book}</a>
+      <a href={`${localePath(locale)}#contact`} class="btn-primary mobile-cta">{nav.book}</a>
     </div>
   </header>
 
   <main><slot /></main>
 
   <footer class="site-footer">
-    <p class="ft-quote">{footer.tagline}</p>
+    <div class="footer-logo">
+      <img src="/logo.svg" alt="Szépségterapeuta" width="140" height="38" />
+    </div>
+    <p class="ft-tagline">{footer.tagline}</p>
+    <div class="footer-links">
+      <a href="#services">{nav.services}</a>
+      <a href="#about">{nav.about}</a>
+      <a href="#contact">{nav.contact}</a>
+    </div>
     <p class="ft-copy">{footer.copyright}</p>
   </footer>
 
-  <!-- Burger JS -->
   <script>
     const burger = document.getElementById('burger');
-    const menu   = document.getElementById('mobile-menu');
-
+    const menu = document.getElementById('mobile-menu');
     burger?.addEventListener('click', () => {
       const open = burger.getAttribute('aria-expanded') === 'true';
       burger.setAttribute('aria-expanded', String(!open));
@@ -120,7 +110,6 @@ const schema = JSON.stringify({
       burger.classList.toggle('is-open', !open);
       menu?.classList.toggle('is-open', !open);
     });
-
     menu?.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         burger?.setAttribute('aria-expanded', 'false');
@@ -130,56 +119,48 @@ const schema = JSON.stringify({
       });
     });
   </script>
-
 </body>
 </html>
 
 <style is:global>
-  /* ── RESET & ALAP ─────────────────────────── */
   :root {
-    --c-gold:  #B89A6A;
-    --c-sage:  #7A8C72;
-    --c-cream: #FAF8F4;
-    --c-linen: #F0EBE1;
-    --c-stone: #E8E0D2;
-    --c-ink:   #1E1E1E;
-    --c-muted: #767068;
-    --f-serif: 'Cormorant Garamond', Georgia, serif;
-    --f-sans:  'Jost', system-ui, sans-serif;
-    --mw:      1160px;
+    --green:   #A8C96A;
+    --sage:    #6E8467;
+    --beige:   #EDE5D6;
+    --cream:   #FAF9F6;
+    --gray-lt: #F2F2F2;
+    --ink:     #2C2C2C;
+    --muted:   #7A7A7A;
+    --f-head:  'Playfair Display', Georgia, serif;
+    --f-body:  'Lato', system-ui, sans-serif;
+    --mw:      1200px;
     --ease:    0.3s ease;
-    --nav-h:   68px;
+    --nav-h:   70px;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
-  }
-
+  html, body { overflow-x: hidden; width: 100%; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: var(--f-sans);
+    font-family: var(--f-body);
     font-weight: 300;
-    background: var(--c-cream);
-    color: var(--c-ink);
+    background: var(--cream);
+    color: var(--ink);
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
-  h1,h2,h3,h4 { font-family: var(--f-serif); font-weight: 400; line-height: 1.2; }
+  h1, h2, h3, h4 { font-family: var(--f-head); font-weight: 400; line-height: 1.2; }
   img { max-width: 100%; height: auto; display: block; }
-  a { color: inherit; }
+  a { color: inherit; text-decoration: none; }
 
-  /* ── NAV ──────────────────────────────────── */
+  /* ── NAV ── */
   .site-nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 500;
-    background: rgba(250,248,244,0.96);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--c-stone);
+    background: rgba(250,249,246,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(168,201,106,0.2);
   }
   .nav-wrap {
     max-width: var(--mw); margin: 0 auto;
@@ -187,131 +168,133 @@ const schema = JSON.stringify({
     padding: 0 2rem;
     display: flex; align-items: center; gap: 2rem;
   }
-  .nav-logo { margin-left: auto; text-decoration: none; flex-shrink: 0; }
+  .nav-logo { flex-shrink: 0; }
+  .desktop-nav { margin-left: auto; }
   .desktop-nav ul { list-style: none; display: flex; gap: 2.5rem; }
   .desktop-nav a {
-    text-decoration: none;
-    font-size: 0.78rem; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--c-muted); transition: color var(--ease);
+    font-size: 0.8rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); transition: color var(--ease);
   }
-  .desktop-nav a:hover { color: var(--c-ink); }
-  .nav-end { display: flex; align-items: center; gap: 1.25rem; }
-
+  .desktop-nav a:hover { color: var(--sage); }
+  .nav-end { display: flex; align-items: center; gap: 1.5rem; margin-left: 2rem; }
   main { padding-top: var(--nav-h); }
 
-  /* ── NYELVVÁLTÓ ───────────────────────────── */
+  /* ── LANG ── */
   .lang-row { display: flex; gap: 0.1rem; }
   .lbtn {
-    font-family: var(--f-sans); font-size: 0.68rem; font-weight: 500;
-    letter-spacing: 0.08em; text-decoration: none;
-    color: var(--c-muted); padding: 0.3rem 0.45rem;
-    border-radius: 3px; transition: all var(--ease);
+    font-family: var(--f-body); font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--muted); padding: 0.3rem 0.4rem;
+    border-radius: 3px; transition: color var(--ease);
   }
-  .lbtn:hover { color: var(--c-ink); }
-  .lbtn.on { color: var(--c-gold); }
+  .lbtn:hover { color: var(--sage); }
+  .lbtn.on { color: var(--sage); }
 
-  /* ── GOMBOK ───────────────────────────────── */
-  .cta-pill {
-    display: inline-block; text-decoration: none;
-    background: var(--c-gold); color: #fff;
-    font-family: var(--f-sans); font-size: 0.75rem;
-    font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.65rem 1.6rem; border-radius: 2px;
+  /* ── GOMBOK ── */
+  .btn-primary {
+    display: inline-block;
+    background: var(--green); color: #fff;
+    font-family: var(--f-body); font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.7rem 1.8rem; border-radius: 4px;
     transition: background var(--ease), transform var(--ease);
     border: none; cursor: pointer; white-space: nowrap;
   }
-  .cta-pill:hover { background: var(--c-sage); transform: translateY(-1px); }
-  .cta-ghost {
-    display: inline-block; text-decoration: none;
-    background: transparent; color: var(--c-ink);
-    font-family: var(--f-sans); font-size: 0.75rem;
-    font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.65rem 1.6rem; border-radius: 2px;
-    border: 1px solid var(--c-ink); transition: all var(--ease);
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-block;
+    background: transparent; color: var(--sage);
+    font-family: var(--f-body); font-size: 0.78rem;
+    font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.7rem 1.8rem; border-radius: 4px;
+    border: 2px solid var(--sage); transition: all var(--ease);
+    cursor: pointer; white-space: nowrap;
   }
-  .cta-ghost:hover { background: var(--c-ink); color: #fff; }
+  .btn-outline:hover { background: var(--sage); color: #fff; }
 
-  /* ── BURGER (csak mobilon) ────────────────── */
+  /* ── BURGER ── */
   .burger {
     display: none;
     flex-direction: column; justify-content: center;
     gap: 5px; width: 36px; height: 36px;
-    background: none; border: none; cursor: pointer;
-    padding: 4px; flex-shrink: 0;
+    background: none; border: none; cursor: pointer; padding: 4px;
+    flex-shrink: 0; order: -1;
   }
   .burger span {
-    display: block; height: 1.5px; width: 100%;
-    background: var(--c-ink);
+    display: block; height: 2px; width: 100%;
+    background: var(--sage);
     transition: transform var(--ease), opacity var(--ease);
     transform-origin: center;
   }
-  .burger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .burger.is-open span:nth-child(2) { opacity: 0; }
-  .burger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .burger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── MOBIL MENÜ ───────────────────────────── */
+  /* ── MOBIL MENU ── */
   .mobile-menu {
     display: none;
     flex-direction: column;
-    gap: 0;
-    background: var(--c-cream);
-    border-top: 1px solid var(--c-stone);
+    background: var(--cream);
+    border-top: 2px solid var(--green);
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.4s ease;
   }
-  .mobile-menu.is-open { max-height: 480px; }
+  .mobile-menu.is-open { max-height: 520px; }
   .mobile-menu ul { list-style: none; }
   .mobile-menu ul li a {
-    display: block;
-    padding: 1.1rem 2rem;
-    font-size: 0.85rem; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none; color: var(--c-ink);
-    border-bottom: 1px solid var(--c-stone);
-    transition: color var(--ease);
+    display: block; padding: 1rem 1.5rem;
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink); border-bottom: 1px solid rgba(168,201,106,0.2);
+    transition: color var(--ease), background var(--ease);
   }
-  .mobile-menu ul li a:hover { color: var(--c-gold); }
-  .mobile-lang {
-    display: flex; gap: 0.5rem;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--c-stone);
-  }
-  .mobile-cta { margin: 1.25rem 2rem 1.5rem; align-self: flex-start; }
+  .mobile-menu ul li a:hover { color: var(--sage); background: var(--gray-lt); }
+  .mobile-lang { display: flex; gap: 0.5rem; padding: 0.8rem 1.5rem; border-bottom: 1px solid rgba(168,201,106,0.2); }
+  .mobile-cta { margin: 1rem 1.5rem 1.5rem; align-self: flex-start; }
 
-  /* ── EGYÉB GLOBÁLIS ───────────────────────── */
-  .sec { padding: clamp(3.5rem,8vw,8rem) 2rem; }
+  /* ── SZEKCIÓ ALAP ── */
+  .sec { padding: clamp(3.5rem, 8vw, 7rem) 2rem; }
   .sec-inner { max-width: var(--mw); margin: 0 auto; }
   .sec-label {
-    display: block; font-family: var(--f-sans);
-    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--c-gold); margin-bottom: 0.9rem;
+    display: block; font-family: var(--f-body);
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--green); margin-bottom: 0.75rem;
   }
-  .sec-head { text-align: center; margin-bottom: 4rem; }
-  .sec-head h2 { font-size: clamp(1.9rem,4.5vw,3rem); margin-bottom: 0.5rem; }
-  .sec-head p { color: var(--c-muted); max-width: 520px; margin: 0 auto; font-size: 0.95rem; }
-  .divider { width: 44px; height: 1px; background: var(--c-gold); margin: 1.25rem auto; }
+  .sec-head { text-align: center; margin-bottom: 3.5rem; }
+  .sec-head h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--sage); margin-bottom: 0.5rem; }
+  .sec-head p { color: var(--muted); max-width: 520px; margin: 0 auto; font-size: 0.95rem; }
+  .divider { width: 50px; height: 2px; background: var(--green); margin: 1rem auto; border-radius: 2px; }
 
+  /* ── FOOTER ── */
   .site-footer {
-    background: var(--c-ink); color: rgba(255,255,255,0.5);
-    text-align: center; padding: 3.5rem 2rem;
+    background: var(--sage);
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    padding: 3rem 2rem;
   }
-  .ft-quote {
-    font-family: var(--f-serif); font-style: italic;
-    font-size: 1.2rem; color: rgba(255,255,255,0.82);
-    margin-bottom: 0.6rem;
+  .footer-logo { margin: 0 auto 1rem; filter: brightness(0) invert(1) opacity(0.9); width: fit-content; }
+  .ft-tagline {
+    font-family: var(--f-head); font-style: italic;
+    font-size: 1.1rem; color: rgba(255,255,255,0.9);
+    margin-bottom: 1.5rem;
   }
-  .ft-copy { font-size: 0.72rem; letter-spacing: 0.05em; }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .footer-links a {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); transition: color var(--ease);
+  }
+  .footer-links a:hover { color: #fff; }
+  .ft-copy { font-size: 0.72rem; color: rgba(255,255,255,0.5); }
 
-  /* ── RESPONSIVE ───────────────────────────── */
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .desktop-nav { display: none; }
     .nav-end { display: none; }
     .burger { display: flex; }
-    .nav-logo { margin-left: auto; }
     .mobile-menu { display: flex; }
-    .nav-wrap { padding: 0 1.25rem; }
-    .sec { padding: clamp(2.5rem,7vw,5rem) 1.25rem; }
+    .nav-wrap { padding: 0 1.25rem; justify-content: space-between; }
+    .sec { padding: clamp(2.5rem, 7vw, 4rem) 1.25rem; }
   }
 </style>
