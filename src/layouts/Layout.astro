@@ -253,12 +253,12 @@ const schema = JSON.stringify({
     display: none;
     flex-direction: column;
     background: var(--cream);
-    border-top: 2px solid var(--green);
+    border-top: 0 solid var(--green);
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.4s ease;
   }
-  .mobile-menu.is-open { max-height: 520px; }
+  .mobile-menu.is-open { max-height: 520px; border-top-width: 2px; }
   .mobile-menu ul { list-style: none; }
   .mobile-menu ul li a {
     display: block; padding: 1rem 1.5rem;
@@ -363,9 +363,13 @@ const schema = JSON.stringify({
   @media (max-width: 768px) {
     .desktop-nav { display: none; }
     .nav-end { display: none; }
-    .burger { display: flex; }
-    .mobile-menu { display: flex; }
-    .nav-wrap { padding: 0 1.25rem; justify-content: space-between; }
+    .nav-logo { display: none; }
+    .burger { display: flex; pointer-events: auto; }
+    .mobile-menu { display: flex; pointer-events: auto; }
+    .site-nav { background: transparent; backdrop-filter: none; border-bottom: none; pointer-events: none; }
+    .site-nav:has(.mobile-menu.is-open) { background: var(--cream); pointer-events: auto; }
+    .nav-wrap { height: 56px; padding: 0.5rem 1.25rem; justify-content: flex-start; }
+    main { padding-top: 0; }
     .sec { padding: clamp(2.5rem, 7vw, 4rem) 1.25rem; }
   }
 </style>
