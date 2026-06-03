@@ -363,11 +363,12 @@ const posts = [
     let ticking = false;
     const update = () => {
       const y = window.scrollY || 0;
-      const p = Math.min(Math.max(y / 380, 0), 1); // 0..1 az első ~380px alatt
+      const p = Math.min(Math.max(y / 360, 0), 1); // 0..1 az első ~360px alatt
       const ease = p * p * (3 - 2 * p); // smoothstep
-      top.style.opacity = String(1 - ease * 0.92);
-      top.style.transform = 'translateY(' + (ease * 52).toFixed(1) + 'px)';
-      if (olive) olive.style.rotate = (-(ease * 18)).toFixed(1) + 'deg';
+      // a felső rész ~65 fokos elfordulásra (ease≈0.72) már teljesen elhalványul
+      top.style.opacity = String(Math.max(1 - ease * 1.4, 0));
+      // olajág: alja fix, felülről jobbra fordul el max 90 fokot
+      if (olive) olive.style.rotate = (ease * 90).toFixed(1) + 'deg';
       ticking = false;
     };
     window.addEventListener('scroll', () => {
@@ -382,7 +383,7 @@ const posts = [
 
 /* FELSŐ ARCULAT */
 .hm-top { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 233px; padding: 1.25rem 1.25rem 0.85rem; overflow: hidden; }
-.hm-olive { position: absolute; top: 0; left: -6%; width: 29%; max-width: 130px; transform: translate(23px,2px) rotate(-4deg); transform-origin: top left; pointer-events: none; z-index: 0; }
+.hm-olive { position: absolute; top: 0; left: -6%; width: 29%; max-width: 130px; transform: translate(23px,2px) rotate(-4deg); transform-origin: bottom center; pointer-events: none; z-index: 0; }
 .hm-logo { position: relative; z-index: 1; width: 17%; max-width: 80px; height: auto; transform: translateY(-15px); }
 .hm-wordmark { position: relative; z-index: 1; width: 70%; max-width: 300px; height: auto; margin-top: 0.6rem; transform: translateY(1px); }
 
