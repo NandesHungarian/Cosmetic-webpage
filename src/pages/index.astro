@@ -357,10 +357,10 @@ const posts = [
 .hero-mobile { display: none; flex-direction: column; background: var(--cream); }
 
 /* FELSŐ ARCULAT */
-.hm-top { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 250px; padding: 1.25rem 1.25rem 0.85rem; overflow: hidden; }
-.hm-olive { position: absolute; top: 0; left: -6%; width: 26%; max-width: 120px; transform: rotate(-4deg); transform-origin: top left; pointer-events: none; z-index: 0; }
-.hm-logo { position: relative; z-index: 1; width: 19%; max-width: 88px; height: auto; }
-.hm-wordmark { position: relative; z-index: 1; width: 70%; max-width: 280px; height: auto; margin-top: 0.6rem; }
+.hm-top { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 233px; padding: 1.25rem 1.25rem 0.85rem; overflow: hidden; }
+.hm-olive { position: absolute; top: 0; left: -6%; width: 29%; max-width: 130px; transform: translate(23px,2px) rotate(-4deg); transform-origin: top left; pointer-events: none; z-index: 0; }
+.hm-logo { position: relative; z-index: 1; width: 17%; max-width: 80px; height: auto; transform: translate(-1px,-15px); }
+.hm-wordmark { position: relative; z-index: 1; width: 70%; max-width: 300px; height: auto; margin-top: 0.6rem; transform: translate(2px,1px); }
 
 /* CSEMPÉK */
 .hm-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #fff; }
@@ -380,12 +380,12 @@ const posts = [
 
 /* ALSÓ HANGULAT */
 .hm-bottom { position: relative; min-height: 380px; background: var(--cream); overflow: hidden; }
-.hm-towel { position: absolute; left: -0.5rem; bottom: 0.5rem; width: 62%; max-width: 290px; transform: rotate(-4deg); pointer-events: none; }
-.hm-natural { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; z-index: 2; }
+.hm-towel { position: absolute; left: -0.5rem; bottom: 0.5rem; width: 59%; max-width: 275px; transform: translate(-47px,-170px) rotate(-4deg); pointer-events: none; }
+.hm-natural { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) translate(10px,-105px); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; z-index: 2; }
 .hm-prof-icon { width: 62px; height: 62px; opacity: 0.85; }
 .hm-footer-txt { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
-.hm-sprig { position: absolute; right: -3rem; bottom: 5rem; width: 60%; max-width: 270px; transform: rotate(6deg); pointer-events: none; }
-.hm-cream { position: absolute; right: 1rem; bottom: 0.5rem; width: 38%; max-width: 180px; pointer-events: none; }
+.hm-sprig { position: absolute; right: -3rem; bottom: 5rem; width: 60%; max-width: 275px; transform: translate(67px,-101px) rotate(6deg); pointer-events: none; }
+.hm-cream { position: absolute; right: 1rem; bottom: 0.5rem; width: 38%; max-width: 175px; transform: translate(7px,-200px); pointer-events: none; }
 .hm-slogan { font-family: var(--f-head); font-style: italic; font-size: 0.95rem; color: var(--sage); text-align: center; padding: 1.25rem 1.25rem 2rem; background: var(--cream); }
 .hero-desktop { display: block; }
 .hero-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; padding: clamp(4rem,9vw,8rem) 2rem clamp(2rem,4vw,4rem); }
