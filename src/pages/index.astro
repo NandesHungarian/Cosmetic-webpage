@@ -12,12 +12,6 @@ const testimonials = getSection<any>(locale, 'testimonials');
 const faq          = getSection<any>(locale, 'faq');
 const contact      = getSection<any>(locale, 'contact');
 
-const steps = [
-  { n: '01', title: 'Időpontfoglalás', desc: 'Válassz egy számodra megfelelő időpontot online vagy telefonon. Az első konzultáció ingyenes.', img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80' },
-  { n: '02', title: 'Személyes konzultáció', desc: 'Megvizsgálom bőröd állapotát és egyedi kezelési tervet állítok össze számodra.', img: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80' },
-  { n: '03', title: 'Kezelés és ápolás', desc: 'Természetes, QMS Medicosmetics alapanyagokkal végzett professzionális kezelés, teljes kényelemben.', img: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80' },
-];
-
 const posts = [
   {
     img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80',
@@ -166,28 +160,6 @@ const posts = [
   </section>
 
   <!-- HOGYAN MŰKÖDIK -->
-  <section class="sec steps-sec">
-    <div class="sec-inner">
-      <div class="sec-head">
-        <span class="sec-label reveal">A folyamat</span>
-        <h2 class="reveal reveal-delay-1">Hogyan működik?</h2>
-        <div class="divider reveal reveal-delay-1"></div>
-        <p class="reveal reveal-delay-2">Három egyszerű lépés, és már úton vagy az egészséges, sugárzó bőr felé.</p>
-      </div>
-      <div class="steps-grid">
-        {steps.map((s) => (
-          <div class="step-card gallery-item">
-            <div class="step-img-wrap">
-              <img src={s.img} alt={s.title} loading="lazy" />
-              <span class="step-number">{s.n}</span>
-            </div>
-            <h3>{s.title}</h3>
-            <p>{s.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <!-- KEZELÉSEK -->
   <section class="sec services-sec" id="services">
@@ -301,6 +273,18 @@ const posts = [
           <div class="faq-row reveal"><dt>{item.q}</dt><dd>{item.a}</dd></div>
         ))}
       </dl>
+    </div>
+  </section>
+
+  <!-- FULL-BLEED CTA -->
+  <section class="cta-band">
+    <div class="cta-bg"></div>
+    <div class="cta-overlay"></div>
+    <div class="cta-content">
+      <span class="cta-label reveal">Kezdjük el</span>
+      <h2 class="reveal reveal-delay-1">Engedd, hogy a bőröd<br/>újra ragyogjon</h2>
+      <p class="reveal reveal-delay-2">Foglalj időpontot, és találjuk meg együtt a bőrödnek leginkább megfelelő, természetes kezelést.</p>
+      <a href="#contact" class="btn-primary cta-btn reveal reveal-delay-3">Foglalj időpontot</a>
     </div>
   </section>
 
@@ -527,6 +511,19 @@ const posts = [
 .faq-row { border-bottom: 1px solid rgba(110,132,103,0.2); padding: 1.5rem 0; }
 .faq-row dt { font-family: var(--f-head); font-size: 1.05rem; color: var(--sage); margin-bottom: 0.5rem; }
 .faq-row dd { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+/* ── FULL-BLEED CTA ── */
+.cta-band { position: relative; min-height: 78vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+.cta-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1500&q=80') center center / cover no-repeat; transform: scale(1.06); }
+.cta-overlay { position: absolute; inset: 0; background: linear-gradient(155deg, rgba(110,132,103,0.74), rgba(54,68,52,0.84)); }
+.cta-band::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 110px; background: linear-gradient(to top, transparent, var(--sage)); z-index: 3; pointer-events: none; }
+.cta-band::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 110px; background: linear-gradient(to bottom, transparent, var(--cream)); z-index: 3; pointer-events: none; }
+.cta-content { position: relative; z-index: 4; max-width: 640px; padding: 5rem 1.5rem; color: #fff; }
+.cta-label { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 1rem; }
+.cta-content h2 { font-family: var(--f-head); font-size: clamp(2rem, 6vw, 3.2rem); color: #fff; line-height: 1.15; margin-bottom: 1.25rem; }
+.cta-content p { color: rgba(255,255,255,0.92); font-size: 1rem; max-width: 480px; margin: 0 auto 2.2rem; line-height: 1.75; }
+.cta-btn { background: #fff; color: var(--sage); }
+.cta-btn:hover { background: var(--cream); color: var(--sage); }
+
 .contact-sec { background: var(--cream); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
 .contact-info h2 { font-size: clamp(1.8rem,3vw,2.6rem); color: var(--sage); margin: 0.5rem 0; }
