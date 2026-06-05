@@ -1,4 +1,3 @@
----
 // v3 — Futurisztikus prototípus (mobil-fókusz). Cím: /v3
 // A HERO arc helye SZÁNDÉKOSAN üres (háttérszín) — ide kerül majd a tiszta videó.
 // A kártya-piktogramok helye is üres (csak a hely van meg).
@@ -81,9 +80,77 @@
   <!-- ░ KÁRTYÁK ░ -->
   <section class="cards-band">
     <div class="cards">
-      <img src="/ic-tudomany.webp" class="card-ic ic1" alt="" />
-      <img src="/ic-szemelyre.webp" class="card-ic ic2" alt="" />
-      <img src="/ic-premium.webp" class="card-ic ic3" alt="" />
+
+      <!-- IKON 1: hexagon molekula hálózat — 6 csúcsból sugárzó karok, végén kis körök -->
+      <div class="card-ic ic1" aria-hidden="true">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" class="card-svg">
+          <!-- Hexagon mag -->
+          <polygon points="28,16 36.66,21 36.66,31 28,36 19.34,31 19.34,21" stroke="currentColor" stroke-width="1.6" fill="none"/>
+          <!-- 6 sugárzó kar a csúcsokból -->
+          <!-- felső -->
+          <line x1="28" y1="16" x2="28" y2="7" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="28" cy="5.5" r="2" fill="currentColor"/>
+          <!-- jobb felső -->
+          <line x1="36.66" y1="21" x2="43.5" y2="17.1" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="45.2" cy="16.1" r="2" fill="currentColor"/>
+          <!-- jobb alsó -->
+          <line x1="36.66" y1="31" x2="43.5" y2="34.9" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="45.2" cy="36" r="2" fill="currentColor"/>
+          <!-- alsó -->
+          <line x1="28" y1="36" x2="28" y2="45" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="28" cy="46.5" r="2" fill="currentColor"/>
+          <!-- bal alsó -->
+          <line x1="19.34" y1="31" x2="12.5" y2="34.9" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="10.8" cy="36" r="2" fill="currentColor"/>
+          <!-- bal felső -->
+          <line x1="19.34" y1="21" x2="12.5" y2="17.1" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="10.8" cy="16.1" r="2" fill="currentColor"/>
+        </svg>
+      </div>
+
+      <!-- IKON 2: 4 sarokzárójel-keret + belső kör + kis nyíl jobb felső sarokban -->
+      <div class="card-ic ic2" aria-hidden="true">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" class="card-svg">
+          <!-- Bal felső sarokzárójel -->
+          <path d="M10,20 L10,10 L20,10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Jobb felső sarokzárójel -->
+          <path d="M36,10 L46,10 L46,20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Jobb alsó sarokzárójel -->
+          <path d="M46,36 L46,46 L36,46" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Bal alsó sarokzárójel -->
+          <path d="M20,46 L10,46 L10,36" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Belső kör -->
+          <circle cx="28" cy="28" r="7.5" stroke="currentColor" stroke-width="1.6" fill="none"/>
+          <!-- Belső kis teli kör (pont) -->
+          <circle cx="28" cy="28" r="2.2" fill="currentColor"/>
+          <!-- Kis nyíl jelzés jobb felső sarokba, zárójelen kívül -->
+          <path d="M40,8 L44,8 L44,12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <line x1="40" y1="12" x2="44" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- IKON 3: 2 hullámos görbe + 4 szórt csillag/pont körülötte -->
+      <div class="card-ic ic3" aria-hidden="true">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" class="card-svg">
+          <!-- Felső hullám -->
+          <path d="M10,23 C15,18 21,18 28,23 C35,28 41,28 46,23" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+          <!-- Alsó hullám -->
+          <path d="M10,32 C15,27 21,27 28,32 C35,37 41,37 46,32" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+          <!-- 4 szórt csillag/pont: bal felső, jobb felső, bal alsó, jobb alsó -->
+          <!-- bal felső csillag (kis kereszt) -->
+          <line x1="13" y1="13" x2="13" y2="17" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="11" y1="15" x2="15" y2="15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <!-- jobb felső csillag -->
+          <line x1="42" y1="11" x2="42" y2="15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="40" y1="13" x2="44" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <!-- bal alsó pont -->
+          <circle cx="14" cy="43" r="1.5" fill="currentColor"/>
+          <!-- jobb alsó csillag -->
+          <line x1="43" y1="41" x2="43" y2="45" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="41" y1="43" x2="45" y2="43" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
       <div class="card reveal"><h3>Tudományos<br/>háttér</h3><p>Bizonyított hatóanyagok, látható eredmények.</p></div>
       <div class="card reveal d1"><h3>Személyre<br/>szabott kezelés</h3><p>Mert minden bőr egyedi.</p></div>
       <div class="card reveal d2"><h3>Prémium<br/>élmény</h3><p>Modern technológia, maximális kényelem.</p></div>
@@ -192,10 +259,17 @@
     .cards{position:relative;--cpad:6px;--cardline:68%;background:rgba(20,23,21,0.35);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:var(--cpad) .85rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin:0;transform:translate(-1px,-224px);box-shadow:0 26px 54px -26px rgba(0,0,0,.4);}
     .card{text-align:center;padding:54px .35rem .5rem;position:relative;}
     .card:not(:last-child)::after{content:'';position:absolute;right:0;top:calc((100% - var(--cardline))/2);height:var(--cardline);width:1.5px;background:rgba(255,255,255,.6);}
-    .card-ic{position:absolute;top:8px;left:50%;z-index:3;object-fit:contain;filter:brightness(0) saturate(100%) invert(72%) sepia(30%) saturate(500%) hue-rotate(50deg) brightness(95%);}
-    .ic1{width:54px;height:54px;transform:translate(-50%,0) translate(-115px,-3px);}
-    .ic2{width:90px;height:90px;transform:translate(-50%,0) translate(-1px,-21px);}
-    .ic3{width:90px;height:90px;transform:translate(-50%,0) translate(112px,-22px);}
+
+    /* Inline SVG ikonok a kártyákon */
+    .card-ic{position:absolute;top:8px;left:50%;z-index:3;display:flex;align-items:center;justify-content:center;color:var(--green);}
+    .card-svg{display:block;}
+    .ic1{width:46px;height:46px;transform:translate(-50%,0) translate(-115px,2px);}
+    .ic1 .card-svg{width:46px;height:46px;}
+    .ic2{width:52px;height:52px;transform:translate(-50%,0) translate(-1px,-3px);}
+    .ic2 .card-svg{width:52px;height:52px;}
+    .ic3{width:52px;height:52px;transform:translate(-50%,0) translate(112px,-3px);}
+    .ic3 .card-svg{width:52px;height:52px;}
+
     .card h3{font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;font-family:var(--sans);font-weight:500;color:#fff;margin-bottom:.5rem;line-height:1.3;}
     .card p{color:rgba(255,255,255,.78);font-size:.7rem;line-height:1.5;}
 
