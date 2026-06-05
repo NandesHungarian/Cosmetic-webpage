@@ -133,7 +133,6 @@
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
-    <!-- Sérum videó: betöltéskor azonnal látható, 0.5mp preview lejátszik, majd megáll -->
     <div class="serum" id="serumWrap">
       <video id="dropvid" muted playsinline preload="auto" poster="/drop2-poster.jpg">
         <source src="/drop2.mp4" type="video/mp4" />
@@ -209,8 +208,8 @@
     .drawer a{padding:.85rem 2.4rem .85rem 1.6rem;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
     .drawer a:hover{color:var(--green);background:var(--bg);}
 
-    /* HERO */
-    .hero{position:relative;height:560px;margin-top:62px;overflow:hidden;background:var(--bg);}
+    /* HERO — margin-top 44px (volt 62px), ~70%-ra csökkentett fejléc alatti tér */
+    .hero{position:relative;height:560px;margin-top:44px;overflow:hidden;background:var(--bg);}
     .hero-media{position:absolute;top:1px;left:76px;width:80%;height:555px;border-radius:18px;overflow:hidden;background:linear-gradient(165deg,#eef0ea,#d6e2c8);}
     .hero-video{width:100%;height:100%;object-fit:cover;display:block;}
     .hero-left-fade{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(to right,var(--bg) 24%,rgba(242,244,239,.45) 46%,transparent 68%);}
@@ -246,12 +245,8 @@
     .brush{display:block;width:59px;height:9px;margin:.15rem 0 .8rem;}
     .brush-dev{width:65px;margin:.1rem 0 1rem;}
 
-    /* SÉRUM VIDEÓ
-       - Betöltéskor azonnal látható (opacity:1, scale:1)
-       - JS lejátszik 0.5mp-et betöltéskor, majd megáll egy fix képkockán
-       - Görgetéskor középre érve újra lejátszik 0.5mp-et
-       - +15% méret (width: 66.7%), élénkebb zöld filter */
-    .serum{position:absolute;left:126px;top:-305px;z-index:0;width:66.7%;}
+    /* SÉRUM VIDEÓ — +5% szélesebb (70%), balrább (105px), élénkebb zöld */
+    .serum{position:absolute;left:105px;top:-305px;z-index:0;width:70%;}
     .serum video{
       width:100%;display:block;
       filter:saturate(2.1) brightness(1.03) hue-rotate(8deg);
@@ -337,33 +332,35 @@
     });
 
     // ---- SÉRUM VIDEÓ ----
-    // Logika:
-    // 1. Betöltéskor AZONNAL lejátszik 0.5mp-et, majd megáll (ez a "preview" képkocka)
-    // 2. Görgetéskor ha középre ér: újra lejátszik 0.5mp-et, megáll
-    // 3. Kattintásra: újraindítás
+    // iOS fix: canplay sokszor nem tüzel preload korlátozás miatt.
+    // Hármas biztosíték: loadeddata + loadedmetadata + 800ms fallback timeout
     (() => {
       const wrap = document.getElementById('serumWrap');
       const v = document.getElementById('dropvid');
       if (!wrap || !v) return;
 
-      // 0.5mp lejátszás, majd megáll
       const playPreview = () => {
         try { v.currentTime = 0; } catch(e) {}
         const p = v.play();
         if (p && p.catch) p.catch(() => {});
-        setTimeout(() => {
-          try { v.pause(); } catch(e) {}
-        }, 500);
+        setTimeout(() => { try { v.pause(); } catch(e) {} }, 500);
       };
 
-      // Betöltéskor azonnal preview
-      const startOnLoad = () => {
+      // Betöltéskor: hármas biztosíték
+      let loadStarted = false;
+      const onReady = () => {
+        if (loadStarted) return;
+        loadStarted = true;
         playPreview();
       };
+
       if (v.readyState >= 2) {
-        startOnLoad();
+        onReady();
       } else {
-        v.addEventListener('canplay', startOnLoad, { once: true });
+        v.addEventListener('loadeddata', onReady, { once: true });
+        v.addEventListener('loadedmetadata', onReady, { once: true });
+        // Fallback: 800ms után próbálja meg akármit — iOS-on néha egyik event sem tüzel
+        setTimeout(onReady, 800);
       }
 
       // Görgetés: középre érve újra preview — egyszer
@@ -376,7 +373,7 @@
         if (centerY > vh * 0.30 && centerY < vh * 0.70) {
           scrollTriggered = true;
           playPreview();
-          window.removeEventListener('scroll', checkCenter, { passive: true });
+          window.removeEventListener('scroll', checkCenter);
         }
       };
       window.addEventListener('scroll', checkCenter, { passive: true });
