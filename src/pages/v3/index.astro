@@ -194,13 +194,13 @@
 
     /* KÁRTYÁK */
     .cards-band{padding:1.4rem 1rem 2rem;margin-top:0;position:relative;z-index:5;}
-    .cards{position:relative;--cpad:6px;--cardline:68%;background:rgba(20,23,21,0.35);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:var(--cpad) .85rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin:0;transform:translate(-9px,-245px);box-shadow:0 26px 54px -26px rgba(0,0,0,.4);}
+    .cards{position:relative;--cpad:6px;--cardline:68%;background:rgba(20,23,21,0.35);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:var(--cpad) .85rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin:0;transform:translate(-1px,-221px);box-shadow:0 26px 54px -26px rgba(0,0,0,.4);}
     .card{text-align:center;padding:74px .35rem .5rem;position:relative;}
     .card:not(:last-child)::after{content:'';position:absolute;right:0;top:calc((100% - var(--cardline))/2);height:var(--cardline);width:1.5px;background:rgba(255,255,255,.6);}
     .card-ic{position:absolute;top:8px;left:50%;z-index:3;}
-    .ic1{width:56px;height:56px;transform:translate(-50%,0) translate(-113px,-4px);}
-    .ic2{width:77px;height:77px;transform:translate(-50%,0) translate(3px,-12px);}
-    .ic3{width:66px;height:66px;transform:translate(-50%,0) translate(112px,-8px);}
+    .ic1{width:46px;height:46px;transform:translate(-50%,0) translate(-118px,0px);}
+    .ic2{width:90px;height:90px;transform:translate(-50%,0) translate(-1px,-20px);}
+    .ic3{width:73px;height:73px;transform:translate(-50%,0) translate(113px,-12px);}
     .card h3{font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;font-family:var(--sans);font-weight:500;color:#fff;margin-bottom:.5rem;line-height:1.3;}
     .card p{color:rgba(255,255,255,.78);font-size:.7rem;line-height:1.5;}
 
@@ -209,7 +209,7 @@
     .brush{display:block;width:59px;height:9px;margin:.15rem 0 .8rem;}
     .brush-dev{width:65px;margin:.1rem 0 1rem;}
     /* PIPETTA + CSEPP + HULLÁMZÁS */
-    .serum{position:absolute;left:159px;top:-296px;z-index:0;width:58%;}
+    .serum{position:absolute;left:157px;top:-248px;z-index:0;width:58%;}
     .serum video{width:100%;display:block;-webkit-mask-image:radial-gradient(112% 104% at 50% 46%,#000 26%,transparent 70%);mask-image:radial-gradient(112% 104% at 50% 46%,#000 26%,transparent 70%);}
     .pool{fill:rgba(150,180,90,.26);}
     .ripple{fill:none;stroke:#9bbe66;stroke-width:1.6;transform-box:fill-box;transform-origin:center;animation:rippleout 3s ease-out infinite;}
@@ -220,7 +220,7 @@
     @media (prefers-reduced-motion:reduce){.drop,.ripple,.r1,.r2,.r3,.nodes{animation:none;}}
 
     .develop{position:relative;padding:1.5rem 1.4rem 2rem;overflow:visible;min-height:90px;margin-top:0;}
-    .develop-text{position:absolute;transform:translate(-10px,-291px) scale(.70);transform-origin:top left;width:70%;z-index:2;}
+    .develop-text{position:absolute;transform:translate(-11px,-259px) scale(.70);transform-origin:top left;width:70%;z-index:2;}
     .develop-text h2{font-size:clamp(2rem,8vw,2.6rem);margin-bottom:1rem;}
     .develop-text p{color:var(--muted);font-size:.95rem;line-height:1.7;max-width:300px;margin-bottom:1.6rem;}
     .develop-media{position:relative;z-index:1;height:200px;margin-top:1.5rem;border-radius:18px;background:radial-gradient(120px 120px at 70% 45%,#cfe0a8,#aecb7e 60%,#9bbe66 100%);box-shadow:0 30px 60px -28px rgba(110,132,103,.5);}
