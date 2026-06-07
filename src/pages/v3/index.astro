@@ -19,6 +19,7 @@ import Footer from '../../components/Footer.astro';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script is:inline>try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; window.scrollTo(0,0); }catch(e){}</script>
   <meta name="description" content="Szépségterapeuta — a tudomány ereje, a természet intelligenciája." />
   <title>szépségterapeuta — v3</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,8 +41,6 @@ import Footer from '../../components/Footer.astro';
   <script>
     // a böngésző ne állítsa vissza a korábbi görgetés-pozíciót (sima reload a tetejéről indul)
     if('scrollRestoration' in history) history.scrollRestoration='manual';
-    // betöltéskor a tetejére (instant, hogy NE ússzon fel láthatóan)
-    window.scrollTo(0,0);
 
     // Bármely videó lejátszása ÚGY, hogy a böngésző NE görgessen hozzá (megőrzi a pozíciódat)
     window.__playNoScroll = function(v){
