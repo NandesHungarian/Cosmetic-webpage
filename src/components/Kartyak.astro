@@ -1,0 +1,31 @@
+---
+// ░ KÁRTYÁK ░ — a hero alá behúzott (negatív transform) hármas kártyasáv.
+---
+
+<section class="cards-band">
+  <div class="cards">
+    <img src="/ic-tudomany.webp" class="card-ic ic1" alt="" />
+    <img src="/ic-szemelyre.webp" class="card-ic ic2" alt="" />
+    <img src="/ic-premium.webp" class="card-ic ic3" alt="" />
+    <div class="card reveal"><h3>Tudományos<br/>háttér</h3><p>Bizonyított hatóanyagok, látható eredmények.</p></div>
+    <div class="card reveal d1"><h3>Személyre<br/>szabott kezelés</h3><p>Mert minden bőr egyedi.</p></div>
+    <div class="card reveal d2"><h3>Prémium<br/>élmény</h3><p>Modern technológia, maximális kényelem.</p></div>
+  </div>
+</section>
+
+<style>
+  .cards-band{padding:1.4rem 1rem 2rem;margin-top:0;position:relative;z-index:5;}
+  .cards{position:relative;--cpad:6px;--cardline:68%;background:rgba(20,23,21,0.4);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:var(--cpad) .85rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin:0;transform:translate(-1px,-224px);box-shadow:0 26px 54px -26px rgba(0,0,0,.4);}
+  .card{text-align:center;padding:54px .35rem .5rem;position:relative;}
+  .card:not(:last-child)::after{content:'';position:absolute;right:0;top:calc((100% - var(--cardline))/2);height:var(--cardline);width:1.5px;background:rgba(255,255,255,.6);}
+  .card-ic{position:absolute;top:8px;left:50%;z-index:3;object-fit:contain;filter:brightness(0) saturate(100%) invert(72%) sepia(30%) saturate(500%) hue-rotate(50deg) brightness(95%);}
+  .ic1{width:46px;height:46px;transform:translate(-50%,0) translate(-115px,2px);}
+  .ic2{width:52px;height:52px;transform:translate(-50%,0) translate(-1px,-3px);}
+  .ic3{width:52px;height:52px;transform:translate(-50%,0) translate(112px,-3px);}
+  .card h3{font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;font-family:var(--sans);font-weight:500;color:#fff;margin-bottom:.5rem;line-height:1.3;}
+  .card p{color:rgba(255,255,255,.78);font-size:.7rem;line-height:1.5;}
+
+  @media (min-width:760px){
+    .cards{max-width:1000px;margin-left:auto;margin-right:auto;}
+  }
+</style>

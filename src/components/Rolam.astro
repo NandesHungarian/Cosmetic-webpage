@@ -1,0 +1,42 @@
+---
+// ░ RÓLAM szekció — Marianna bemutatása ░
+// A fotó helyét szaggatott keret jelöli; a szövegek placeholderek, a valódi bemutatkozást a tartalom adja.
+// Scoped stílus, közös változók a global.css-ből.
+---
+
+<section class="rolam" id="rolam">
+  <div class="rolam-inner">
+    <div class="rolam-photo"><span>Marianna fotója</span></div>
+
+    <div class="rolam-text">
+      <span class="eyebrow">Rólam</span>
+      <h2>Ismerd meg <em>Mariannát</em></h2>
+      <p class="rolam-lead">(Ide jön Marianna rövid bemutatkozása — ki ő, mivel foglalkozik, mi a filozófiája. A szöveget te adod meg, és beírom.)</p>
+      <p class="rolam-p">(Végzettségek, tanfolyamok, tapasztalat, értékek — pár mondatban. Ezt is megírhatod, és ide kerül.)</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rolam{ background: var(--bg); padding: 2.4rem 1.2rem 2.6rem; }
+  .rolam-inner{ max-width:1000px; margin:0 auto; display:flex; flex-direction:column; gap:1.4rem; }
+
+  /* fotó helye (placeholder keret) */
+  .rolam-photo{
+    border:1.5px dashed var(--green); border-radius:18px;
+    min-height:260px; display:flex; align-items:center; justify-content:center;
+    color:var(--green-deep); background:rgba(168,201,106,.06);
+    font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; text-align:center;
+  }
+
+  .rolam-text h2{ font-size:clamp(1.7rem,7vw,2.4rem); margin:.3rem 0 .9rem; }
+  .rolam-lead{ color:var(--ink); font-size:.92rem; line-height:1.7; margin-bottom:1rem; }
+  .rolam-p{ color:var(--muted); font-size:.86rem; line-height:1.65; }
+
+  @media (min-width:760px){
+    .rolam{ padding:3rem 1.4rem 3.4rem; }
+    .rolam-inner{ flex-direction:row; align-items:center; gap:2.6rem; }
+    .rolam-photo{ flex:1; min-height:360px; }
+    .rolam-text{ flex:1; }
+  }
+</style>
