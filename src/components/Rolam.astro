@@ -20,6 +20,41 @@
     background: var(--bg);
     padding: 26px 1.1rem 37px 24px;
     overflow: hidden;
+    position: relative;
+  }
+
+  /* Felso feher fedőreteg: a szekció legtetejétől a padding-top (26px) aljig feher,
+     utána 30px alatt teljesen átlátszó — ez fed a kép folé */
+  .rolam::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom,
+      var(--bg) 0%,
+      var(--bg) 35%,
+      transparent 100%
+    );
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Jobb oldali feher fedőreteg: hátteret takarja a kep jobb szélénél */
+  .rolam::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    bottom: 0;
+    background: linear-gradient(to left,
+      var(--bg) 0%,
+      transparent 100%
+    );
+    z-index: 3;
+    pointer-events: none;
   }
 
   .rolam-head{
@@ -56,7 +91,6 @@
     max-width: 170px;
   }
 
-  /* +10% nagyobb (63%->69%), top -101px hogy az alja ne mozduljon */
   .rolam-photo{
     position: absolute;
     top: -101px;
