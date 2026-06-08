@@ -10,7 +10,7 @@
       <p class="rolam-sub">Több mint kezeléseket kínálok. A célom megérteni, mire van valóban szüksége a bőrödnek, és olyan megoldást találni, amely hosszú távon is támogatja annak egészségét és természetes ragyogását.</p>
     </div>
     <div class="rolam-photo">
-      <img src="/marianna-rolam.webp?3" alt="Marianna portré" />
+      <img src="/piktogram_4.jpg" alt="Marianna portré" />
     </div>
   </div>
 </section>
@@ -25,9 +25,6 @@
   .rolam-h2 em{ font-style:italic; color:var(--green); }
   .rolam-sub{ color:var(--muted); font-size:10px; line-height:1.55; max-width:170px; }
 
-  /* 20%-kal nagyobb (226→271px), jobb oldal fix → bal alsó sarok nem mozdul el.
-     A kép tetejét az eyebrow betűjének tetejével egy vonalban vágjuk (top:0, overflow:hidden a wrapper-en).
-     A felső és alsó szélt is elmaszatoljuk — így nem látszik a kép éle sehol. */
   .rolam-photo{
     position:absolute;
     top:0;
@@ -41,10 +38,7 @@
     width:100%;
     height:auto;
     display:block;
-    /* Felső + alsó + oldalsó elmaszatolás:
-       - fentről ~18%-ig teljesen átlátszó → hirtelen nem "vágódik" a kép teteje
-       - középen teli opak
-       - alul és oldalt a korábbi radial-gradient simítás megmarad */
+    object-fit:cover;
     -webkit-mask-image:
       linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 12%, #000 22%),
       radial-gradient(74% 82% at 50% 52%, #000 44%, transparent 86%);
