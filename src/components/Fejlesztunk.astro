@@ -12,13 +12,13 @@
         <path d="M1,2.6 L199,4.2 L199,5.6 L1,7.4 Z" fill="url(#brushgrad)"/>
       </svg>
     </div>
-    <p class="reveal d2 dev-p">Együttműködünk a bőröddel, hogy hosszú távon a legjobb önmagad lehess.</p>
+    <p class="reveal d2 dev-p">Összeműködünk a bőröddel, hogy hosszú távon a legjobb önmagad lehess.</p>
   </div>
   <!--
     MÁSODIK VIDEÓ (szérum) — ELMENTVE, kivéve a megjelenésből.
     A JELENLEGI színekkel/filterekkel/maszkkal (NEM az eredeti feltöltött).
     A pontos kinézet a lenti .serum CSS-ben él: filter saturate(1.45) brightness(1) + a réteges él-maszk.
-    VISSZATÉTEL: töröld ezt a nyitó komment-sort és lent a záró jelölőt, és a videó visszakerül a mostani kinézettel.
+    VISSZATÉTEL: töröld ezt a nyító komment-sort és lent a záró jelölőt, és a videó visszakerül a mostani kinézettel.
 
   <div class="serum reveal-media">
     <video id="dropvid" muted playsinline preload="auto" poster="/drop2-poster.jpg">
@@ -30,12 +30,8 @@
 </section>
 
 <style>
-  /* PIPETTA + CSEPP + HULLÁMZÁS */
-  /* A videó háttere eleve ~megegyezik az oldaléval (240,239,233 ≈ --bg). Ezért NEM nyúlunk a fényerőhöz (különben "doboz" lesz),
-     csak a gömböt emeljük ki enyhe telítettséggel, a széleket pedig lágyan a háttérbe olvasztjuk egy maszkkal. */
   .serum{position:absolute;left:105px;top:-305px;z-index:0;width:70%;pointer-events:auto;}
   .serum video{width:100%;display:block;filter:saturate(1.45) brightness(1.0);transform:translateZ(0);will-change:transform;}
-  /* Réteges él-elkenés: a tartalom (gömb) ~66%/60%-nál van, a felső+bal él csak háttér → azokat erősen a háttérbe olvasztjuk. */
   .serum::after{content:'';position:absolute;inset:0;pointer-events:none;background:
     linear-gradient(to bottom, var(--bg) 0%, transparent 30%),
     linear-gradient(to right, var(--bg) 0%, transparent 24%),
@@ -50,9 +46,8 @@
   @keyframes rippleout{0%,42%{transform:scale(.25);opacity:0;}50%{opacity:.7;}82%{transform:scale(2.3);opacity:0;}100%{opacity:0;}}
   @media (prefers-reduced-motion:reduce){.drop,.ripple{animation:none;}}
 
-  /* mobilon a develop-doboz alacsony, hogy a Kezelések feljebb induljon (a szöveg+szérum úgyis fel van húzva) */
-  .develop{position:relative;padding:1.5rem 1.4rem .4rem;overflow:visible;min-height:0;margin-top:0;}
-  /* két-oszlop: cím balra, szöveg jobbra (automatikusan, nem átfedő, reszponzív) */
+  /* padding-bottom: 0 — a felesleges üres ter megszűnik */
+  .develop{position:relative;padding:1.5rem 1.4rem 0;overflow:visible;min-height:0;margin-top:0;}
   .develop-text{position:absolute;transform:translate(4px,-264px);transform-origin:top left;width:100%;z-index:2;pointer-events:none;display:flex;align-items:center;gap:1rem;padding-right:1.2rem;}
   .dev-col{flex:0 0 auto;width:47%;}
   .develop-text a{pointer-events:auto;}
