@@ -18,59 +18,75 @@
 <style>
   .rolam{
     background: var(--bg);
-    padding: 2rem 1.1rem 2.4rem 1.65rem;
+    padding: 26px 1.1rem 37px 24px;
     overflow: hidden;
   }
 
-  /* A container ad magasságot, a szöveg szabadon folyik, a kép absolute jobbra */
   .rolam-head{
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
-    min-height: 300px;
+    min-height: 506px;
   }
 
-  /* Szöveg: teljes szélesség, rámehet a kép */
   .rolam-text{
     position: relative;
     z-index: 2;
-    width: 100%;
+    max-width: 207px;
   }
 
-  .rolam .eyebrow{ font-size: .525rem; margin-bottom: .74rem; }
-  .rolam-h2{ font-size: 21px; line-height: 1.12; margin: 0 0 .7rem; }
-  .rolam-h2 em{ font-style: italic; color: var(--green); }
-  .rolam-sub{ color: var(--muted); font-size: 10px; line-height: 1.55; max-width: 170px; }
+  .rolam .eyebrow{
+    font-size: .525rem;
+    margin-bottom: 12px;
+    display: block;
+  }
 
-  /* Kép: absolute jobbra, 61% széles (53% + 15%), feljebb tolva */
+  .rolam-h2{
+    font-size: 25px;
+    line-height: 1.12;
+    margin: 0 0 11px;
+  }
+
+  .rolam-h2 em{ font-style: italic; color: var(--green); }
+
+  .rolam-sub{
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.55;
+    max-width: 170px;
+  }
+
+  /* Kep: absolute jobbra, felulrol -80px (felesleg levagva overflow:hidden-nel) */
   .rolam-photo{
     position: absolute;
-    top: -18px;
-    right: -8px;
-    width: 61%;
+    top: -80px;
+    right: 0px;
+    width: 63%;
     z-index: 1;
     overflow: hidden;
   }
 
+  /* Felso levagast a kontener overflow:hidden intezi,
+     maszk csak alul+oldalt fadel */
   .rolam-photo img{
     width: 100%;
     height: auto;
     display: block;
     -webkit-mask-image:
-      linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 12%, #000 22%),
-      radial-gradient(74% 82% at 50% 52%, #000 44%, transparent 86%);
+      linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%),
+      radial-gradient(88% 88% at 80% 64%, #000 70%, transparent 93%);
     -webkit-mask-composite: source-in;
     mask-image:
-      linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 12%, #000 22%),
-      radial-gradient(74% 82% at 50% 52%, #000 44%, transparent 86%);
+      linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%),
+      radial-gradient(88% 88% at 80% 64%, #000 70%, transparent 93%);
     mask-composite: intersect;
   }
 
   @media (min-width: 760px){
     .rolam{ padding: 3rem 1.4rem; }
-    .rolam-head{ min-height: 380px; }
+    .rolam-head{ min-height: 420px; }
     .rolam-h2{ font-size: 2rem; }
     .rolam-sub{ font-size: .9rem; max-width: 430px; }
-    .rolam-photo{ width: 61%; top: -24px; right: -12px; }
+    .rolam-text{ max-width: 480px; }
   }
 </style>
