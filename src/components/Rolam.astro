@@ -22,20 +22,19 @@
     overflow: hidden;
   }
 
-  /* GRID: bal 47% szöveg, jobb 53% kép — mobilon és desktopon egyaránt */
+  /* A container ad magasságot, a szöveg szabadon folyik, a kép absolute jobbra */
   .rolam-head{
-    display: grid;
-    grid-template-columns: 47fr 53fr;
-    align-items: start;
+    position: relative;
     max-width: 1000px;
     margin: 0 auto;
-    min-height: 280px;
+    min-height: 300px;
   }
 
+  /* Szöveg: teljes szélesség, rámehet a kép */
   .rolam-text{
     position: relative;
     z-index: 2;
-    padding-right: 0.5rem;
+    width: 100%;
   }
 
   .rolam .eyebrow{ font-size: .525rem; margin-bottom: .74rem; }
@@ -43,11 +42,14 @@
   .rolam-h2 em{ font-style: italic; color: var(--green); }
   .rolam-sub{ color: var(--muted); font-size: 10px; line-height: 1.55; max-width: 170px; }
 
-  /* Fotó: a grid jobb cellajában van, teljes szélesség */
+  /* Kép: absolute jobbra, 61% széles (53% + 15%), feljebb tolva */
   .rolam-photo{
-    width: 100%;
+    position: absolute;
+    top: -18px;
+    right: -8px;
+    width: 61%;
+    z-index: 1;
     overflow: hidden;
-    margin-top: -0.5rem; /* kicsit feljőbb, hogy a fej a tetején legyen */
   }
 
   .rolam-photo img{
@@ -66,8 +68,9 @@
 
   @media (min-width: 760px){
     .rolam{ padding: 3rem 1.4rem; }
-    .rolam-head{ min-height: 340px; }
+    .rolam-head{ min-height: 380px; }
     .rolam-h2{ font-size: 2rem; }
     .rolam-sub{ font-size: .9rem; max-width: 430px; }
+    .rolam-photo{ width: 61%; top: -24px; right: -12px; }
   }
 </style>
