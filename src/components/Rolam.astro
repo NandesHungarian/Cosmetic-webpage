@@ -56,18 +56,16 @@
     max-width: 170px;
   }
 
-  /* Kep: absolute jobbra, felulrol -80px (felesleg levagva overflow:hidden-nel) */
+  /* +10% nagyobb (63%->69%), top -101px hogy az alja ne mozduljon */
   .rolam-photo{
     position: absolute;
-    top: -80px;
+    top: -101px;
     right: 0px;
-    width: 63%;
+    width: 69%;
     z-index: 1;
     overflow: hidden;
   }
 
-  /* Felso levagast a kontener overflow:hidden intezi,
-     maszk csak alul+oldalt fadel */
   .rolam-photo img{
     width: 100%;
     height: auto;
