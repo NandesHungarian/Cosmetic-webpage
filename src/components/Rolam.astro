@@ -1,4 +1,3 @@
----
 // ░ RÓLAM szekció — Marianna bemutatása ░
 // Scoped stílus, közös változók a global.css-ből. A kép jobbra, lágy maszkkal a háttérbe olvasztva.
 ---
@@ -25,16 +24,42 @@
   .rolam-h2{ font-size:21px; line-height:1.12; margin:0 0 .7rem; }
   .rolam-h2 em{ font-style:italic; color:var(--green); }
   .rolam-sub{ color:var(--muted); font-size:10px; line-height:1.55; max-width:170px; }
-  .rolam-photo{ position:absolute; top:0; right:0; width:226px; z-index:1; transform:translate(3px,2px); }
-  .rolam-photo img{ width:100%; height:auto; display:block;
-    -webkit-mask-image:radial-gradient(74% 80% at 50% 42%, #000 46%, transparent 88%);
-    mask-image:radial-gradient(74% 80% at 50% 42%, #000 46%, transparent 88%); }
+
+  /* 20%-kal nagyobb (226→271px), jobb oldal fix → bal alsó sarok nem mozdul el.
+     A kép tetejét az eyebrow betűjének tetejével egy vonalban vágjuk (top:0, overflow:hidden a wrapper-en).
+     A felső és alsó szélt is elmaszatoljuk — így nem látszik a kép éle sehol. */
+  .rolam-photo{
+    position:absolute;
+    top:0;
+    right:0;
+    width:271px;
+    z-index:1;
+    transform:translate(3px, 2px);
+    overflow:hidden;
+  }
+  .rolam-photo img{
+    width:100%;
+    height:auto;
+    display:block;
+    /* Felső + alsó + oldalsó elmaszatolás:
+       - fentről ~18%-ig teljesen átlátszó → hirtelen nem "vágódik" a kép teteje
+       - középen teli opak
+       - alul és oldalt a korábbi radial-gradient simítás megmarad */
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 12%, #000 22%),
+      radial-gradient(74% 82% at 50% 52%, #000 44%, transparent 86%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 12%, #000 22%),
+      radial-gradient(74% 82% at 50% 52%, #000 44%, transparent 86%);
+    mask-composite: intersect;
+  }
 
   @media (min-width:760px){
     .rolam{ padding:3rem 1.4rem; }
     .rolam-head{ gap:2.5rem; }
     .rolam-h2{ font-size:2rem; }
     .rolam-sub{ font-size:.9rem; max-width:430px; }
-    .rolam-photo{ width:300px; }
+    .rolam-photo{ width:360px; }
   }
 </style>
