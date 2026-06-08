@@ -16,28 +16,44 @@
 </section>
 
 <style>
-  .rolam{ background:var(--bg); padding:2rem 1.1rem 2.4rem 1.65rem; overflow:hidden; }
-  .rolam-head{ position:relative; min-height:280px; max-width:1000px; margin:0 auto; }
-  .rolam-text{ position:relative; z-index:2; max-width:55%; }
-  .rolam .eyebrow{ font-size:.525rem; margin-bottom:.74rem; }
-  .rolam-h2{ font-size:21px; line-height:1.12; margin:0 0 .7rem; }
-  .rolam-h2 em{ font-style:italic; color:var(--green); }
-  .rolam-sub{ color:var(--muted); font-size:10px; line-height:1.55; max-width:170px; }
-
-  /* Szélesség: a szekció 53%-a (képelemésből: a nő fotó pontosan ennyi helyet foglal el a célképen) */
-  .rolam-photo{
-    position:absolute;
-    top:0;
-    right:0;
-    width:53%;
-    z-index:1;
-    transform:translate(3px, 0px);
-    overflow:hidden;
+  .rolam{
+    background: var(--bg);
+    padding: 2rem 1.1rem 2.4rem 1.65rem;
+    overflow: hidden;
   }
+
+  /* GRID: bal 47% szöveg, jobb 53% kép — mobilon és desktopon egyaránt */
+  .rolam-head{
+    display: grid;
+    grid-template-columns: 47fr 53fr;
+    align-items: start;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 280px;
+  }
+
+  .rolam-text{
+    position: relative;
+    z-index: 2;
+    padding-right: 0.5rem;
+  }
+
+  .rolam .eyebrow{ font-size: .525rem; margin-bottom: .74rem; }
+  .rolam-h2{ font-size: 21px; line-height: 1.12; margin: 0 0 .7rem; }
+  .rolam-h2 em{ font-style: italic; color: var(--green); }
+  .rolam-sub{ color: var(--muted); font-size: 10px; line-height: 1.55; max-width: 170px; }
+
+  /* Fotó: a grid jobb cellajában van, teljes szélesség */
+  .rolam-photo{
+    width: 100%;
+    overflow: hidden;
+    margin-top: -0.5rem; /* kicsit feljőbb, hogy a fej a tetején legyen */
+  }
+
   .rolam-photo img{
-    width:100%;
-    height:auto;
-    display:block;
+    width: 100%;
+    height: auto;
+    display: block;
     -webkit-mask-image:
       linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 12%, #000 22%),
       radial-gradient(74% 82% at 50% 52%, #000 44%, transparent 86%);
@@ -48,10 +64,10 @@
     mask-composite: intersect;
   }
 
-  @media (min-width:760px){
-    .rolam{ padding:3rem 1.4rem; }
-    .rolam-head{ gap:2.5rem; }
-    .rolam-h2{ font-size:2rem; }
-    .rolam-sub{ font-size:.9rem; max-width:430px; }
+  @media (min-width: 760px){
+    .rolam{ padding: 3rem 1.4rem; }
+    .rolam-head{ min-height: 340px; }
+    .rolam-h2{ font-size: 2rem; }
+    .rolam-sub{ font-size: .9rem; max-width: 430px; }
   }
 </style>
