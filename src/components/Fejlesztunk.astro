@@ -18,7 +18,7 @@
     MÁSODIK VIDEÓ (szérum) — ELMENTVE, kivéve a megjelenésből.
     A JELENLEGI színekkel/filterekkel/maszkkal (NEM az eredeti feltöltött).
     A pontos kinézet a lenti .serum CSS-ben él: filter saturate(1.45) brightness(1) + a réteges él-maszk.
-    VISSZATÉTEL: töröld ezt a nyító komment-sort és lent a záró jelölőt, és a videó visszakerül a mostani kinézettel.
+    VISSZATÉTEL: töröld ezt a nyitó komment-sort és lent a záró jelölőt, és a videó visszakerül a mostani kinézettel.
 
   <div class="serum reveal-media">
     <video id="dropvid" muted playsinline preload="auto" poster="/drop2-poster.jpg">
@@ -46,8 +46,8 @@
   @keyframes rippleout{0%,42%{transform:scale(.25);opacity:0;}50%{opacity:.7;}82%{transform:scale(2.3);opacity:0;}100%{opacity:0;}}
   @media (prefers-reduced-motion:reduce){.drop,.ripple{animation:none;}}
 
-  /* padding-bottom: 0 — a felesleges üres ter megszűnik */
-  .develop{position:relative;padding:1.5rem 1.4rem 0;overflow:visible;min-height:0;margin-top:0;}
+  /* mobilon: padding+height=0, a szekció nem foglal helyet, szöveg abszolút felhúzva */
+  .develop{position:relative;padding:0;height:0;overflow:visible;min-height:0;margin-top:0;}
   .develop-text{position:absolute;transform:translate(4px,-264px);transform-origin:top left;width:100%;z-index:2;pointer-events:none;display:flex;align-items:center;gap:1rem;padding-right:1.2rem;}
   .dev-col{flex:0 0 auto;width:47%;}
   .develop-text a{pointer-events:auto;}
@@ -60,7 +60,7 @@
     pointer-events:none;}
 
   @media (min-width:760px){
-    .develop{max-width:1000px;margin-left:auto;margin-right:auto;min-height:90px;padding-bottom:2rem;}
+    .develop{height:auto;padding:1.5rem 1.4rem 2rem;max-width:1000px;margin-left:auto;margin-right:auto;min-height:90px;}
     .develop-text p{max-width:420px;}
   }
 </style>
