@@ -6,13 +6,13 @@ const { tr } = Astro.props as { tr: T };
 <section class="develop" id="fejlesztunk">
   <div class="develop-text">
     <div class="dev-col">
-      <span class="eyebrow reveal">{tr.develop.eyebrow}</span>
-      <h2 class="reveal d1">{tr.develop.h2}<br/><em>{tr.develop.h2em}</em></h2>
-      <svg class="brush brush-dev reveal d1" viewBox="0 0 200 10" preserveAspectRatio="none" aria-hidden="true">
+      <span class="eyebrow">{tr.develop.eyebrow}</span>
+      <h2 class="develop-h2">{tr.develop.h2}<br/><em>{tr.develop.h2em}</em></h2>
+      <svg class="brush brush-dev" viewBox="0 0 200 10" preserveAspectRatio="none" aria-hidden="true">
         <path d="M1,2.6 L199,4.2 L199,5.6 L1,7.4 Z" fill="url(#brushgrad)"/>
       </svg>
     </div>
-    <p class="reveal d2 dev-p">{tr.develop.body}</p>
+    <p class="dev-p">{tr.develop.body}</p>
   </div>
 </section>
 
@@ -21,11 +21,11 @@ const { tr } = Astro.props as { tr: T };
   .develop-text{position:relative;width:100%;z-index:2;pointer-events:none;display:flex;align-items:center;gap:1rem;}
   .dev-col{flex:0 0 auto;width:47%;}
   .develop-text a{pointer-events:auto;}
-  .develop-text h2{font-size:var(--section-h2);line-height:1.08;margin:0;}
-  .develop-text p{color:var(--muted);font-size:var(--section-body);line-height:1.55;flex:1;min-width:0;max-width:153px;margin:0;}
+  .develop-h2{font-size:var(--section-h2);line-height:1.08;margin:0;}
+  .dev-p{color:var(--muted);font-size:var(--section-body);line-height:1.55;flex:1;min-width:0;max-width:153px;margin:0;}
   @media (min-width:760px){
     .develop{height:auto;padding:1.5rem var(--page-margin) 2rem;max-width:1000px;margin-left:auto;margin-right:auto;min-height:90px;margin-top:-230px;}
     .develop-text{position:relative;transform:none;}
-    .develop-text p{max-width:420px;}
+    .dev-p{max-width:420px;}
   }
 </style>
