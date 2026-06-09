@@ -1,552 +1,119 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Animations from '../components/Animations.astro';
-import { getSection } from '../i18n/utils';
-
-const locale = 'hu';
-const meta         = getSection<any>(locale, 'meta');
-const hero         = getSection<any>(locale, 'hero');
-const about        = getSection<any>(locale, 'about');
-const services     = getSection<any>(locale, 'services');
-const testimonials = getSection<any>(locale, 'testimonials');
-const faq          = getSection<any>(locale, 'faq');
-const contact      = getSection<any>(locale, 'contact');
-
-const posts = [
-  {
-    img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80',
-    tag: 'Trendek',
-    date: '2026. máj. 25.',
-    title: 'Hová tart a kozmetika 2026-ban?',
-    excerpt: 'A szakma ma már nem csak krémekről szól — a személyre szabás, a skinimalizmus és az okos technológia együtt formálja a bőrápolás jövőjét.',
-    body: `A kozmetika ma már messze nem csak a „szépítő kezelésekről\" szól. Az elmúlt években a szakma látványosan elmozdult abba az irányba, hogy a bőrápolás egyszerre legyen tudatosabb, személyre szabottabb és tudományosabban megalapozott. Ez a változás a hétköznapi vendégek számára is jól látható: egyre többen keresnek olyan megoldásokat, amelyek nem ígérnek csodát egyik napról a másikra, hanem valóban a bőr állapotához, életmódjához és érzékenységéhez igazodnak.\n\nAz egyik legerősebb irány a skinimalizmus, vagyis a kevesebb, de okosan megválasztott termékek használata. A korábbi „minél több, annál jobb\" szemlélet helyett ma sok szakember azt vallja, hogy a bőr gyakran jobban reagál egy egyszerűbb, átgondolt rutinra. Ennek van is logikája: ha túl sok hatóanyagot, túl sok réteget vagy egymással nehezen összeegyeztethető terméket használunk, a bőr könnyen irritálttá válhat, a barrierje sérülhet, és végül pont az ellenkező hatást érjük el, mint amit szerettünk volna.\n\nEzzel párhuzamosan egyre fontosabbá válik a személyre szabás. Ugyanaz a krém, ugyanaz a kezelés vagy ugyanaz a hatóanyag nem működik mindenkinél egyformán. A szakma ezért ma már sokkal inkább arra törekszik, hogy a vendég bőrtípusát, bőrproblémáját, életkorát, érzékenységét és napi szokásait is figyelembe vegye.\n\nA technológia közben egyre látványosabban belép ebbe a világba. A bőrértékelésben megjelentek a digitális eszközök, az intelligensebb diagnosztikai rendszerek és a hatóanyagok célzottabb bejuttatására szolgáló fejlesztések is. Fontos azonban látni, hogy ezek nem helyettesítik a kozmetikust, hanem segítik őt.\n\nA kozmetika jövője tehát nem a túlzásokról szól, hanem a tudatosságról. Kevesebb ígéret, több valódi figyelem — és ez az, amiben egy jó kozmetikus igazán számít.`,
-    sources: [
-      { label: 'Artificial intelligence in cosmetic dermatology (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/39188183/' },
-      { label: 'Nanocarriers in skincare: current trends (PubMed, 2025)', url: 'https://pubmed.ncbi.nlm.nih.gov/41014067/' },
-      { label: 'Evaluating efficacy and innovation in skin care (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12408269/' },
-    ]
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&q=80',
-    tag: 'Szakmai',
-    date: '2026. máj. 25.',
-    title: 'Mennyire hatásosak valójában a kozmetikai termékek?',
-    excerpt: 'A dobozon szereplő ígéret és a valódi tudományos bizonyíték között sokszor komoly a szakadék. Mutatjuk, mire érdemes figyelni.',
-    body: `Sokan ma is úgy vesznek kozmetikumot, mintha a dobozon szereplő ígéret önmagában garancia lenne az eredményre. A valóság ennél jóval összetettebb: egy termék hatásossága nemcsak attól függ, mi van benne, hanem attól is, milyen koncentrációban, milyen formulában, és milyen bőrtípuson használják.\n\nA tudományos vizsgálatok egyre gyakrabban mutatják meg, hogy bizonyos összetevők valóban képesek javítani a bőr hidratáltságát, rugalmasságát vagy a ráncok megjelenését — de az eredmény nem mindig látványos az első napon vagy akár az első héten. Ez különösen fontos akkor, amikor a vendégek gyors, azonnali változást várnak.\n\nA kozmetikus szerepe ezért nem egyszerűen az, hogy terméket ajánljon, hanem az, hogy elmagyarázza: a bőrön mérhető javulás időt, következetes használatot és megfelelő rutinba illesztést igényel. Sok esetben a legjobb eredmény nem egy „csodakrémből\", hanem egy jól felépített otthoni ápolási rendszerből és a professzionális kezelésből együtt születik.\n\nKülönösen érdekes terület a botanikai eredetű hatóanyagok és a fermentált összetevők kutatása — több tanulmány ígéretes javulást mutat hidratáltság, textúra és rugalmasság terén. Ugyanakkor a marketing szöveg és a bizonyíték között mindig érdemes különbséget tenni, mert nem minden „természetes\" formula egyformán jól vizsgált.\n\nHa tehát legközelebb terméket választasz, érdemes megkérdezni: van-e mögötte valódi vizsgálat, és illik-e az én bőröm aktuális állapotához? Ebben pontosan az a kozmetikus tud segíteni, aki ismeri a bőrödet.`,
-    sources: [
-      { label: 'Efficacy of fermented lysate in anti-aging cosmetics (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/37977853/' },
-      { label: 'Anti-wrinkle efficacy of phenolic acids (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/38943252/' },
-      { label: 'Efficacy and Safety of Plant-Based Products (PubMed, 2025)', url: 'https://pubmed.ncbi.nlm.nih.gov/39654386/' },
-    ]
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80',
-    tag: 'Fenntarthatóság',
-    date: '2026. máj. 25.',
-    title: 'Fenntartható kozmetika: divat vagy tartós irány?',
-    excerpt: 'A „természetes\" és „bio\" jelzők mögött nem mindig van, amit gondolunk. Nézzük meg, mit jelent valójában a felelős bőrápolás.',
-    body: `A fenntarthatóság ma már nem külön „szépészeti extra\", hanem a kozmetikai ipar egyik komoly fejlődési iránya. A friss áttekintések szerint a szakma egyre nagyobb figyelmet fordít az alacsonyabb környezeti terhelésre, az etikus alapanyag-beszerzésre, az energiahatékony működésre és az újrahasznosítható csomagolásokra.\n\nEz a változás nemcsak a gyártókat érinti, hanem a szalonokat és a vendégeket is. Egyre több fogyasztó kérdez rá arra, hogy egy termék mennyire környezetbarát, honnan származik az összetevő, és mennyire biztonságos hosszú távon.\n\nFontos azonban, hogy a fenntarthatóságot ne keverjük össze automatikusan a „természetes\" vagy „bio\" jelzővel. Egy alapanyag lehet növényi eredetű, de ettől még nem feltétlenül jobb vagy kevésbé irritáló — és egy jól megtervezett szintetikus összetevő is lehet biztonságosabb és stabilabb.\n\nA modern kozmetika ezért ma már nem fekete-fehér módon gondolkodik. A kérdés inkább az, hogyan lehet egyszerre hatékony, biztonságos és felelősen előállított termékeket használni. Ez a szemlélet hosszú távon valószínűleg még fontosabb lesz, mert a piac és a fogyasztók is egyre inkább ebbe az irányba mozdulnak.\n\nHa egy szalon fenntartható termékekkel dolgozik és ezt átláthatóan kommunikálja, az ma már versenyelőnyt is jelent — mert a tudatos vásárló pontosan ezt keresi.`,
-    sources: [
-      { label: 'Sustainability in Cosmetic Dermatology (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12454804/' },
-      { label: 'Sustainable cosmetic ingredient alternatives (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12877994/' },
-      { label: 'From plant genetic resources to cosmetic active ingredients (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12495392/' },
-    ]
-  },
-];
+// FŐOLDAL — v3 (mobil-fókuszú, futurisztikus design)
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Kartyak from '../components/Kartyak.astro';
+import Fejlesztunk from '../components/Fejlesztunk.astro';
+import Kezelesek from '../components/Kezelesek.astro';
+import Rolam from '../components/Rolam.astro';
+import Boreelemzes from '../components/Boreelemzes.astro';
+import Kapcsolat from '../components/Kapcsolat.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout locale={locale} title={meta.title} description={meta.description}>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-mobile">
-      <!-- FELSŐ: arculat -->
-      <div class="hm-top">
-        <img src="/olajag.webp" alt="" class="hm-olive" aria-hidden="true" loading="eager" />
-        <img src="/logo.webp" alt="Szépségterapeuta logó" class="hm-logo" width="200" height="133" loading="eager" />
-        <img src="/szepsegterapeuta.webp" alt="szépségterapeuta" class="hm-wordmark" width="280" height="60" loading="eager" />
-      </div>
-
-      <!-- CSEMPÉK -->
-      <div class="hm-tiles">
-        <a href="#about" class="hmt hmt-green">
-          <span class="hmt-circle">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="currentColor" stroke-width="1.4"/><path d="M12 24c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M18 10c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4z" stroke="currentColor" stroke-width="1.4"/></svg>
-          </span>
-          <span class="hmt-name">RÓLAM</span>
-        </a>
-        <a href="#services" class="hmt hmt-beige">
-          <span class="hmt-circle hmt-circle-beige">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="currentColor" stroke-width="1.4"/><path d="M18 8c0 0-7 5.5-7 12a7 7 0 0014 0c0-6.5-7-12-7-12z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M18 20v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-          </span>
-          <span class="hmt-name">KEZELÉSEK</span>
-        </a>
-      </div>
-
-      <!-- GOMB -->
-      <div class="hm-btns">
-        <a href="#contact" class="btn-primary hm-btn-main">{hero.ctaPrimary}</a>
-        <a href="#about" class="hm-btn-arrow" aria-label="Tovább">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M7 10h6M10 7l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <!-- ALSÓ: hangulat -->
-      <div class="hm-bottom">
-        <img src="/torolkozo.webp" alt="" class="hm-towel" aria-hidden="true" loading="lazy" />
-        <img src="/profeszionalis_logo.webp" alt="" class="hm-prof-icon" aria-hidden="true" loading="lazy" />
-        <span class="hm-footer-txt hm-prof-word">PROFESSZIONÁLIS</span>
-        <a href="#services" class="hm-prof-sub">Kezelések</a>
-        <img src="/novenyag.webp" alt="" class="hm-sprig" aria-hidden="true" loading="lazy" />
-        <img src="/krem.webp" alt="" class="hm-cream" aria-hidden="true" loading="lazy" />
-      </div>
-      <p class="hm-slogan">Szépség kívül és belül – rólad szól.</p>
-    </div>
-
-    <div class="hero-desktop">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <span class="sec-label reveal">{hero.badge}</span>
-          <h1 class="reveal reveal-delay-1">{hero.title}</h1>
-          <div class="hero-divider reveal reveal-delay-2"></div>
-          <p class="hero-sub reveal reveal-delay-2">{hero.subtitle}</p>
-          <p class="hero-tagline reveal reveal-delay-3">Természetes szépség, harmónia, önbizalom</p>
-          <div class="hero-btns reveal reveal-delay-4">
-            <a href="#contact" class="btn-primary">{hero.ctaPrimary}</a>
-            <a href="#about" class="btn-outline">{hero.ctaSecondary}</a>
-          </div>
-        </div>
-        <div class="hero-img-wrap reveal-right">
-          <img src="/spa-bg.webp" alt="Természetes kozmetikai kezelés" width="560" height="660" loading="eager" />
-        </div>
-      </div>
-      <div class="hero-stats">
-        {hero.stats.map((s: any) => (
-          <div class="stat-item reveal">
-            <span class="stat-n" data-target={s.n.replace(/[^0-9]/g,'')} data-suffix={s.n.replace(/[0-9]/g,'')}>0</span>
-            <span class="stat-l">{s.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      {['Természetes szépség','QMS Medicosmetics','Harmónia','20+ év tapasztalat','Szépségterápia','Budapest','Önbizalom','Bőrápolás','Természetes szépség','QMS Medicosmetics','Harmónia','20+ év tapasztalat','Szépségterápia','Budapest','Önbizalom','Bőrápolás'].map(txt => (
-        <span class="marquee-item"><span class="marquee-dot"></span>{txt}</span>
-      ))}
-    </div>
-  </div>
-
-  <!-- RÓLAM -->
-  <section class="sec about-sec" id="about">
-    <div class="sec-inner about-grid">
-      <div class="about-img-wrap reveal-left">
-        <img src="/marianna.webp" alt={about.imageAlt} width="480" height="560" loading="lazy" />
-      </div>
-      <div class="about-text">
-        <span class="sec-label reveal">{about.sectionLabel}</span>
-        <h2 class="reveal reveal-delay-1">{about.title}</h2>
-        <div class="divider reveal reveal-delay-1" style="margin:1rem 0"></div>
-        <p class="about-body reveal reveal-delay-2">{about.body}</p>
-        <div class="cert-row reveal reveal-delay-3">
-          {about.certs.map((c: string) => <span class="cert-tag">{c}</span>)}
-        </div>
-        <a href="#contact" class="btn-primary reveal reveal-delay-4" style="margin-top:2rem;display:inline-block">Időpontot foglalok</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOGYAN MŰKÖDIK -->
-
-  <!-- KEZELÉSEK -->
-  <section class="sec services-sec" id="services">
-    <div class="sec-inner">
-      <div class="sec-head">
-        <span class="sec-label reveal">{services.sectionLabel}</span>
-        <h2 class="reveal reveal-delay-1">{services.title}</h2>
-        <div class="divider reveal reveal-delay-1"></div>
-        <p class="reveal reveal-delay-2">{services.subtitle}</p>
-      </div>
-      <div class="svc-grid">
-        {services.items.map((s: any) => (
-          <article class="svc-card gallery-item">
-            <div class="svc-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M14 8v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-            <span class="svc-tag">{s.tag}</span>
-            <h3>{s.title}</h3>
-            <p>{s.description}</p>
-            <div class="svc-meta">
-              <span class="svc-duration">{s.duration}</span>
-              <span class="svc-price">{s.price}</span>
-            </div>
-            <a href="#contact" class="btn-outline svc-btn">Foglalás</a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOG -->
-  <section class="sec blog-sec">
-    <div class="sec-inner">
-      <div class="sec-head">
-        <span class="sec-label reveal">Tippek &amp; útmutatók</span>
-        <h2 class="reveal reveal-delay-1">Bőrápolási blog</h2>
-        <div class="divider reveal reveal-delay-1"></div>
-        <p class="reveal reveal-delay-2">Szakmai tippek, kezelési útmutatók és bőrápolási trendek közvetlenül a rendelőből.</p>
-      </div>
-      <div class="blog-grid">
-        {posts.map((p, i) => (
-          <article class="blog-card gallery-item">
-            <div class="blog-img-wrap">
-              <img src={p.img} alt={p.title} loading="lazy" />
-              <span class="blog-tag">{p.tag}</span>
-            </div>
-            <div class="blog-body">
-              <p class="blog-date">{p.date}</p>
-              <h3>{p.title}</h3>
-              <p class="blog-excerpt">{p.excerpt}</p>
-              <button class="blog-link blog-open-btn" data-index={i}>Tovább olvasom →</button>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOG MODALS -->
-  {posts.map((p, i) => (
-    <dialog id={`modal-hu-${i}`} class="blog-modal">
-      <div class="modal-inner">
-        <button class="modal-close blog-close-btn" data-id={`modal-hu-${i}`} aria-label="Bezárás">✕</button>
-        <span class="blog-tag modal-tag">{p.tag}</span>
-        <p class="blog-date">{p.date}</p>
-        <h2 class="modal-title">{p.title}</h2>
-        <img src={p.img} alt={p.title} class="modal-img" loading="lazy" />
-        <div class="modal-body">
-          {p.body.split('\n\n').map((para: string) => <p>{para}</p>)}
-        </div>
-        <div class="modal-sources">
-          <h4>Források</h4>
-          <ul>
-            {p.sources.map((s: any) => (
-              <li><a href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a></li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </dialog>
-  ))}
-
-  <!-- VÉLEMÉNYEK -->
-  <section class="sec testi-sec">
-    <div class="sec-inner">
-      <div class="sec-head">
-        <span class="sec-label reveal">{testimonials.sectionLabel}</span>
-        <h2 class="reveal reveal-delay-1">{testimonials.title}</h2>
-        <div class="divider reveal reveal-delay-1"></div>
-      </div>
-      <div class="testi-grid">
-        {testimonials.items.map((t: any) => (
-          <figure class="testi-card gallery-item">
-            <div class="testi-quote-icon">❝</div>
-            <blockquote><p>{t.quote}</p></blockquote>
-            <figcaption>{t.author}</figcaption>
-          </figure>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- GYIK -->
-  <section class="sec faq-sec">
-    <div class="sec-inner faq-inner">
-      <div class="sec-head">
-        <span class="sec-label reveal">{faq.sectionLabel}</span>
-        <h2 class="reveal reveal-delay-1">{faq.title}</h2>
-        <div class="divider reveal reveal-delay-1"></div>
-      </div>
-      <dl class="faq-list">
-        {faq.items.map((item: any) => (
-          <div class="faq-row reveal"><dt>{item.q}</dt><dd>{item.a}</dd></div>
-        ))}
-      </dl>
-    </div>
-  </section>
-
-  <!-- FULL-BLEED CTA -->
-  <section class="cta-band">
-    <div class="cta-bg"></div>
-    <div class="cta-overlay"></div>
-    <div class="cta-content">
-      <span class="cta-label reveal">Kezdjük el</span>
-      <h2 class="reveal reveal-delay-1">Engedd, hogy a bőröd<br/>újra ragyogjon</h2>
-      <p class="reveal reveal-delay-2">Foglalj időpontot, és találjuk meg együtt a bőrödnek leginkább megfelelő, természetes kezelést.</p>
-      <a href="#contact" class="btn-primary cta-btn reveal reveal-delay-3">Foglalj időpontot</a>
-    </div>
-  </section>
-
-  <!-- KAPCSOLAT -->
-  <section class="sec contact-sec" id="contact">
-    <div class="sec-inner contact-grid">
-      <div class="contact-info">
-        <span class="sec-label reveal">{contact.sectionLabel}</span>
-        <h2 class="reveal reveal-delay-1">{contact.title}</h2>
-        <div class="divider reveal reveal-delay-1" style="margin:1rem 0"></div>
-        <p class="contact-sub reveal reveal-delay-2">{contact.subtitle}</p>
-        <div class="contact-details reveal reveal-delay-3">
-          <div class="contact-item"><span class="contact-icon">📍</span><span>{contact.address}</span></div>
-          <div class="contact-item"><span class="contact-icon">📞</span><a href={`tel:${contact.phone}`}>{contact.phone}</a></div>
-          <div class="contact-item"><span class="contact-icon">✉️</span><a href={`mailto:${contact.email}`}>{contact.email}</a></div>
-          <div class="contact-item"><span class="contact-icon">🕐</span><span>{contact.hours}</span></div>
-        </div>
-      </div>
-      <form class="contact-form reveal reveal-delay-2" name="contact" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
-        <label class="form-field"><span>{contact.formName}</span><input type="text" name="name" required /></label>
-        <label class="form-field"><span>{contact.formEmail}</span><input type="email" name="email" required /></label>
-        <label class="form-field"><span>{contact.formMessage}</span><textarea name="message" rows="5" required></textarea></label>
-        <button type="submit" class="btn-primary">{contact.formSubmit}</button>
-      </form>
-    </div>
-  </section>
-
-  <Animations />
-
-</Layout>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.blog-open-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const idx = (btn as HTMLElement).dataset.index;
-        const modal = document.getElementById('modal-hu-' + idx) as HTMLDialogElement | null;
-        modal?.showModal();
-      });
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script is:inline>
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.addEventListener('pageshow', function() {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     });
-    document.querySelectorAll('.blog-close-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const id = (btn as HTMLElement).dataset.id;
-        const modal = document.getElementById(id!) as HTMLDialogElement | null;
-        modal?.close();
-      });
-    });
-  });
-</script>
+  </script>
+  <meta name="description" content="Prémium kozmetikai kezelések Budapesten. Hancz Marianna szépségterapeuta, QMS Anti-aging specialista." />
+  <title>Hancz Marianna — Szépségterapeuta | Budapest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
 
-<script>
-  // Görgetés-vezérelt parallax a mobil heró tetején (Apple-szerű)
-  (() => {
-    if (window.matchMedia('(min-width: 769px)').matches) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const top = document.querySelector('.hm-top') as HTMLElement | null;
-    const olive = document.querySelector('.hm-olive') as HTMLElement | null;
-    if (!top) return;
-    top.style.willChange = 'transform, opacity, filter';
-    let ticking = false;
-    const update = () => {
-      const y = window.scrollY || 0;
-      const p = Math.min(Math.max(y / 440, 0), 1); // 0..1 az első ~440px alatt
-      const ease = p * p * (3 - 2 * p); // smoothstep
-      // finom parallax: a felső rész lágyan hátralép (zsugorodik, sodródik, életlenedik, halványul)
-      top.style.opacity = String(1 - ease);
-      top.style.transform = 'translateY(' + (-ease * 26).toFixed(1) + 'px) scale(' + (1 - ease * 0.07).toFixed(3) + ')';
-      top.style.filter = 'blur(' + (ease * 3).toFixed(1) + 'px)';
-      // olajág: épp csak billen néhány fokot az aljánál fogva
-      if (olive) olive.style.rotate = (-(ease * 6)).toFixed(1) + 'deg';
-      ticking = false;
+<body>
+  <Nav />
+  <Hero />
+  <Kartyak />
+  <Fejlesztunk />
+  <Kezelesek />
+  <Rolam />
+  <Boreelemzes />
+  <Kapcsolat />
+  <Footer />
+
+  <script>
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+
+    window.__playNoScroll = function(v){
+      const sy = window.scrollY;
+      try{ const p = v.play(); if(p&&p.catch) p.catch(()=>{}); }catch(e){}
+      const fix = () => { if(Math.abs(window.scrollY - sy) > 2) window.scrollTo(0, sy); };
+      requestAnimationFrame(fix); setTimeout(fix, 40); setTimeout(fix, 120);
     };
-    window.addEventListener('scroll', () => {
-      if (!ticking) { requestAnimationFrame(update); ticking = true; }
-    }, { passive: true });
-    update();
-  })();
-</script>
 
-<style>
-.hero-mobile { display: none; flex-direction: column; background: var(--cream); }
+    (() => {
+      const hv = document.querySelector('.hero-video');
+      if(!hv) return;
+      const setRate = () => { hv.playbackRate = 0.85; };
+      hv.addEventListener('loadedmetadata', setRate);
+      hv.addEventListener('play', setRate);
+      setRate();
+    })();
 
-/* FELSŐ ARCULAT */
-.hm-top { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 233px; padding: 1.25rem 1.25rem 0.85rem; overflow: hidden; }
-.hm-olive { position: absolute; top: 0; left: -6%; width: 29%; max-width: 130px; transform: translate(23px,2px) rotate(-4deg); transform-origin: bottom center; pointer-events: none; z-index: 0; }
-.hm-logo { position: relative; z-index: 1; width: 17%; max-width: 80px; height: auto; transform: translateY(-15px); }
-.hm-wordmark { position: relative; z-index: 1; width: 70%; max-width: 300px; height: auto; margin-top: 0.6rem; transform: translateY(1px); }
+    (() => {
+      const ov = document.querySelector('.kz-orb-vid');
+      if(!ov) return;
+      const io = new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          if(e.isIntersecting){ var p = ov.play(); if(p && p.catch) p.catch(function(){}); }
+          else { try{ ov.pause(); }catch(_){} }
+        });
+      }, { threshold: 0.25 });
+      io.observe(ov);
+    })();
 
-/* CSEMPÉK */
-.hm-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #fff; }
-.hmt { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.85rem; padding: 2.1rem 1rem; text-align: center; text-decoration: none; transition: filter var(--ease); }
-.hmt:hover { filter: brightness(0.96); }
-.hmt-green { background: var(--green); color: #fff; }
-.hmt-beige { background: var(--beige); color: var(--sage); }
-.hmt-circle { width: 58px; height: 58px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; }
-.hmt-circle-beige { border-color: rgba(110,132,103,0.5); }
-.hmt-name { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; }
+    const burger=document.getElementById('burger'),drawer=document.getElementById('drawer');
+    burger?.addEventListener('click',()=>{burger.classList.toggle('open');drawer?.classList.toggle('open');});
+    drawer?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger?.classList.remove('open');drawer.classList.remove('open');}));
+    const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+    document.querySelectorAll('.reveal,.reveal-media').forEach(el=>io.observe(el));
 
-/* GOMB */
-.hm-btns { display: flex; align-items: center; gap: 0.75rem; padding: 1.4rem 1.25rem; background: var(--cream); }
-.hm-btn-main { flex: 1; text-align: center; font-size: 0.78rem; padding: 0.85rem 1rem; letter-spacing: 0.14em; }
-.hm-btn-arrow { width: 46px; height: 46px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--green); color: #fff; transition: background var(--ease); }
-.hm-btn-arrow:hover { background: var(--sage); }
-
-/* ALSÓ HANGULAT */
-.hm-bottom { position: relative; min-height: 380px; background: var(--cream); overflow: hidden; }
-.hm-towel { position: absolute; left: -0.5rem; bottom: 0.5rem; width: 59%; max-width: 275px; transform: translate(-47px,-170px) rotate(-4deg); pointer-events: none; }
-.hm-prof-icon { position: absolute; top: 40%; left: 50%; width: 94px; height: 94px; opacity: 0.85; z-index: 2; transform: translate(-50%,-50%) translateY(-93px); }
-.hm-footer-txt { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
-.hm-prof-word { position: absolute; top: 58%; left: 50%; z-index: 2; white-space: nowrap; font-size: 0.6rem; transform: translate(-50%,-50%) translateY(-122px); }
-.hm-prof-sub { position: absolute; top: 58%; left: 50%; z-index: 2; white-space: nowrap; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); transform: translate(-50%,-50%) translateY(-100px); transition: color var(--ease); }
-.hm-prof-sub:hover { color: var(--green); }
-.hm-sprig { position: absolute; right: -3rem; bottom: 5rem; width: 60%; max-width: 275px; transform: translate(62px,-102px) rotate(6deg); pointer-events: none; }
-.hm-cream { position: absolute; right: 1rem; bottom: 0.5rem; width: 38%; max-width: 175px; transform: translate(7px,-200px); pointer-events: none; }
-.hm-slogan { font-family: var(--f-head); font-style: italic; font-size: 0.95rem; color: var(--sage); text-align: center; padding: 1.25rem 1.25rem 2rem; background: var(--cream); }
-
-/* ── BEÚSZÓ ANIMÁCIÓK (mobil hero) ── */
-@keyframes hmUp    { from { opacity: 0; translate: 0 38px; } to { opacity: 1; translate: 0 0; } }
-@keyframes hmLeft  { from { opacity: 0; translate: -46px 0; } to { opacity: 1; translate: 0 0; } }
-@keyframes hmRight { from { opacity: 0; translate: 46px 0; } to { opacity: 1; translate: 0 0; } }
-@keyframes hmScale { from { opacity: 0; scale: 0.78; } to { opacity: 1; scale: 1; } }
-
-.hm-olive    { animation: hmLeft  1.6s cubic-bezier(0.22,1,0.36,1) 0.10s both; }
-.hm-logo     { animation: hmScale 1.5s cubic-bezier(0.22,1,0.36,1) 0.32s both; }
-.hm-wordmark { animation: hmUp    1.5s cubic-bezier(0.22,1,0.36,1) 0.52s both; }
-.hm-tiles .hmt:nth-child(1) { animation: hmUp 1.4s cubic-bezier(0.22,1,0.36,1) 0.72s both; }
-.hm-tiles .hmt:nth-child(2) { animation: hmUp 1.4s cubic-bezier(0.22,1,0.36,1) 0.86s both; }
-.hm-btns     { animation: hmUp    1.4s cubic-bezier(0.22,1,0.36,1) 1.00s both; }
-.hm-towel    { animation: hmLeft  1.5s cubic-bezier(0.22,1,0.36,1) 1.12s both; }
-.hm-cream    { animation: hmUp    1.5s cubic-bezier(0.22,1,0.36,1) 1.22s both; }
-.hm-sprig    { animation: hmRight 1.5s cubic-bezier(0.22,1,0.36,1) 1.30s both; }
-.hm-prof-icon{ animation: hmScale 1.5s cubic-bezier(0.22,1,0.36,1) 1.38s both; }
-.hm-prof-word{ animation: hmUp    1.4s cubic-bezier(0.22,1,0.36,1) 1.50s both; }
-.hm-prof-sub { animation: hmUp    1.4s cubic-bezier(0.22,1,0.36,1) 1.60s both; }
-.hm-slogan   { animation: hmUp    1.4s cubic-bezier(0.22,1,0.36,1) 1.70s both; }
-
-@media (prefers-reduced-motion: reduce) {
-  .hm-olive, .hm-logo, .hm-wordmark, .hm-tiles .hmt, .hm-btns,
-  .hm-towel, .hm-cream, .hm-sprig, .hm-prof-icon, .hm-prof-word, .hm-prof-sub, .hm-slogan { animation: none; }
-}
-.hero-desktop { display: block; }
-.hero-inner { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; padding: clamp(4rem,9vw,8rem) 2rem clamp(2rem,4vw,4rem); }
-.hero-text h1 { font-size: clamp(2.4rem,5vw,3.8rem); color: var(--sage); margin: 0.5rem 0; }
-.hero-divider { width: 55px; height: 2px; background: var(--green); margin: 1.25rem 0; border-radius: 2px; }
-.hero-sub { color: var(--muted); font-size: 1rem; max-width: 420px; margin-bottom: 0.5rem; }
-.hero-tagline { font-family: var(--f-head); font-style: italic; color: var(--sage); font-size: 1rem; margin-bottom: 2rem; }
-.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-.hero-img-wrap { border-radius: 8px; overflow: hidden; background: var(--beige); min-height: 420px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(110,132,103,0.15); }
-.hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-.hero-stats { max-width: var(--mw); margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid rgba(168,201,106,0.3); padding: 2rem; gap: 1rem; }
-.stat-item { text-align: center; }
-.stat-n { display: block; font-family: var(--f-head); font-size: clamp(1.8rem,4vw,2.8rem); color: var(--green); line-height: 1; }
-.stat-l { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
-.about-sec { background: var(--beige); }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.about-img-wrap { border-radius: 8px; overflow: hidden; background: var(--gray-lt); min-height: 400px; display: flex; align-items: center; justify-content: center; box-shadow: 0 16px 48px rgba(110,132,103,0.12); }
-.about-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-.about-text h2 { font-size: clamp(1.8rem,3vw,2.6rem); color: var(--sage); margin: 0.5rem 0; }
-.about-body { color: var(--muted); line-height: 1.8; margin-bottom: 0.5rem; }
-.cert-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
-.cert-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); border: 1.5px solid var(--sage); padding: 0.3rem 0.8rem; border-radius: 20px; }
-.steps-sec { background: var(--cream); }
-.steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
-.step-card { display: flex; flex-direction: column; gap: 1rem; }
-.step-img-wrap { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; }
-.step-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.step-card:hover .step-img-wrap img { transform: scale(1.04); }
-.step-number { position: absolute; top: 1rem; left: 1rem; width: 40px; height: 40px; background: var(--green); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--f-head); font-size: 0.9rem; font-weight: 600; }
-.step-card h3 { font-size: 1.15rem; color: var(--sage); }
-.step-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
-.services-sec { background: var(--gray-lt); }
-.svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-.svc-card { background: #fff; padding: 2rem 1.75rem; border-radius: 8px; display: flex; flex-direction: column; gap: 0.75rem; border: 1px solid rgba(168,201,106,0.2); transition: box-shadow var(--ease), transform var(--ease); }
-.svc-card:hover { box-shadow: 0 8px 32px rgba(110,132,103,0.15); transform: translateY(-3px); }
-.svc-icon { color: var(--green); }
-.svc-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); }
-.svc-card h3 { font-size: 1.25rem; color: var(--sage); }
-.svc-card p { color: var(--muted); font-size: 0.9rem; flex: 1; line-height: 1.7; }
-.svc-meta { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; padding-top: 0.75rem; border-top: 1px solid rgba(168,201,106,0.25); }
-.svc-duration { color: var(--muted); }
-.svc-price { color: var(--sage); }
-.svc-btn { align-self: flex-start; margin-top: 0.25rem; font-size: 0.72rem; padding: 0.5rem 1.2rem; }
-.blog-sec { background: var(--beige); }
-.blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
-.blog-card { background: #fff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 20px rgba(110,132,103,0.08); transition: box-shadow var(--ease), transform var(--ease); }
-.blog-card:hover { box-shadow: 0 12px 40px rgba(110,132,103,0.18); transform: translateY(-4px); }
-.blog-img-wrap { position: relative; aspect-ratio: 16/9; overflow: hidden; }
-.blog-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.blog-card:hover .blog-img-wrap img { transform: scale(1.05); }
-.blog-tag { position: absolute; top: 0.75rem; left: 0.75rem; background: var(--green); color: #fff; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 3px; }
-.blog-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
-.blog-date { font-size: 0.7rem; color: var(--muted); }
-.blog-body h3 { font-size: 1.1rem; color: var(--sage); line-height: 1.3; }
-.blog-excerpt { font-size: 0.85rem; color: var(--muted); line-height: 1.6; flex: 1; }
-.blog-link { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-top: 0.5rem; transition: color var(--ease); background: none; border: none; cursor: pointer; padding: 0; font-family: inherit; }
-.blog-link:hover { color: var(--sage); }
-.blog-modal { border: none; border-radius: 12px; padding: 0; max-width: 680px; width: 92vw; max-height: 88vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.18); }
-.blog-modal::backdrop { background: rgba(60,75,60,0.45); backdrop-filter: blur(3px); }
-.modal-inner { padding: 2.5rem 2rem 2rem; position: relative; }
-.modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--muted); transition: color var(--ease); }
-.modal-close:hover { color: var(--sage); }
-.modal-tag { position: static; display: inline-block; margin-bottom: 0.5rem; }
-.modal-title { font-size: clamp(1.4rem,3vw,2rem); color: var(--sage); margin: 0.5rem 0 1rem; line-height: 1.3; }
-.modal-img { width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 1.5rem; }
-.modal-body p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
-.modal-sources { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(110,132,103,0.2); }
-.modal-sources h4 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
-.modal-sources ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
-.modal-sources li a { font-size: 0.78rem; color: var(--green); text-decoration: underline; word-break: break-all; }
-.modal-sources li a:hover { color: var(--sage); }
-.testi-sec { background: var(--sage); }
-.testi-sec .sec-label { color: rgba(255,255,255,0.7); }
-.testi-sec .sec-head h2 { color: #fff; }
-.testi-sec .divider { background: var(--green); }
-.testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-.testi-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 2rem; }
-.testi-quote-icon { font-size: 2rem; color: var(--green); line-height: 1; margin-bottom: 0.75rem; }
-.testi-card blockquote p { font-family: var(--f-head); font-style: italic; font-size: 1.05rem; color: rgba(255,255,255,0.9); line-height: 1.7; }
-.testi-card figcaption { margin-top: 1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); }
-.faq-sec { background: var(--beige); }
-.faq-inner { max-width: 740px; }
-.faq-list { display: flex; flex-direction: column; }
-.faq-row { border-bottom: 1px solid rgba(110,132,103,0.2); padding: 1.5rem 0; }
-.faq-row dt { font-family: var(--f-head); font-size: 1.05rem; color: var(--sage); margin-bottom: 0.5rem; }
-.faq-row dd { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
-/* ── FULL-BLEED CTA ── */
-.cta-band { position: relative; min-height: 78vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
-.cta-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1500&q=80') center center / cover no-repeat; transform: scale(1.06); }
-.cta-overlay { position: absolute; inset: 0; background: linear-gradient(155deg, rgba(110,132,103,0.74), rgba(54,68,52,0.84)); }
-.cta-band::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 110px; background: linear-gradient(to top, transparent, var(--sage)); z-index: 3; pointer-events: none; }
-.cta-band::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 110px; background: linear-gradient(to bottom, transparent, var(--cream)); z-index: 3; pointer-events: none; }
-.cta-content { position: relative; z-index: 4; max-width: 640px; padding: 5rem 1.5rem; color: #fff; }
-.cta-label { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 1rem; }
-.cta-content h2 { font-family: var(--f-head); font-size: clamp(2rem, 6vw, 3.2rem); color: #fff; line-height: 1.15; margin-bottom: 1.25rem; }
-.cta-content p { color: rgba(255,255,255,0.92); font-size: 1rem; max-width: 480px; margin: 0 auto 2.2rem; line-height: 1.75; }
-.cta-btn { background: #fff; color: var(--sage); }
-.cta-btn:hover { background: var(--cream); color: var(--sage); }
-
-.contact-sec { background: var(--cream); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
-.contact-info h2 { font-size: clamp(1.8rem,3vw,2.6rem); color: var(--sage); margin: 0.5rem 0; }
-.contact-sub { color: var(--muted); margin-bottom: 1.5rem; }
-.contact-details { display: flex; flex-direction: column; gap: 0.9rem; }
-.contact-item { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: var(--muted); }
-.contact-item a { color: var(--sage); }
-.contact-item a:hover { text-decoration: underline; }
-.contact-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
-.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
-.form-field { display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.contact-form input, .contact-form textarea { width: 100%; padding: 0.85rem 0; border: none; border-bottom: 1.5px solid rgba(110,132,103,0.3); background: transparent; font-family: var(--f-body); font-size: 0.95rem; color: var(--ink); transition: border-color var(--ease); outline: none; }
-.contact-form input:focus, .contact-form textarea:focus { border-bottom-color: var(--green); }
-.contact-form textarea { resize: vertical; min-height: 120px; }
-@media (max-width: 900px) {
-  .hero-mobile { display: flex; }
-  .hero-desktop { display: none; }
-  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .svc-grid, .steps-grid, .blog-grid { grid-template-columns: 1fr; }
-  .testi-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-  .hm-logo-wrap { height: 55vw; }
-  .modal-inner { padding: 2rem 1.25rem 1.5rem; }
-}
-</style>
+    (() => {
+      const v = document.getElementById('dropvid');
+      if(!v) return;
+      let teased = false, centeredPlayed = false;
+      const teaser = () => {
+        if(teased) return; teased = true;
+        try{ v.currentTime = 0; }catch(e){}
+        window.__playNoScroll(v);
+        setTimeout(() => { try{ if(!centeredPlayed){ v.pause(); v.currentTime = 0.5; } }catch(e){} }, 500);
+      };
+      if(v.readyState >= 2) teaser(); else v.addEventListener('loadeddata', teaser, { once:true });
+      const cio = new IntersectionObserver((es) => {
+        es.forEach(e => {
+          if(e.isIntersecting && !centeredPlayed){
+            centeredPlayed = true;
+            try{ v.currentTime = 0.5; }catch(e){}
+            window.__playNoScroll(v);
+            cio.disconnect();
+          }
+        });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      cio.observe(v);
+      let tailDone = false;
+      v.addEventListener('ended', () => {
+        if(tailDone) return; tailDone = true;
+        try{ v.currentTime = 0; }catch(e){}
+        window.__playNoScroll(v);
+        setTimeout(() => { try{ v.pause(); }catch(e){} }, 520);
+      });
+      v.style.cursor = 'pointer';
+      v.addEventListener('click', () => { tailDone = false; try{ v.currentTime = 0; }catch(e){} window.__playNoScroll(v); });
+    })();
+  </script>
+</body>
+</html>
