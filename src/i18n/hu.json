@@ -38,7 +38,7 @@
       {
         "slug": "meso-laser",
         "title": "Meso I Laser kezelések",
-        "description": "Forradalmi lézer és fókuszált mezoterápia, amely a hatóanyagokat 5–8 mm mélységig juttatja a bőrbe. Ránctalanítás, feszes ítés, revitalizálás — tű nélkül.",
+        "description": "Forradalmi lézer és fókuszált mezoterápia, amely a hatóanyagokat 5–8 mm mélységig juttatja a bőrbe. Ránctalanítás, feszesítés, revitalizálás — tű nélkül.",
         "duration": "45–60 perc",
         "price": "18 900 Ft-tól",
         "tag": "Legnépszerűbb"
@@ -46,7 +46,7 @@
       {
         "slug": "qms",
         "title": "QMS Medicosmetics",
-        "description": "A világ egyik legelismertebb prémium kozmetikai rendszere. Tiszta oxigénes fesz esítés és Neo Tissudermie arcfiatalítás garantált eredményekkel.",
+        "description": "A világ egyik legelismertebb prémium kozmetikai rendszere. Tiszta oxigénes feszesítés és Neo Tissudermie arcfiatalítás garantált eredményekkel.",
         "duration": "60–90 perc",
         "price": "Érdeklődjön",
         "tag": "Prémium"
@@ -76,8 +76,8 @@
       { "q": "Hogyan foglalhatok időpontot?", "a": "Telefonon a +36 20 339 3399 számon vagy e-mailben az info@szepsegterapeuta.hu címen." },
       { "q": "Mikor van nyitva?", "a": "Előzetes bejelentkezés alapján reggel 6-tól este 8-ig, hétvégén is." },
       { "q": "Hol található a szalon?", "a": "1126 Budapest, Dolgos utca 2. – 6B lépcsőház." },
-      { "q": "Először jövök, mit várjak?", "a": "Előszö r bőrelemzéssel kezdünk, hogy pontosan megértsük, mire van szüksége a bőrének." },
-      { "q": "Kinek ajánlott a Meso Laser?", "a": "Mindenkinek, aki ránctalanítást, feszes ítést vagy revitalizálást szeretne, tű nélkül." }
+      { "q": "Először jövök, mit várjak?", "a": "Először bőrelemzéssel kezdünk, hogy pontosan megértsük, mire van szüksége a bőrének." },
+      { "q": "Kinek ajánlott a Meso Laser?", "a": "Mindenkinek, aki ránctalanítást, feszesítést vagy revitalizálást szeretne, tű nélkül." }
     ]
   },
   "contact": {
