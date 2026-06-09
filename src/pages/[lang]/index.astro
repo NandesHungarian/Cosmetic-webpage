@@ -1,10 +1,9 @@
----
 /**
  * src/pages/[lang]/index.astro
  * ─────────────────────────────────────────────────────
  * Minden locale főoldala egyetlen fájlból.
  * - /en  → angol fordítás
- * - /ja  → japán (egyelőre hu fallback)
+ * - /ja  → japán
  * - /ko  → koreai
  *
  * A magyar főoldal a gyökér URL-en él: src/pages/index.astro
@@ -73,7 +72,7 @@ const alts = alternateUrls('/');
   <Rolam tr={tr} />
   <Boreelemzes tr={tr} />
   <Kapcsolat tr={tr} />
-  <Footer tr={tr} />
+  <Footer tr={tr} locale={locale} />
 
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
