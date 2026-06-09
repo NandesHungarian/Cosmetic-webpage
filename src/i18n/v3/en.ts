@@ -33,9 +33,9 @@ export const en: T = {
   ],
   develop: {
     eyebrow: 'Your skin deserves it',
-    h2: "We don't just treat.",
-    h2em: 'We improve.',
-    body: 'We work with your skin so you can be the best version of yourself long-term.',
+    h2: "I don't just treat.",
+    h2em: 'I improve.',
+    body: 'I work with your skin so you can be the best version of yourself long-term.',
   },
   treatments: {
     eyebrow: 'Treatments',
@@ -43,7 +43,7 @@ export const en: T = {
     h2em: "for your skin's",
     h2bold: 'real',
     h2end: 'needs.',
-    sub: 'We work with modern technology and expertise for natural, healthy radiance.',
+    sub: 'I work with modern technology and expertise for natural, healthy radiance.',
     categories: [
       {
         title: 'Facial treatments',
@@ -64,8 +64,8 @@ export const en: T = {
         desc: 'Skin-firming, regenerating treatments with luxury active ingredients.',
         items: [
           { name: 'Personalised anti-aging treatments (60 min)',       price: 'from 34 000 HUF' },
-          { name: 'Facial with luxury professional products',          price: '36 000-56 000 HUF' },
-          { name: 'Mesotherapy (electroporator/dermapen) treatments',  price: '36 000-58 000 HUF' },
+          { name: 'Facial with luxury professional products',          price: '36 000–56 000 HUF' },
+          { name: 'Mesotherapy (electroporator/dermapen) treatments',  price: '36 000–58 000 HUF' },
         ],
       },
       {
@@ -93,7 +93,7 @@ export const en: T = {
   },
   closing: {
     h2: "Let's start together",
-    body: "Let's find the natural treatment that suits your skin best.",
+    body: "Your first consultation is free. Let's find the treatment that suits your skin best.",
     cta: 'Book an appointment',
   },
   contact: {
