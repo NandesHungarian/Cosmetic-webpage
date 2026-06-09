@@ -59,11 +59,11 @@ export const hu = {
       {
         title: 'Anti-aging',
         ariaLabel: 'Anti-aging árai',
-        desc: 'Bőrfeszesítő, regeneráló kezelések luxus hatóanyagokkal.',
+        desc: 'Bőrfeszestítő, regeneratív kezelések luxus hatóanyagokkal.',
         items: [
           { name: 'Egyénre szabott antiaging kezelések (60 perc)',   price: '34 000 Ft-tól' },
           { name: 'Arckezelés luxus professzionális termékekkel',    price: '36 000–56 000 Ft' },
-          { name: 'Mezoterápiás (elektroporátor/dermapen) kezelések', price: '36 000–58 000 Ft' },
+          { name: 'Mezoterapíiás (elektroporátor/dermapen) kezelések', price: '36 000–58 000 Ft' },
         ],
       },
       {
@@ -74,7 +74,7 @@ export const hu = {
           { name: 'Szemöldök / szempilla festés',          price: '4 000 Ft' },
           { name: 'Bőrápolási tanácsadás',                 price: '25 000 Ft' },
           { name: 'Nappali smink / próbasmink',            price: '18 000 Ft' },
-          { name: 'Sminktanácsadás és oktatás (3 óra)',    price: '55 000 Ft' },
+          { name: 'Sminktácsadás és oktatás (3 óra)',    price: '55 000 Ft' },
           { name: 'Alkalmi / esküvői smink',               price: 'egyeztetés szerint' },
         ],
       },
