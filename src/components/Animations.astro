@@ -1,18 +1,31 @@
-<!-- Scroll-reveal + Count-up + Marquee JS -->
+<!-- Scroll-reveal + Scroll-exit + Count-up JS — minden böngészőn működik -->
 <script>
-// ══ 1. SCROLL REVEAL ══
-const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+// ── 1. SCROLL REVEAL (belépő: .reveal → .in) ──
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      e.target.classList.add('revealed');
+      e.target.classList.add('in');
       revealObs.unobserve(e.target);
     }
   });
 }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
-revealEls.forEach(el => revealObs.observe(el));
+document.querySelectorAll('.reveal, .reveal-media').forEach(el => revealObs.observe(el));
 
-// ══ 2. COUNT-UP ══
+// ── 2. SCROLL EXIT (kilépő: .scroll-exit → .exiting amikor eltűnik felfelé) ──
+const exitObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting && e.boundingClientRect.top < 0) {
+      // Szekció felfelé gurult ki a képernyőről
+      e.target.classList.add('exiting');
+    } else {
+      // Visszagörgetéskor visszaáll
+      e.target.classList.remove('exiting');
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.scroll-exit').forEach(el => exitObs.observe(el));
+
+// ── 3. COUNT-UP ──
 function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 function countUp(el) {
   const target = parseFloat(el.dataset.target);
@@ -29,7 +42,6 @@ function countUp(el) {
   }
   requestAnimationFrame(frame);
 }
-const countEls = document.querySelectorAll('[data-target]');
 const countObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -38,24 +50,21 @@ const countObs = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.5 });
-countEls.forEach(el => countObs.observe(el));
+document.querySelectorAll('[data-target]').forEach(el => countObs.observe(el));
 
-// ══ 3. STAGGERED GALLERY ══
+// ── 4. STAGGERED GALLERY ──
 const galleryGroups = new Map();
 document.querySelectorAll('.gallery-item').forEach(el => {
   const parent = el.parentElement;
   if (!galleryGroups.has(parent)) galleryGroups.set(parent, []);
   galleryGroups.get(parent).push(el);
 });
-
 const galleryObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       const siblings = galleryGroups.get(e.target.parentElement) || [];
       const idx = siblings.indexOf(e.target);
-      setTimeout(() => {
-        e.target.classList.add('gallery-visible');
-      }, idx * 150);
+      setTimeout(() => e.target.classList.add('gallery-visible'), idx * 150);
       galleryObs.unobserve(e.target);
     }
   });
@@ -64,88 +73,19 @@ document.querySelectorAll('.gallery-item').forEach(el => galleryObs.observe(el))
 </script>
 
 <style is:global>
-/* ══ SCROLL REVEAL — lassabb, kúszóbb ══ */
-.reveal {
-  opacity: 0;
-  transform: translateY(42px);
-  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+/* ── STAGGERED GALLERY ── */
+.gallery-item{
+  opacity:0;
+  transform:translateY(48px);
+  transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);
 }
-.reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-delay-1 { transition-delay: 0.13s; }
-.reveal-delay-2 { transition-delay: 0.26s; }
-.reveal-delay-3 { transition-delay: 0.39s; }
-.reveal-delay-4 { transition-delay: 0.52s; }
+.gallery-item.gallery-visible{opacity:1;transform:translateY(0);}
 
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-48px);
-  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.reveal-left.revealed { opacity: 1; transform: translateX(0); }
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(48px);
-  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.reveal-right.revealed { opacity: 1; transform: translateX(0); }
-
-/* ══ STAGGERED GALLERY — lassabb ══ */
-.gallery-item {
-  opacity: 0;
-  transform: translateY(48px);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.gallery-item.gallery-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ══ MARQUEE ══ */
-.marquee-wrap {
-  overflow: hidden;
-  width: 100%;
-  background: var(--beige);
-  padding: 1.5rem 0;
-  border-top: 1px solid rgba(168,201,106,0.25);
-  border-bottom: 1px solid rgba(168,201,106,0.25);
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee-scroll 32s linear infinite;
-}
-.marquee-wrap:hover .marquee-track {
-  animation-play-state: paused;
-}
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.marquee-item {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0 2.5rem;
-  font-family: var(--f-body);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--sage);
-  white-space: nowrap;
-}
-.marquee-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
-}
+/* ── MARQUEE ── */
+.marquee-wrap{overflow:hidden;width:100%;background:var(--beige);padding:1.5rem 0;border-top:1px solid rgba(168,201,106,.25);border-bottom:1px solid rgba(168,201,106,.25);}
+.marquee-track{display:flex;width:max-content;animation:marquee-scroll 32s linear infinite;}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+@keyframes marquee-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.marquee-item{display:flex;align-items:center;gap:.6rem;padding:0 2.5rem;font-family:var(--f-body);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);white-space:nowrap;}
+.marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0;}
 </style>
