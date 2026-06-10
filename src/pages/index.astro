@@ -79,7 +79,6 @@ const alts = alternateUrls('/');
       opacity: 0;
     }
 
-    /* kis globális ikon bal oldalt */
     #lang-suggest-icon {
       flex-shrink: 0;
       width: 36px;
@@ -93,7 +92,6 @@ const alts = alternateUrls('/');
       color: #6e8467;
     }
 
-    /* szöveg rész */
     #lang-suggest-body {
       flex: 1;
       min-width: 0;
@@ -117,7 +115,6 @@ const alts = alternateUrls('/');
       line-height: 1.4;
     }
 
-    /* CTA gomb */
     #lang-suggest-link {
       flex-shrink: 0;
       display: inline-flex;
@@ -148,7 +145,6 @@ const alts = alternateUrls('/');
       fill: none;
     }
 
-    /* bezárás gomb */
     #lang-suggest-close {
       flex-shrink: 0;
       background: none;
@@ -193,24 +189,20 @@ const alts = alternateUrls('/');
 
   <!-- ── Nyelvajanlo sav (futurisztikus, glassmorphism) ── -->
   <div id="lang-suggest" role="region" aria-label="Language suggestion">
-    <!-- globális ikon -->
     <div id="lang-suggest-icon" aria-hidden="true">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
         <circle cx="12" cy="12" r="10"/>
         <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
       </svg>
     </div>
-    <!-- szöveg -->
     <div id="lang-suggest-body">
       <span id="lang-suggest-label">Language</span>
       <span id="lang-suggest-text"></span>
     </div>
-    <!-- CTA -->
     <a id="lang-suggest-link" href="#">
       <span id="lang-suggest-link-text"></span>
       <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
-    <!-- bezárás -->
     <button id="lang-suggest-close" aria-label="Close">
       <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
     </button>
@@ -229,10 +221,18 @@ const alts = alternateUrls('/');
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
+    // ── Hero videó indítása ──────────────────────────────
+    function startHeroVideo() {
+      const hv = document.querySelector('.hero-video');
+      if (!hv) return;
+      hv.playbackRate = 0.85;
+      const p = hv.play();
+      if (p && p.catch) p.catch(() => {});
+    }
+
     // ── Nyelvajanlo logika ──────────────────────────────
     (function() {
       var dismissed = sessionStorage.getItem('lang-suggest-dismissed');
-      if (dismissed) return;
 
       var lang = (navigator.language || '').toLowerCase().split('-')[0];
       var suggest = document.getElementById('lang-suggest');
@@ -240,7 +240,7 @@ const alts = alternateUrls('/');
       var lnk     = document.getElementById('lang-suggest-link');
       var lnkTxt  = document.getElementById('lang-suggest-link-text');
       var closeBtn= document.getElementById('lang-suggest-close');
-      if (!suggest || !txt || !lnk || !lnkTxt || !closeBtn) return;
+      if (!suggest || !txt || !lnk || !lnkTxt || !closeBtn) { startHeroVideo(); return; }
 
       var config = null;
       if (lang === 'ja') {
@@ -250,13 +250,25 @@ const alts = alternateUrls('/');
       } else if (lang !== 'hu') {
         config = { text: 'Would you prefer this page in English?', btnLabel: 'View in English', href: '/en' };
       }
-      if (!config) return;
+
+      // Ha nincs mit javasolni VAGY már el volt utasítva → azonnal indul a videó
+      if (!config || dismissed) {
+        startHeroVideo();
+        return;
+      }
+
+      // Van banner: videó egyelőre NEM indul
+      var hv = document.querySelector('.hero-video');
+      if (hv) {
+        hv.autoplay = false;
+        try { hv.pause(); } catch(e) {}
+      }
 
       txt.textContent    = config.text;
       lnkTxt.textContent = config.btnLabel;
       lnk.href           = config.href;
 
-      // megjelenes animacioval
+      // Banner megjelenés animációval
       suggest.style.display = 'flex';
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
@@ -269,15 +281,17 @@ const alts = alternateUrls('/');
         suggest.classList.remove('ls-visible');
         suggest.classList.add('ls-hiding');
         setTimeout(function() { suggest.style.display = 'none'; }, 550);
+        // Videó elindul bezárás után
+        setTimeout(startHeroVideo, 100);
       }
 
       closeBtn.addEventListener('click', dismiss);
       lnk.addEventListener('click', function() {
         sessionStorage.setItem('lang-suggest-dismissed', '1');
+        // Átnavigál → videót nem kell indítani
       });
 
-      // 8 masodperc utan automatikusan eltűnik
-      setTimeout(dismiss, 8000);
+      // Nincs automatikus eltűnés — csak kattintásra zárul
     })();
 
     window.__playNoScroll = function(v) {
@@ -293,7 +307,6 @@ const alts = alternateUrls('/');
       const setRate = () => { hv.playbackRate = 0.85; };
       hv.addEventListener('loadedmetadata', setRate);
       hv.addEventListener('play', setRate);
-      setRate();
     })();
 
     (() => {
