@@ -3,7 +3,7 @@ import type { T } from '../i18n/v3/hu';
 const { tr } = Astro.props as { tr: T };
 ---
 
-<section class="kartyak scroll-exit">
+<section class="kartyak">
   <div class="kv-grid">
     {tr.cards.map((card, i) => (
       <div class={`kv-card reveal d${i+1}`}>
