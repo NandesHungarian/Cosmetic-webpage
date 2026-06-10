@@ -4,6 +4,8 @@ import { localePath, LOCALES, type Locale } from '../i18n/v3/index';
 
 const { tr, locale = 'hu' } = Astro.props as { tr: T; locale?: Locale };
 
+const homeHref = locale && locale !== 'hu' ? `/${locale}` : '/';
+
 const langLabels: Record<Locale, string> = {
   hu: 'HU',
   en: 'EN',
@@ -13,7 +15,7 @@ const langLabels: Record<Locale, string> = {
 ---
 
 <header class="nav">
-  <a href="/" class="brand" aria-label="Főoldal">
+  <a href={homeHref} class="brand" aria-label="Főoldal">
     <img src="/logo.png" alt="" class="brand-mark" />
     <span class="brand-name"><b>{tr.nav.brandBold}</b>{tr.nav.brand.slice(tr.nav.brandBold.length)}</span>
   </a>
