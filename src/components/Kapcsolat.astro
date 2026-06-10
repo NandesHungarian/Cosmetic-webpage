@@ -11,13 +11,13 @@ const ct = tr.contact;
       <h2 class="kapcsolat-h2">{ct.h2}</h2>
       <p class="kapcsolat-sub">{ct.sub}</p>
       <ul class="kapcsolat-list">
-        {ct.items.map(item => (
+        {ct.items.map((item, i) => (
           <li class="kapcsolat-item">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d={item.icon} stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             {item.href
-              ? <a href={item.href} class="kapcsolat-link" target="_blank" rel="noopener noreferrer">{item.label}</a>
+              ? <a href={item.href} class={`kapcsolat-link${i === 0 ? ' kapcsolat-link--address' : ''}`} target="_blank" rel="noopener noreferrer">{item.label}</a>
               : <span>{item.label}</span>
             }
           </li>
@@ -53,6 +53,8 @@ const ct = tr.contact;
   .kapcsolat-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem;}
   .kapcsolat-link{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;transition:color .18s,border-color .18s;}
   .kapcsolat-link:hover{color:var(--green);border-bottom-color:var(--green);}
+  .kapcsolat-link--address{color:var(--green);border-bottom:1px solid var(--green);}
+  .kapcsolat-link--address:hover{opacity:.75;}
   .form-field{display:flex;flex-direction:column;gap:.35rem;font-family:var(--sans);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
   .kapcsolat-form{display:flex;flex-direction:column;gap:1.1rem;}
   .kapcsolat-form input,.kapcsolat-form textarea{width:100%;padding:.7rem 0;border:none;border-bottom:1.5px solid rgba(58,63,62,.18);background:transparent;font-family:var(--sans);font-size:var(--section-body);font-weight:300;color:var(--ink);outline:none;transition:border-color .2s;}
