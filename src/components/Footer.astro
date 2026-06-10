@@ -1,3 +1,4 @@
+---
 import type { T } from '../i18n/v3/hu';
 const { tr, locale } = Astro.props as { tr: T; locale?: string };
 const homeHref = locale && locale !== 'hu' ? `/${locale}` : '/';
