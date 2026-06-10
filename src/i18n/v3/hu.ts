@@ -59,22 +59,22 @@ export const hu = {
       {
         title: 'Anti-aging',
         ariaLabel: 'Anti-aging árai',
-        desc: 'Bőrfeszestíő, regeneratív kezelések luxus hatóanyagokkal.',
+        desc: 'Bőrfeszesítő, regeneratív kezelések luxus hatóanyagokkal.',
         items: [
           { name: 'Egyénre szabott antiaging kezelések (60 perc)',   price: '34 000 Ft-tól' },
           { name: 'Arckezelés luxus professzionális termékekkel',    price: '36 000–56 000 Ft' },
-          { name: 'Mezoterapías (elektroporátor/dermapen) kezelések', price: '36 000–58 000 Ft' },
+          { name: 'Mezoterápias (elektroporátor/dermapen) kezelések', price: '36 000–58 000 Ft' },
         ],
       },
       {
         title: 'Smink',
         ariaLabel: 'Smink árai',
-        desc: 'Sminkelés, szempilla- és szemoldökfestés, tanácsadás.',
+        desc: 'Sminkelés, szempilla- és szemöldökfestés, tanácsadás.',
         items: [
-          { name: 'Szemoldök / szempilla festés',          price: '4 000 Ft' },
+          { name: 'Szemöldök / szempilla festés',          price: '4 000 Ft' },
           { name: 'Bőrápolási tanácsadás',                 price: '25 000 Ft' },
           { name: 'Nappali smink / próbasmink',            price: '18 000 Ft' },
-          { name: 'Sminktácsadás és oktatás (3 óra)',    price: '55 000 Ft' },
+          { name: 'Sminktanácsadás és oktatás (3 óra)',    price: '55 000 Ft' },
           { name: 'Alkalmi / esküvői smink',               price: 'egyeztetés szerint' },
         ],
       },
@@ -86,7 +86,7 @@ export const hu = {
     h2em1: 'információ.',
     h2mid: 'A kezelés célja ennek',
     h2em2: 'megértése.',
-    body: 'Több vagyok egy kozmetikusnál. A célom megérteni, mire van valóban szüksége a bőrödnek — és olyan megoldást találni, amely hosszú távon is támogatja annak egészségét és ragyogását. A bőröd többet tud elmondani magadról, mint gondolnád.',
+    body: 'Több vagyok egy kozmetikusnál. A bőröd többet tud elmondani magadról, mint gondolnád, a célom ezt megérteni, és olyan megoldást találni, amely hosszú távon is támogatja az egészségét és ragyogását.',
     imgAlt: 'Marianna portré',
   },
   closing: {
