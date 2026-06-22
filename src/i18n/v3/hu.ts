@@ -11,6 +11,7 @@ export const hu = {
       { label: 'Kezelések', href: '#kezelesek' },
       { label: 'Rólam',    href: '#rolam' },
       { label: 'Kapcsolat', href: '#kapcsolat' },
+      { label: 'Blog',     href: '/blog' },
     ],
     cta: 'Időpont',
     ctaAriaLabel: 'Időpontfoglalás',

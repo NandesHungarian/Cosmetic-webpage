@@ -13,6 +13,7 @@ export const en: T = {
       { label: 'Treatments', href: '#kezelesek' },
       { label: 'About',      href: '#rolam' },
       { label: 'Contact',    href: '#kapcsolat' },
+      { label: 'Blog',       href: '/en/blog' },
     ],
     cta: 'Book',
     ctaAriaLabel: 'Book an appointment',

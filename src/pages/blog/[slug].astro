@@ -1,23 +1,26 @@
 ---
 /**
  * src/pages/blog/[slug].astro
- * Magyar blog cikk — /blog/{slug}
+ * Magyar blog cikk oldal — /blog/:slug
  */
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import { t } from '../../i18n/v3/index';
+import '../../styles/global.css';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import '../../styles/global.css';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => data.lang === 'hu');
-  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+  return posts.map(post => ({ params: { slug: post.slug } }));
 }
 
-const { post } = Astro.props;
-const { Content } = await render(post);
+const { slug } = Astro.params;
+const posts = await getCollection('blog', ({ data }) => data.lang === 'hu');
+const post = posts.find(p => p.slug === slug);
+if (!post) return Astro.redirect('/blog');
+
+const { Content } = await post.render();
 const tr = t('hu');
-const fmt = new Intl.DateTimeFormat('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <!DOCTYPE html>
@@ -25,26 +28,35 @@ const fmt = new Intl.DateTimeFormat('hu-HU', { year: 'numeric', month: 'long', d
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{post.data.title} — Hancz Marianna</title>
   <meta name="description" content={post.data.description} />
+  <title>{post.data.title} — Hancz Marianna Szépségterapeuta</title>
   <link rel="canonical" href={`https://szepsegterapeuta.hu/blog/${post.slug}`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script is:inline>
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  </script>
 </head>
 <body>
   <Nav tr={tr} locale="hu" />
 
   <main class="article-main">
-    <article class="article">
+    <a href="/blog" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Vissza a bloghoz
+    </a>
+
+    <article>
       <header class="article-header">
-        <a href="/blog" class="article-back">← Vissza a blogra</a>
         <time class="article-date" datetime={post.data.pubDate.toISOString()}>
-          {fmt.format(post.data.pubDate)}
+          {post.data.pubDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
         <h1 class="article-title">{post.data.title}</h1>
-        <p class="article-lead">{post.data.description}</p>
+        <p class="article-desc">{post.data.description}</p>
       </header>
+
       <div class="article-body">
         <Content />
       </div>
@@ -52,6 +64,103 @@ const fmt = new Intl.DateTimeFormat('hu-HU', { year: 'numeric', month: 'long', d
   </main>
 
   <Footer tr={tr} locale="hu" />
+
+  <style>
+    body { background: var(--bg, #f2f4ef); }
+
+    .article-main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 7rem 1.5rem 5rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--sans, 'Inter', sans-serif);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted, #6b7468);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.18s;
+    }
+    .back-link:hover { color: var(--green, #7fa852); }
+
+    .article-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .article-date {
+      display: block;
+      font-family: var(--sans, 'Inter', sans-serif);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green, #7fa852);
+      margin-bottom: 0.75rem;
+    }
+
+    .article-title {
+      font-family: var(--serif, 'Playfair Display', Georgia, serif);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      color: var(--ink, #2a2e27);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .article-desc {
+      font-family: var(--sans, 'Inter', sans-serif);
+      font-size: 1.05rem;
+      color: var(--muted, #6b7468);
+      line-height: 1.65;
+    }
+
+    .article-body {
+      font-family: var(--sans, 'Inter', sans-serif);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--ink, #2a2e27);
+    }
+
+    .article-body h2 {
+      font-family: var(--serif, 'Playfair Display', Georgia, serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--ink, #2a2e27);
+      margin: 2.25rem 0 0.75rem;
+      line-height: 1.25;
+    }
+
+    .article-body p {
+      margin-bottom: 1.25rem;
+      max-width: 65ch;
+    }
+
+    .article-body ul {
+      padding-left: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-body li {
+      margin-bottom: 0.4rem;
+      line-height: 1.65;
+    }
+
+    .article-body a {
+      color: var(--green, #7fa852);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .article-body a:hover { color: var(--green-deep, #5a7a3a); }
+  </style>
 
   <script>
     const burger = document.getElementById('burger');
@@ -67,70 +176,3 @@ const fmt = new Intl.DateTimeFormat('hu-HU', { year: 'numeric', month: 'long', d
   </script>
 </body>
 </html>
-
-<style>
-  .article-main { padding-top: 62px; }
-
-  .article {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 3rem var(--page-margin) 5rem;
-  }
-
-  .article-back {
-    display: inline-block;
-    font-size: .72rem;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1.8rem;
-    transition: color .2s;
-  }
-  .article-back:hover { color: var(--green-deep); }
-
-  .article-date {
-    display: block;
-    font-size: .68rem;
-    font-weight: 600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--green-deep);
-    margin-bottom: .8rem;
-  }
-
-  .article-title {
-    font-family: var(--serif);
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 500;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-
-  .article-lead {
-    font-size: var(--section-body);
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--line);
-  }
-
-  /* Markdown tartalom */
-  .article-body { font-size: var(--section-body); line-height: 1.8; color: var(--ink); }
-  .article-body h2 {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin: 2.2rem 0 .8rem;
-    color: var(--ink);
-  }
-  .article-body p { margin-bottom: 1.2rem; max-width: 68ch; }
-  .article-body ul, .article-body ol {
-    margin: .8rem 0 1.2rem 1.4rem;
-  }
-  .article-body li { margin-bottom: .4rem; }
-  .article-body strong { font-weight: 600; color: var(--ink); }
-  .article-body em { font-style: italic; color: var(--green-deep); }
-  .article-body a { color: var(--green-deep); text-decoration: underline; }
-</style>
