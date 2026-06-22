@@ -1,333 +1,157 @@
 ---
-import Layout from '../layouts/Layout.astro';
+/**
+ * src/pages/blog.astro
+ * Magyar blog lista — /blog
+ */
+import { getCollection } from 'astro:content';
+import { t } from '../i18n/v3/index';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
 
-const locale = 'hu';
+const tr = t('hu');
+const posts = (await getCollection('blog', ({ data }) => data.lang === 'hu'))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
-const posts = [
-  {
-    id: 'trendek-2026',
-    img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1200&q=85',
-    tag: 'Trendek',
-    date: '2026. máj. 25.',
-    readTime: '5 perc olvasás',
-    title: 'Hová tart a kozmetika 2026-ban?',
-    excerpt: 'A szakma ma már nem csak krémekről szól — a személyre szabás, a skinimalizmus és az okos technológia együtt formálja a bőrápolás jövőjét.',
-    body: [
-      'A kozmetika ma már messze nem csak a „szépítő kezelésekről" szól. Az elmúlt években a szakma látványosan elmozdult abba az irányba, hogy a bőrápolás egyszerre legyen tudatosabb, személyre szabottabb és tudományosabban megalapozott. Ez a változás a hétköznapi vendégek számára is jól látható: egyre többen keresnek olyan megoldásokat, amelyek nem ígérnek csodát egyik napról a másikra, hanem valóban a bőr állapotához, életmódjához és érzékenységéhez igazodnak.',
-      'Az egyik legerősebb irány a skinimalizmus, vagyis a kevesebb, de okosan megválasztott termékek használata. A korábbi „minél több, annál jobb" szemlélet helyett ma sok szakember azt vallja, hogy a bőr gyakran jobban reagál egy egyszerűbb, átgondolt rutinra. Ennek van is logikája: ha túl sok hatóanyagot, túl sok réteget vagy egymással nehezen összeegyeztethető termékeket használunk, a bőr könnyen irritálttá válhat, a barrierje sérülhet, és végül pont az ellenkező hatást érjük el.',
-      'Ezzel párhuzamosan egyre fontosabbá válik a személyre szabás. Ugyanaz a krém, ugyanaz a kezelés vagy ugyanaz a hatóanyag nem működik mindenkinél egyformán. A szakma ezért ma már sokkal inkább arra törekszik, hogy a vendég bőrtípusát, bőrproblémáját, életkorát, érzékenységét és napi szokásait is figyelembe vegye.',
-      'A technológia közben egyre látványosabban belép ebbe a világba. A bőrértékelésben megjelentek a digitális eszközök, az intelligensebb diagnosztikai rendszerek és a hatóanyagok célzottabb bejuttatására szolgáló fejlesztések is. Fontos azonban látni, hogy ezek nem helyettesítik a kozmetikust, hanem segítik őt.',
-      'A kozmetika jövője tehát nem a túlzásokról szól, hanem a tudatosságról. Kevesebb ígéret, több valódi figyelem — és ez az, amiben egy jó kozmetikus igazán számít.',
-    ],
-    sources: [
-      { label: 'Artificial intelligence in cosmetic dermatology (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/39188183/' },
-      { label: 'Nanocarriers in skincare: current trends (PubMed, 2025)', url: 'https://pubmed.ncbi.nlm.nih.gov/41014067/' },
-      { label: 'Evaluating efficacy and innovation in skin care (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12408269/' },
-    ]
-  },
-  {
-    id: 'hatekonysag',
-    img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=1200&q=85',
-    tag: 'Szakmai',
-    date: '2026. máj. 25.',
-    readTime: '6 perc olvasás',
-    title: 'Mennyire hatásosak valójában a kozmetikai termékek?',
-    excerpt: 'A dobozon szereplő ígéret és a valódi tudományos bizonyíték között sokszor komoly a szakadék. Mutatjuk, mire érdemes figyelni.',
-    body: [
-      'Sokan ma is úgy vesznek kozmetikumot, mintha a dobozon szereplő ígéret önmagában garancia lenne az eredményre. A valóság ennél jóval összetettebb: egy termék hatásossága nemcsak attól függ, mi van benne, hanem attól is, milyen koncentrációban, milyen formulában, és milyen bőrtípuson használják.',
-      'A tudományos vizsgálatok egyre gyakrabban mutatják meg, hogy bizonyos összetevők valóban képesek javítani a bőr hidratáltságát, rugalmasságát vagy a ráncok megjelenését — de az eredmény nem mindig látványos az első napon vagy akár az első héten. Ez különösen fontos akkor, amikor a vendégek gyors, azonnali változást várnak.',
-      'A kozmetikus szerepe ezért nem egyszerűen az, hogy terméket ajánljon, hanem az, hogy elmagyarázza: a bőrön mérhető javulás időt, következetes használatot és megfelelő rutinba illesztést igényel. Sok esetben a legjobb eredmény nem egy „csodakrémből", hanem egy jól felépített otthoni ápolási rendszerből és a professzionális kezelésből együtt születik.',
-      'Különösen érdekes terület a botanikai eredetű hatóanyagok és a fermentált összetevők kutatása — több tanulmány ígéretes javulást mutat hidratáltság, textúra és rugalmasság terén. Ugyanakkor a marketing szöveg és a bizonyíték között mindig érdemes különbséget tenni.',
-      'Ha tehát legközelebb terméket választasz, érdemes megkérdezni: van-e mögötte valódi vizsgálat, és illik-e az én bőröm aktuális állapotához? Ebben pontosan az a kozmetikus tud segíteni, aki ismeri a bőrödet.',
-    ],
-    sources: [
-      { label: 'Efficacy of fermented lysate in anti-aging cosmetics (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/37977853/' },
-      { label: 'Anti-wrinkle efficacy of phenolic acids (PubMed, 2024)', url: 'https://pubmed.ncbi.nlm.nih.gov/38943252/' },
-      { label: 'Efficacy and Safety of Plant-Based Products (PubMed, 2025)', url: 'https://pubmed.ncbi.nlm.nih.gov/39654386/' },
-    ]
-  },
-  {
-    id: 'fenntarthatosag',
-    img: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=1200&q=85',
-    tag: 'Fenntarthatóság',
-    date: '2026. máj. 25.',
-    readTime: '5 perc olvasás',
-    title: 'Fenntartható kozmetika: divat vagy tartós irány?',
-    excerpt: 'A „természetes" és „bio" jelzők mögött nem mindig van, amit gondolunk. Nézzük meg, mit jelent valójában a felelős bőrápolás.',
-    body: [
-      'A fenntarthatóság ma már nem külön „szépészeti extra", hanem a kozmetikai ipar egyik komoly fejlődési iránya. A friss áttekintések szerint a szakma egyre nagyobb figyelmet fordít az alacsonyabb környezeti terhelésre, az etikus alapanyag-beszerzésre, az energiahatékony működésre és az újrahasznosítható csomagolásokra.',
-      'Ez a változás nemcsak a gyártókat érinti, hanem a szalonokat és a vendégeket is. Egyre több fogyasztó kérdez rá arra, hogy egy termék mennyire környezetbarát, honnan származik az összetevő, és mennyire biztonságos hosszú távon.',
-      'Fontos azonban, hogy a fenntarthatóságot ne keverjük össze automatikusan a „természetes" vagy „bio" jelzővel. Egy alapanyag lehet növényi eredetű, de ettől még nem feltétlenül jobb vagy kevésbé irritáló — és egy jól megtervezett szintetikus összetevő is lehet biztonságosabb és stabilabb.',
-      'A modern kozmetika ezért ma már nem fekete-fehér módon gondolkodik. A kérdés inkább az, hogyan lehet egyszerre hatékony, biztonságos és felelősen előállított termékeket használni.',
-      'Ha egy szalon fenntartható termékekkel dolgozik és ezt átláthatóan kommunikálja, az ma már versenyelőnyt is jelent — mert a tudatos vásárló pontosan ezt keresi.',
-    ],
-    sources: [
-      { label: 'Sustainability in Cosmetic Dermatology (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12454804/' },
-      { label: 'Sustainable cosmetic ingredient alternatives (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12877994/' },
-      { label: 'From plant genetic resources to cosmetic active ingredients (PMC, 2025)', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12495392/' },
-    ]
-  },
-];
+const fmt = new Intl.DateTimeFormat('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Layout locale={locale} title="Blog — Bőrápolási tippek & trendek" description="Szakmai tippek, kezelési útmutatók és bőrápolási trendek közvetlenül a rendelőből.">
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Hancz Marianna szépségterapeuta</title>
+  <meta name="description" content="Bőrápolási tippek, kezelési útmutatók és szépségipari újdonságok Hancz Mariannától." />
+  <link rel="canonical" href="https://szepsegterapeuta.hu/blog" />
+  <link rel="alternate" hreflang="en" href="https://szepsegterapeuta.hu/en/blog" />
+  <link rel="alternate" hreflang="x-default" href="https://szepsegterapeuta.hu/blog" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <Nav tr={tr} locale="hu" />
 
-  <!-- HERO SÁV -->
-  <section class="blog-hero">
-    <div class="bh-inner">
-      <span class="sec-label">Tippek & Útmutatók</span>
-      <h1>Bőrápolási blog</h1>
-      <div class="bh-line"></div>
-      <p>Szakmai tippek, kezelési útmutatók és bőrápolási trendek közvetlenül a rendelőből.</p>
-    </div>
-  </section>
+  <main class="blog-main">
+    <header class="blog-header reveal">
+      <span class="eyebrow">Blog</span>
+      <h1>Bőrápolási <em>útmutató</em></h1>
+      <p class="blog-sub">Tippek, kezelési ismeretek és szépségipari újdonságok.</p>
+    </header>
 
-  <!-- KÁRTYA LISTA -->
-  <section class="blog-list-sec">
-    <div class="blog-list-inner">
-      {posts.map((p, i) => (
-        <article class="bpost" id={p.id}>
-          <div class="bpost-img">
-            <img src={p.img} alt={p.title} loading={i === 0 ? 'eager' : 'lazy'} />
-            <span class="bpost-tag">{p.tag}</span>
+    <section class="blog-grid">
+      {posts.length === 0 && (
+        <p class="blog-empty">Hamarosan érkeznek az első cikkek.</p>
+      )}
+      {posts.map((post, i) => (
+        <a href={`/blog/${post.slug}`} class={`blog-card reveal d${(i % 3) + 1}`}>
+          <div class="blog-card-body">
+            <time class="blog-date" datetime={post.data.pubDate.toISOString()}>
+              {fmt.format(post.data.pubDate)}
+            </time>
+            <h2 class="blog-card-title">{post.data.title}</h2>
+            <p class="blog-card-desc">{post.data.description}</p>
           </div>
-          <div class="bpost-content">
-            <div class="bpost-meta">
-              <span class="bpost-date">{p.date}</span>
-              <span class="bpost-sep">·</span>
-              <span class="bpost-read">{p.readTime}</span>
-            </div>
-            <h2 class="bpost-title">{p.title}</h2>
-            <p class="bpost-excerpt">{p.excerpt}</p>
-            <div class="bpost-body">
-              {p.body.map((para: string) => <p>{para}</p>)}
-            </div>
-            <div class="bpost-sources">
-              <p class="sources-label">Tudományos források</p>
-              <ul>
-                {p.sources.map((s: any) => (
-                  <li><a href={s.url} target="_blank" rel="noopener noreferrer">{s.label} ↗</a></li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </article>
+          <span class="blog-card-cta">Elolvasom →</span>
+        </a>
       ))}
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- CTA -->
-  <section class="blog-cta-sec">
-    <div class="blog-cta-inner">
-      <p class="blog-cta-label">Személyes tanácsadás</p>
-      <h2>Kérdésed van a bőrödről?</h2>
-      <p class="blog-cta-sub">Foglalj időpontot egy ingyenes konzultációra, és személyre szabott bőrápolási tervet állítunk össze számodra.</p>
-      <a href="/#contact" class="btn-primary">Időpontot foglalok</a>
-    </div>
-  </section>
+  <Footer tr={tr} locale="hu" />
 
-</Layout>
+  <script>
+    const io = new IntersectionObserver(
+      (es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+      { threshold: .12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    const burger = document.getElementById('burger');
+    const drawer = document.getElementById('drawer');
+    burger?.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      drawer?.classList.toggle('open');
+    });
+    drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      burger?.classList.remove('open');
+      drawer.classList.remove('open');
+    }));
+  </script>
+</body>
+</html>
 
 <style>
-.blog-hero {
-  background: var(--beige);
-  padding: clamp(4rem, 9vw, 8rem) 2rem clamp(3rem, 6vw, 6rem);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.blog-hero::before {
-  content: '';
-  position: absolute;
-  top: -40%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(168,201,106,0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-.bh-inner {
-  max-width: 640px;
-  margin: 0 auto;
-  position: relative;
-}
-.bh-inner h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  color: var(--sage);
-  margin: 0.5rem 0;
-}
-.bh-line {
-  width: 50px; height: 2px;
-  background: var(--green);
-  margin: 1.25rem auto;
-  border-radius: 2px;
-}
-.bh-inner p {
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.75;
-  max-width: 480px;
-  margin: 0 auto;
-}
+  .blog-main { padding-top: 62px; min-height: 80vh; }
 
-.blog-list-sec {
-  background: var(--cream);
-  padding: clamp(3rem, 7vw, 6rem) 2rem;
-}
-.blog-list-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.bpost {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 0;
-  border-bottom: 1px solid rgba(110,132,103,0.15);
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
-  align-items: start;
-}
-.bpost:first-child { padding-top: 0; }
-.bpost:last-child { border-bottom: none; }
-
-.bpost-img {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  aspect-ratio: 4/3;
-  margin-right: 3rem;
-  flex-shrink: 0;
-}
-.bpost-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-.bpost:hover .bpost-img img { transform: scale(1.04); }
-.bpost-tag {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  background: var(--green);
-  color: #fff;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 0.3rem 0.7rem;
-  border-radius: 3px;
-}
-
-.bpost-content { padding: 0.25rem 0; }
-.bpost-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-}
-.bpost-date, .bpost-read {
-  font-size: 0.72rem;
-  color: var(--muted);
-  font-weight: 400;
-}
-.bpost-sep { color: var(--green); font-size: 0.9rem; }
-
-.bpost-title {
-  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-  color: var(--sage);
-  line-height: 1.25;
-  margin-bottom: 0.85rem;
-}
-.bpost-excerpt {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.75;
-  margin-bottom: 1.5rem;
-  font-style: italic;
-}
-.bpost-body {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-.bpost-body p {
-  font-size: 0.92rem;
-  color: var(--ink);
-  line-height: 1.85;
-  font-weight: 300;
-}
-.bpost-sources {
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(110,132,103,0.15);
-}
-.sources-label {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.6rem;
-}
-.bpost-sources ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-.bpost-sources li a {
-  font-size: 0.75rem;
-  color: var(--sage);
-  text-decoration: none;
-  transition: color var(--ease);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-.bpost-sources li a:hover { color: var(--green); }
-
-.blog-cta-sec {
-  background: var(--sage);
-  padding: clamp(3.5rem, 7vw, 6rem) 2rem;
-  text-align: center;
-}
-.blog-cta-inner { max-width: 560px; margin: 0 auto; }
-.blog-cta-label {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 0.75rem;
-}
-.blog-cta-inner h2 {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  color: #fff;
-  margin-bottom: 1rem;
-}
-.blog-cta-sub {
-  color: rgba(255,255,255,0.75);
-  font-size: 0.95rem;
-  line-height: 1.75;
-  margin-bottom: 2rem;
-}
-
-@media (max-width: 680px) {
-  .bpost {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .blog-header {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3.5rem var(--page-margin) 2rem;
   }
-  .bpost-img {
-    margin-right: 0;
-    aspect-ratio: 16/9;
+  .blog-header h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: .6rem; }
+  .blog-sub { font-size: var(--section-body); color: var(--muted); max-width: 52ch; }
+
+  .blog-grid {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 var(--page-margin) 5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: 1.25rem;
   }
-  .blog-hero { padding: 3rem 1.25rem 2.5rem; }
-  .blog-list-sec { padding: 2.5rem 1.25rem; }
-}
+
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.6rem 1.5rem 1.3rem;
+    border: 1px solid var(--line);
+    transition: box-shadow .25s, transform .25s;
+    cursor: pointer;
+  }
+  .blog-card:hover {
+    box-shadow: 0 8px 28px rgba(58,63,62,.1);
+    transform: translateY(-3px);
+  }
+
+  .blog-card-body { flex: 1; }
+  .blog-date {
+    display: block;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin-bottom: .7rem;
+  }
+  .blog-card-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: .6rem;
+    color: var(--ink);
+  }
+  .blog-card-desc {
+    font-size: .8rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .blog-card-cta {
+    display: inline-block;
+    margin-top: 1.2rem;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--green-deep);
+  }
+  .blog-empty {
+    color: var(--muted);
+    font-size: var(--section-body);
+    padding: 2rem 0;
+  }
 </style>
