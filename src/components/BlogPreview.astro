@@ -5,6 +5,8 @@
  * - hu locale: /blog oldalra mutat, hu cikkeket tölt
  * - en locale: /en/blog oldalra mutat, en cikkeket tölt
  * - ja / ko: nem renderel semmit (nincs elég tartalom)
+ *
+ * Tipográfia: pontosan illeszkedik a blog.astro fejléc stílusához.
  */
 import { getCollection } from 'astro:content';
 import type { Locale } from '../i18n/v3/index';
@@ -28,15 +30,21 @@ const posts = allPosts
 const blogBase = locale === 'hu' ? '/blog' : `/${locale}/blog`;
 const postBase = locale === 'hu' ? '/blog' : `/${locale}/blog`;
 
-const labels: Record<string, { heading: string; sub: string; cta: string; readmore: string }> = {
+const labels: Record<string, { eyebrow: string; heading: string; headingEm: string; headingEnd: string; sub: string; cta: string; readmore: string }> = {
   hu: {
-    heading: 'A blogról',
-    sub: 'Szakmai cikkek bőrápolásról, kezelésekről és a tudatos szépségápolásról.',
+    eyebrow: 'Tudástár',
+    heading: 'Bőrápolási ',
+    headingEm: 'tippek',
+    headingEnd: ' és tanácsok',
+    sub: 'Szakmai tartalmak a bőröd egészségéért és természetes ragyogásáért.',
     cta: 'Összes cikk',
-    readmore: 'Olvasd el',
+    readmore: 'Elolvasom',
   },
   en: {
-    heading: 'From the blog',
+    eyebrow: 'Knowledge',
+    heading: 'Skincare ',
+    headingEm: 'tips',
+    headingEnd: ' and advice',
     sub: 'Professional articles on skincare, treatments and conscious beauty routines.',
     cta: 'All articles',
     readmore: 'Read more',
@@ -49,36 +57,29 @@ const l = labels[locale] ?? labels['hu'];
 {posts.length > 0 && (
 <section class="bp-section reveal">
   <div class="bp-inner">
-    <div class="bp-header">
-      <div>
-        <p class="bp-eyebrow">Blog</p>
-        <h2 class="bp-heading">{l.heading}</h2>
-        <p class="bp-sub">{l.sub}</p>
-      </div>
-      <a href={blogBase} class="bp-cta-top">
-        {l.cta}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
+
+    <header class="bp-header">
+      <p class="bp-eyebrow">{l.eyebrow}</p>
+      <h2 class="bp-title">{l.heading}<em>{l.headingEm}</em>{l.headingEnd}</h2>
+      <p class="bp-sub">{l.sub}</p>
+    </header>
 
     <div class="bp-grid">
       {posts.map((post) => (
         <a href={`${postBase}/${slugOf(post.id)}`} class="bp-card">
-          <div class="bp-card-meta">
-            <time datetime={post.data.pubDate.toISOString()}>
+          <div class="bp-card-body">
+            <time class="bp-date" datetime={post.data.pubDate.toISOString()}>
               {post.data.pubDate.toLocaleDateString(
                 locale === 'hu' ? 'hu-HU' : 'en-GB',
                 { year: 'numeric', month: 'long', day: 'numeric' }
               )}
             </time>
+            <h3 class="bp-card-title">{post.data.title}</h3>
+            <p class="bp-card-desc">{post.data.description}</p>
           </div>
-          <h3 class="bp-card-title">{post.data.title}</h3>
-          <p class="bp-card-desc">{post.data.description}</p>
-          <span class="bp-card-read">
+          <span class="bp-card-cta">
             {l.readmore}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
@@ -86,190 +87,157 @@ const l = labels[locale] ?? labels['hu'];
       ))}
     </div>
 
-    <a href={blogBase} class="bp-cta-bottom">
-      {l.cta}
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
+    <div class="bp-footer">
+      <a href={blogBase} class="bp-cta">
+        {l.cta}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
   </div>
 </section>
 )}
 
 <style>
   .bp-section {
-    background: var(--bg, #f2f4ef);
-    padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+    background: var(--bg);
+    padding: clamp(4rem, 8vw, 6rem) var(--page-margin);
   }
 
   .bp-inner {
-    max-width: 1100px;
+    max-width: 900px;
     margin: 0 auto;
   }
 
-  /* ── Fejléc ── */
+  /* ── Fejléc — 1:1 másolat a blog.astro .blog-header stílusából ── */
   .bp-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin-bottom: 2.75rem;
-    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 3rem;
   }
 
   .bp-eyebrow {
-    font-family: var(--sans, 'Inter', sans-serif);
-    font-size: 0.7rem;
+    font-family: var(--sans);
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--green, #7fa852);
-    margin-bottom: 0.5rem;
+    color: var(--green);
+    margin-bottom: 0.75rem;
   }
 
-  .bp-heading {
-    font-family: var(--serif, 'Playfair Display', Georgia, serif);
-    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  .bp-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 400;
-    color: var(--ink, #2a2e27);
+    color: var(--ink);
     line-height: 1.15;
-    margin-bottom: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .bp-title em {
+    font-style: italic;
+    color: var(--green);
   }
 
   .bp-sub {
-    font-family: var(--sans, 'Inter', sans-serif);
-    font-size: 0.95rem;
-    color: var(--muted, #6b7468);
-    max-width: 42ch;
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 50ch;
+    margin: 0 auto;
     line-height: 1.6;
   }
 
-  /* CTA gomb – fejlécben, asztali nézetben */
-  .bp-cta-top {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    flex-shrink: 0;
-    font-family: var(--sans, 'Inter', sans-serif);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink, #2a2e27);
-    text-decoration: none;
-    border-bottom: 1.5px solid var(--green, #7fa852);
-    padding-bottom: 2px;
-    transition: color 0.18s, border-color 0.18s;
-    white-space: nowrap;
-    align-self: center;
-    margin-bottom: 1rem;
-  }
-  .bp-cta-top:hover { color: var(--green, #7fa852); }
-
-  /* CTA gomb – mobilon, a kártyák alatt */
-  .bp-cta-bottom {
-    display: none;
-    align-items: center;
-    gap: 0.45rem;
-    font-family: var(--sans, 'Inter', sans-serif);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink, #2a2e27);
-    text-decoration: none;
-    border-bottom: 1.5px solid var(--green, #7fa852);
-    padding-bottom: 2px;
-    transition: color 0.18s;
-    margin-top: 2rem;
-  }
-  .bp-cta-bottom:hover { color: var(--green, #7fa852); }
-
-  /* ── Kártyarács ── */
+  /* ── Kártyarács — 1:1 másolat a blog.astro .blog-grid stílusából ── */
   .bp-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+    gap: 1.5rem;
   }
 
-  /* ── Kártya ── */
   .bp-card {
     background: #fff;
     border-radius: 14px;
-    padding: 1.75rem 1.75rem 1.5rem;
-    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.07);
+    padding: 1.75rem;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    border: 1px solid rgba(0,0,0,0.06);
-    box-shadow: 0 2px 8px rgba(42,46,39,0.04);
+    justify-content: space-between;
+    gap: 1.25rem;
+    text-decoration: none;
+    color: inherit;
     transition: transform 0.22s cubic-bezier(0.16,1,0.3,1),
-                box-shadow 0.22s cubic-bezier(0.16,1,0.3,1),
-                border-color 0.22s;
+                box-shadow 0.22s cubic-bezier(0.16,1,0.3,1);
   }
   .bp-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(42,46,39,0.1);
-    border-color: rgba(127,168,82,0.3);
+    box-shadow: 0 12px 32px rgba(80,100,60,0.1);
   }
 
-  .bp-card-meta time {
-    font-family: var(--sans, 'Inter', sans-serif);
-    font-size: 0.68rem;
+  .bp-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .bp-date {
+    font-family: var(--sans);
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--green, #7fa852);
+    color: var(--muted);
   }
 
   .bp-card-title {
-    font-family: var(--serif, 'Playfair Display', Georgia, serif);
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-family: var(--serif);
+    font-size: 1.25rem;
     font-weight: 500;
-    color: var(--ink, #2a2e27);
+    color: var(--ink);
     line-height: 1.3;
-    margin-top: 0.2rem;
   }
 
   .bp-card-desc {
-    font-family: var(--sans, 'Inter', sans-serif);
+    font-family: var(--sans);
     font-size: 0.875rem;
-    color: var(--muted, #6b7468);
-    line-height: 1.65;
-    flex: 1;
+    color: var(--muted);
+    line-height: 1.6;
   }
 
-  .bp-card-read {
+  .bp-card-cta {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    font-family: var(--sans, 'Inter', sans-serif);
-    font-size: 0.72rem;
+    gap: 0.4rem;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+
+  /* ── "Összes cikk" gomb alul, középen ── */
+  .bp-footer {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .bp-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--sans);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--green, #7fa852);
-    margin-top: 0.4rem;
-    transition: gap 0.18s;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--green);
+    padding-bottom: 2px;
+    transition: color 0.18s;
   }
-  .bp-card:hover .bp-card-read { gap: 0.55rem; }
-
-  /* ── Reszponzív ── */
-  @media (max-width: 640px) {
-    .bp-cta-top { display: none; }
-    .bp-cta-bottom { display: inline-flex; }
-    .bp-header { margin-bottom: 2rem; }
-  }
-
-  /* reveal animáció */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
-                transform 0.65s cubic-bezier(0.16,1,0.3,1);
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: none;
-  }
+  .bp-cta:hover { color: var(--green); }
 </style>
