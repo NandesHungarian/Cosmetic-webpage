@@ -1,9 +1,5 @@
 ---
-/**
- * src/pages/blog/[slug].astro
- * Magyar blog cikk oldal — /blog/:slug
- */
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { t } from '../../i18n/v3/index';
 import '../../styles/global.css';
 import Nav from '../../components/Nav.astro';
@@ -11,15 +7,15 @@ import Footer from '../../components/Footer.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => data.lang === 'hu');
-  return posts.map(post => ({ params: { slug: post.slug } }));
+  return posts.map(post => ({ params: { slug: post.id } }));
 }
 
 const { slug } = Astro.params;
 const posts = await getCollection('blog', ({ data }) => data.lang === 'hu');
-const post = posts.find(p => p.slug === slug);
+const post = posts.find(p => p.id === slug);
 if (!post) return Astro.redirect('/blog');
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 const tr = t('hu');
 ---
 
@@ -30,7 +26,7 @@ const tr = t('hu');
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={post.data.description} />
   <title>{post.data.title} — Hancz Marianna Szépségterapeuta</title>
-  <link rel="canonical" href={`https://szepsegterapeuta.hu/blog/${post.slug}`} />
+  <link rel="canonical" href={`https://szepsegterapeuta.hu/blog/${post.id}`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -56,7 +52,6 @@ const tr = t('hu');
         <h1 class="article-title">{post.data.title}</h1>
         <p class="article-desc">{post.data.description}</p>
       </header>
-
       <div class="article-body">
         <Content />
       </div>
@@ -67,98 +62,19 @@ const tr = t('hu');
 
   <style>
     body { background: var(--bg, #f2f4ef); }
-
-    .article-main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 7rem 1.5rem 5rem;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--sans, 'Inter', sans-serif);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted, #6b7468);
-      text-decoration: none;
-      margin-bottom: 2.5rem;
-      transition: color 0.18s;
-    }
+    .article-main { max-width: 720px; margin: 0 auto; padding: 7rem 1.5rem 5rem; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--sans, 'Inter', sans-serif); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted, #6b7468); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.18s; }
     .back-link:hover { color: var(--green, #7fa852); }
-
-    .article-header {
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-    }
-
-    .article-date {
-      display: block;
-      font-family: var(--sans, 'Inter', sans-serif);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--green, #7fa852);
-      margin-bottom: 0.75rem;
-    }
-
-    .article-title {
-      font-family: var(--serif, 'Playfair Display', Georgia, serif);
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 400;
-      color: var(--ink, #2a2e27);
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-
-    .article-desc {
-      font-family: var(--sans, 'Inter', sans-serif);
-      font-size: 1.05rem;
-      color: var(--muted, #6b7468);
-      line-height: 1.65;
-    }
-
-    .article-body {
-      font-family: var(--sans, 'Inter', sans-serif);
-      font-size: 1rem;
-      line-height: 1.75;
-      color: var(--ink, #2a2e27);
-    }
-
-    .article-body h2 {
-      font-family: var(--serif, 'Playfair Display', Georgia, serif);
-      font-size: 1.4rem;
-      font-weight: 500;
-      color: var(--ink, #2a2e27);
-      margin: 2.25rem 0 0.75rem;
-      line-height: 1.25;
-    }
-
-    .article-body p {
-      margin-bottom: 1.25rem;
-      max-width: 65ch;
-    }
-
-    .article-body ul {
-      padding-left: 1.25rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .article-body li {
-      margin-bottom: 0.4rem;
-      line-height: 1.65;
-    }
-
-    .article-body a {
-      color: var(--green, #7fa852);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
+    .article-header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .article-date { display: block; font-family: var(--sans, 'Inter', sans-serif); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green, #7fa852); margin-bottom: 0.75rem; }
+    .article-title { font-family: var(--serif, 'Playfair Display', Georgia, serif); font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 400; color: var(--ink, #2a2e27); line-height: 1.2; margin-bottom: 1rem; }
+    .article-desc { font-family: var(--sans, 'Inter', sans-serif); font-size: 1.05rem; color: var(--muted, #6b7468); line-height: 1.65; }
+    .article-body { font-family: var(--sans, 'Inter', sans-serif); font-size: 1rem; line-height: 1.75; color: var(--ink, #2a2e27); }
+    .article-body h2 { font-family: var(--serif, 'Playfair Display', Georgia, serif); font-size: 1.4rem; font-weight: 500; color: var(--ink, #2a2e27); margin: 2.25rem 0 0.75rem; line-height: 1.25; }
+    .article-body p { margin-bottom: 1.25rem; max-width: 65ch; }
+    .article-body ul { padding-left: 1.25rem; margin-bottom: 1.25rem; }
+    .article-body li { margin-bottom: 0.4rem; line-height: 1.65; }
+    .article-body a { color: var(--green, #7fa852); text-decoration: underline; text-underline-offset: 3px; }
     .article-body a:hover { color: var(--green-deep, #5a7a3a); }
   </style>
 
