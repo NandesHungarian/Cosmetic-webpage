@@ -1,13 +1,4 @@
-/**
- * src/pages/[lang]/blog.astro
- * ─────────────────────────────────────────────────────
- * Minden nem-magyar locale blog lista oldala egyetlen fájlból.
- * - /en/blog  → angol blog
- * - /ja/blog  → japán blog
- * - /ko/blog  → koreai blog
- *
- * A magyar blog lista a gyökér URL-en él: src/pages/blog.astro
- */
+---
 import { getCollection } from 'astro:content';
 import { t, LOCALES, DEFAULT_LOCALE, alternateUrls, type Locale } from '../../i18n/v3/index';
 import '../../styles/global.css';
@@ -43,13 +34,11 @@ const posts = (await getCollection('blog', ({ data }) => data.lang === locale))
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={tr.meta.description} />
   <title>Blog — {tr.meta.title}</title>
-
   {Object.entries(alts).map(([l, href]) => (
     <link rel="alternate" hreflang={l} href={`https://szepsegterapeuta.hu${href}`} />
   ))}
   <link rel="alternate" hreflang="x-default" href="https://szepsegterapeuta.hu/blog" />
   <link rel="canonical" href={`https://szepsegterapeuta.hu/${locale}/blog`} />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -64,14 +53,14 @@ const posts = (await getCollection('blog', ({ data }) => data.lang === locale))
 
   <main class="blog-main">
     <header class="blog-header">
-      <p class="blog-eyebrow">{tr.meta.lang === 'ja' ? 'ナレッジベース' : tr.meta.lang === 'ko' ? '지식 베이스' : 'Knowledge base'}</p>
+      <p class="blog-eyebrow">{locale === 'ja' ? 'ナレッジベース' : locale === 'ko' ? '지식 베이스' : 'Knowledge base'}</p>
       <h1 class="blog-title">Skincare <em>tips</em> and advice</h1>
       <p class="blog-sub">Professional content for the health and natural radiance of your skin.</p>
     </header>
 
     <section class="blog-grid">
       {posts.map(post => (
-        <a href={`/${locale}/blog/${post.slug}`} class="blog-card">
+        <a href={`/${locale}/blog/${post.id}`} class="blog-card">
           <div class="blog-card-body">
             <time class="blog-date" datetime={post.data.pubDate.toISOString()}>
               {post.data.pubDate.toLocaleDateString(localeDateFormat[locale], { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -80,7 +69,7 @@ const posts = (await getCollection('blog', ({ data }) => data.lang === locale))
             <p class="blog-card-desc">{post.data.description}</p>
           </div>
           <span class="blog-card-cta">
-            {tr.meta.lang === 'ja' ? '続きを読む' : tr.meta.lang === 'ko' ? '더 읽기' : 'Read more'}
+            {locale === 'ja' ? '続きを読む' : locale === 'ko' ? '더 읽기' : 'Read more'}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
         </a>

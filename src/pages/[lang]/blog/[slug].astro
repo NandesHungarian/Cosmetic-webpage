@@ -1,14 +1,5 @@
-/**
- * src/pages/[lang]/blog/[slug].astro
- * ─────────────────────────────────────────────────────
- * Minden nem-magyar locale blog cikk oldala egyetlen fájlból.
- * - /en/blog/:slug  → angol cikk
- * - /ja/blog/:slug  → japán cikk
- * - /ko/blog/:slug  → koreai cikk
- *
- * A magyar cikk oldal: src/pages/blog/[slug].astro
- */
-import { getCollection } from 'astro:content';
+---
+import { getCollection, render } from 'astro:content';
 import { t, LOCALES, DEFAULT_LOCALE, type Locale } from '../../../i18n/v3/index';
 import '../../../styles/global.css';
 import Nav from '../../../components/Nav.astro';
@@ -20,7 +11,7 @@ export async function getStaticPaths() {
   for (const locale of locales) {
     const posts = await getCollection('blog', ({ data }) => data.lang === locale);
     for (const post of posts) {
-      paths.push({ params: { lang: locale, slug: post.slug } });
+      paths.push({ params: { lang: locale, slug: post.id } });
     }
   }
   return paths;
@@ -29,10 +20,10 @@ export async function getStaticPaths() {
 const { lang, slug } = Astro.params;
 const locale = lang as Locale;
 const posts = await getCollection('blog', ({ data }) => data.lang === locale);
-const post = posts.find(p => p.slug === slug);
+const post = posts.find(p => p.id === slug);
 if (!post) return Astro.redirect(`/${locale}/blog`);
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 const tr = t(locale);
 
 const localeDateFormat: Record<Locale, string> = {
@@ -57,7 +48,7 @@ const backLabel: Record<Locale, string> = {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={post.data.description} />
   <title>{post.data.title} — {tr.meta.title}</title>
-  <link rel="canonical" href={`https://szepsegterapeuta.hu/${locale}/blog/${post.slug}`} />
+  <link rel="canonical" href={`https://szepsegterapeuta.hu/${locale}/blog/${post.id}`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -74,7 +65,6 @@ const backLabel: Record<Locale, string> = {
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       {backLabel[locale]}
     </a>
-
     <article>
       <header class="article-header">
         <time class="article-date" datetime={post.data.pubDate.toISOString()}>
