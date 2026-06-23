@@ -8,6 +8,7 @@ import Footer from '../../../components/Footer.astro';
 const slugOf = (id: string) => id.split('/').slice(1).join('/');
 
 export async function getStaticPaths() {
+  const slugOf = (id: string) => id.split('/').slice(1).join('/');
   const locales = LOCALES.filter(l => l !== DEFAULT_LOCALE);
   const paths = [];
   for (const locale of locales) {
@@ -61,7 +62,6 @@ const backLabel: Record<Locale, string> = {
 </head>
 <body>
   <Nav tr={tr} locale={locale} />
-
   <main class="article-main">
     <a href={`/${locale}/blog`} class="back-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -78,9 +78,7 @@ const backLabel: Record<Locale, string> = {
       <div class="article-body"><Content /></div>
     </article>
   </main>
-
   <Footer tr={tr} locale={locale} />
-
   <style>
     body { background: var(--bg, #f2f4ef); }
     .article-main { max-width: 720px; margin: 0 auto; padding: 7rem 1.5rem 5rem; }
@@ -98,7 +96,6 @@ const backLabel: Record<Locale, string> = {
     .article-body a { color: var(--green, #7fa852); text-decoration: underline; text-underline-offset: 3px; }
     .article-body a:hover { color: var(--green-deep, #5a7a3a); }
   </style>
-
   <script>
     const burger = document.getElementById('burger');
     const drawer = document.getElementById('drawer');

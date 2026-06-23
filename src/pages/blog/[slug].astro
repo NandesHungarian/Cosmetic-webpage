@@ -8,6 +8,7 @@ import Footer from '../../components/Footer.astro';
 const slugOf = (id: string) => id.split('/').slice(1).join('/');
 
 export async function getStaticPaths() {
+  const slugOf = (id: string) => id.split('/').slice(1).join('/');
   const posts = await getCollection('blog', ({ data }) => data.lang === 'hu');
   return posts.map(post => ({ params: { slug: slugOf(post.id) } }));
 }
@@ -39,13 +40,11 @@ const tr = t('hu');
 </head>
 <body>
   <Nav tr={tr} locale="hu" />
-
   <main class="article-main">
     <a href="/blog" class="back-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Vissza a bloghoz
     </a>
-
     <article>
       <header class="article-header">
         <time class="article-date" datetime={post.data.pubDate.toISOString()}>
@@ -54,14 +53,10 @@ const tr = t('hu');
         <h1 class="article-title">{post.data.title}</h1>
         <p class="article-desc">{post.data.description}</p>
       </header>
-      <div class="article-body">
-        <Content />
-      </div>
+      <div class="article-body"><Content /></div>
     </article>
   </main>
-
   <Footer tr={tr} locale="hu" />
-
   <style>
     body { background: var(--bg, #f2f4ef); }
     .article-main { max-width: 720px; margin: 0 auto; padding: 7rem 1.5rem 5rem; }
@@ -79,18 +74,11 @@ const tr = t('hu');
     .article-body a { color: var(--green, #7fa852); text-decoration: underline; text-underline-offset: 3px; }
     .article-body a:hover { color: var(--green-deep, #5a7a3a); }
   </style>
-
   <script>
     const burger = document.getElementById('burger');
     const drawer = document.getElementById('drawer');
-    burger?.addEventListener('click', () => {
-      burger.classList.toggle('open');
-      drawer?.classList.toggle('open');
-    });
-    drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      burger?.classList.remove('open');
-      drawer.classList.remove('open');
-    }));
+    burger?.addEventListener('click', () => { burger.classList.toggle('open'); drawer?.classList.toggle('open'); });
+    drawer?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { burger?.classList.remove('open'); drawer.classList.remove('open'); }));
   </script>
 </body>
 </html>
