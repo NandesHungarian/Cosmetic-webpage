@@ -1,0 +1,275 @@
+---
+/**
+ * BlogPreview.astro
+ * A főoldalon megjelenő blog előnézet szekció.
+ * - hu locale: /blog oldalra mutat, hu cikkeket tölt
+ * - en locale: /en/blog oldalra mutat, en cikkeket tölt
+ * - ja / ko: nem renderel semmit (nincs elég tartalom)
+ */
+import { getCollection } from 'astro:content';
+import type { Locale } from '../i18n/v3/index';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+// ja/ko: ne renderelj semmit
+if (locale === 'ja' || locale === 'ko') return;
+
+const slugOf = (id: string) => id.split('/').slice(1).join('/');
+
+const allPosts = await getCollection('blog', ({ data }) => data.lang === locale);
+const posts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const blogBase = locale === 'hu' ? '/blog' : `/${locale}/blog`;
+const postBase = locale === 'hu' ? '/blog' : `/${locale}/blog`;
+
+const labels: Record<string, { heading: string; sub: string; cta: string; readmore: string }> = {
+  hu: {
+    heading: 'A blogról',
+    sub: 'Szakmai cikkek bőrápolásról, kezelésekről és a tudatos szépségápolásról.',
+    cta: 'Összes cikk',
+    readmore: 'Olvasd el',
+  },
+  en: {
+    heading: 'From the blog',
+    sub: 'Professional articles on skincare, treatments and conscious beauty routines.',
+    cta: 'All articles',
+    readmore: 'Read more',
+  },
+};
+
+const l = labels[locale] ?? labels['hu'];
+---
+
+{posts.length > 0 && (
+<section class="bp-section reveal">
+  <div class="bp-inner">
+    <div class="bp-header">
+      <div>
+        <p class="bp-eyebrow">Blog</p>
+        <h2 class="bp-heading">{l.heading}</h2>
+        <p class="bp-sub">{l.sub}</p>
+      </div>
+      <a href={blogBase} class="bp-cta-top">
+        {l.cta}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="bp-grid">
+      {posts.map((post) => (
+        <a href={`${postBase}/${slugOf(post.id)}`} class="bp-card">
+          <div class="bp-card-meta">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString(
+                locale === 'hu' ? 'hu-HU' : 'en-GB',
+                { year: 'numeric', month: 'long', day: 'numeric' }
+              )}
+            </time>
+          </div>
+          <h3 class="bp-card-title">{post.data.title}</h3>
+          <p class="bp-card-desc">{post.data.description}</p>
+          <span class="bp-card-read">
+            {l.readmore}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <a href={blogBase} class="bp-cta-bottom">
+      {l.cta}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+)}
+
+<style>
+  .bp-section {
+    background: var(--bg, #f2f4ef);
+    padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+  }
+
+  .bp-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── Fejléc ── */
+  .bp-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2.75rem;
+    flex-wrap: wrap;
+  }
+
+  .bp-eyebrow {
+    font-family: var(--sans, 'Inter', sans-serif);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green, #7fa852);
+    margin-bottom: 0.5rem;
+  }
+
+  .bp-heading {
+    font-family: var(--serif, 'Playfair Display', Georgia, serif);
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    color: var(--ink, #2a2e27);
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+  }
+
+  .bp-sub {
+    font-family: var(--sans, 'Inter', sans-serif);
+    font-size: 0.95rem;
+    color: var(--muted, #6b7468);
+    max-width: 42ch;
+    line-height: 1.6;
+  }
+
+  /* CTA gomb – fejlécben, asztali nézetben */
+  .bp-cta-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-shrink: 0;
+    font-family: var(--sans, 'Inter', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink, #2a2e27);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--green, #7fa852);
+    padding-bottom: 2px;
+    transition: color 0.18s, border-color 0.18s;
+    white-space: nowrap;
+    align-self: center;
+    margin-bottom: 1rem;
+  }
+  .bp-cta-top:hover { color: var(--green, #7fa852); }
+
+  /* CTA gomb – mobilon, a kártyák alatt */
+  .bp-cta-bottom {
+    display: none;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--sans, 'Inter', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink, #2a2e27);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--green, #7fa852);
+    padding-bottom: 2px;
+    transition: color 0.18s;
+    margin-top: 2rem;
+  }
+  .bp-cta-bottom:hover { color: var(--green, #7fa852); }
+
+  /* ── Kártyarács ── */
+  .bp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 1.25rem;
+  }
+
+  /* ── Kártya ── */
+  .bp-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.75rem 1.75rem 1.5rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px rgba(42,46,39,0.04);
+    transition: transform 0.22s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.22s cubic-bezier(0.16,1,0.3,1),
+                border-color 0.22s;
+  }
+  .bp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(42,46,39,0.1);
+    border-color: rgba(127,168,82,0.3);
+  }
+
+  .bp-card-meta time {
+    font-family: var(--sans, 'Inter', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green, #7fa852);
+  }
+
+  .bp-card-title {
+    font-family: var(--serif, 'Playfair Display', Georgia, serif);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 500;
+    color: var(--ink, #2a2e27);
+    line-height: 1.3;
+    margin-top: 0.2rem;
+  }
+
+  .bp-card-desc {
+    font-family: var(--sans, 'Inter', sans-serif);
+    font-size: 0.875rem;
+    color: var(--muted, #6b7468);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .bp-card-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--sans, 'Inter', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green, #7fa852);
+    margin-top: 0.4rem;
+    transition: gap 0.18s;
+  }
+  .bp-card:hover .bp-card-read { gap: 0.55rem; }
+
+  /* ── Reszponzív ── */
+  @media (max-width: 640px) {
+    .bp-cta-top { display: none; }
+    .bp-cta-bottom { display: inline-flex; }
+    .bp-header { margin-bottom: 2rem; }
+  }
+
+  /* reveal animáció */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+                transform 0.65s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+</style>

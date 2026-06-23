@@ -3,9 +3,9 @@
  * src/pages/[lang]/index.astro
  * ─────────────────────────────────────────────────────
  * Minden locale főoldala egyetlen fájlból.
- * - /en  → angol fordítás
- * - /ja  → japán
- * - /ko  → koreai
+ * - /en  → angol fordítás (blog preview megjelenik)
+ * - /ja  → japán (blog preview NEM jelenik meg)
+ * - /ko  → koreai (blog preview NEM jelenik meg)
  *
  * A magyar főoldal a gyökér URL-en él: src/pages/index.astro
  */
@@ -19,6 +19,7 @@ import Fejlesztunk from '../../components/Fejlesztunk.astro';
 import Kezelesek from '../../components/Kezelesek.astro';
 import Rolam from '../../components/Rolam.astro';
 import Boreelemzes from '../../components/Boreelemzes.astro';
+import BlogPreview from '../../components/BlogPreview.astro';
 import Kapcsolat from '../../components/Kapcsolat.astro';
 import Footer from '../../components/Footer.astro';
 
@@ -72,6 +73,7 @@ const alts = alternateUrls('/');
   <Kezelesek tr={tr} />
   <Rolam tr={tr} />
   <Boreelemzes tr={tr} />
+  <BlogPreview locale={locale} />
   <Kapcsolat tr={tr} />
   <Footer tr={tr} locale={locale} />
 

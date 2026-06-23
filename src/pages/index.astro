@@ -15,6 +15,7 @@ import Fejlesztunk from '../components/Fejlesztunk.astro';
 import Kezelesek from '../components/Kezelesek.astro';
 import Rolam from '../components/Rolam.astro';
 import Boreelemzes from '../components/Boreelemzes.astro';
+import BlogPreview from '../components/BlogPreview.astro';
 import Kapcsolat from '../components/Kapcsolat.astro';
 import Footer from '../components/Footer.astro';
 
@@ -215,6 +216,7 @@ const alts = alternateUrls('/');
   <Kezelesek tr={tr} />
   <Rolam tr={tr} />
   <Boreelemzes tr={tr} />
+  <BlogPreview locale="hu" />
   <Kapcsolat tr={tr} />
   <Footer tr={tr} locale="hu" />
 
@@ -251,13 +253,11 @@ const alts = alternateUrls('/');
         config = { text: 'Would you prefer this page in English?', btnLabel: 'View in English', href: '/en' };
       }
 
-      // Ha nincs mit javasolni VAGY már el volt utasítva → azonnal indul a videó
       if (!config || dismissed) {
         startHeroVideo();
         return;
       }
 
-      // Van banner: videó egyelőre NEM indul
       var hv = document.querySelector('.hero-video');
       if (hv) {
         hv.autoplay = false;
@@ -268,7 +268,6 @@ const alts = alternateUrls('/');
       lnkTxt.textContent = config.btnLabel;
       lnk.href           = config.href;
 
-      // Banner megjelenés animációval
       suggest.style.display = 'flex';
       requestAnimationFrame(function() {
         requestAnimationFrame(function() {
@@ -281,17 +280,13 @@ const alts = alternateUrls('/');
         suggest.classList.remove('ls-visible');
         suggest.classList.add('ls-hiding');
         setTimeout(function() { suggest.style.display = 'none'; }, 550);
-        // Videó elindul bezárás után
         setTimeout(startHeroVideo, 100);
       }
 
       closeBtn.addEventListener('click', dismiss);
       lnk.addEventListener('click', function() {
         sessionStorage.setItem('lang-suggest-dismissed', '1');
-        // Átnavigál → videót nem kell indítani
       });
-
-      // Nincs automatikus eltűnés — csak kattintásra zárul
     })();
 
     window.__playNoScroll = function(v) {
