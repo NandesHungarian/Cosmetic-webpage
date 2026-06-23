@@ -10,6 +10,8 @@ const alts = alternateUrls('/blog');
 
 const posts = (await getCollection('blog', ({ data }) => data.lang === 'hu'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const slugOf = (id: string) => id.split('/').slice(1).join('/');
 ---
 
 <!DOCTYPE html>
@@ -44,7 +46,7 @@ const posts = (await getCollection('blog', ({ data }) => data.lang === 'hu'))
 
     <section class="blog-grid">
       {posts.map(post => (
-        <a href={`/blog/${post.id}`} class="blog-card">
+        <a href={`/blog/${slugOf(post.id)}`} class="blog-card">
           <div class="blog-card-body">
             <time class="blog-date" datetime={post.data.pubDate.toISOString()}>
               {post.data.pubDate.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })}

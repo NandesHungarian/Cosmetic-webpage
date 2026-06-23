@@ -5,13 +5,15 @@ import '../../../styles/global.css';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
 
+const slugOf = (id: string) => id.split('/').slice(1).join('/');
+
 export async function getStaticPaths() {
   const locales = LOCALES.filter(l => l !== DEFAULT_LOCALE);
   const paths = [];
   for (const locale of locales) {
     const posts = await getCollection('blog', ({ data }) => data.lang === locale);
     for (const post of posts) {
-      paths.push({ params: { lang: locale, slug: post.id } });
+      paths.push({ params: { lang: locale, slug: slugOf(post.id) } });
     }
   }
   return paths;
@@ -20,7 +22,7 @@ export async function getStaticPaths() {
 const { lang, slug } = Astro.params;
 const locale = lang as Locale;
 const posts = await getCollection('blog', ({ data }) => data.lang === locale);
-const post = posts.find(p => p.id === slug);
+const post = posts.find(p => slugOf(p.id) === slug);
 if (!post) return Astro.redirect(`/${locale}/blog`);
 
 const { Content } = await render(post);
@@ -48,7 +50,7 @@ const backLabel: Record<Locale, string> = {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={post.data.description} />
   <title>{post.data.title} — {tr.meta.title}</title>
-  <link rel="canonical" href={`https://szepsegterapeuta.hu/${locale}/blog/${post.id}`} />
+  <link rel="canonical" href={`https://szepsegterapeuta.hu/${locale}/blog/${slugOf(post.id)}`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />

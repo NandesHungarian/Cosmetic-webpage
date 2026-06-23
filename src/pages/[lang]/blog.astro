@@ -16,6 +16,8 @@ const locale = lang as Locale;
 const tr = t(locale);
 const alts = alternateUrls('/blog');
 
+const slugOf = (id: string) => id.split('/').slice(1).join('/');
+
 const localeDateFormat: Record<Locale, string> = {
   hu: 'hu-HU',
   en: 'en-GB',
@@ -60,7 +62,7 @@ const posts = (await getCollection('blog', ({ data }) => data.lang === locale))
 
     <section class="blog-grid">
       {posts.map(post => (
-        <a href={`/${locale}/blog/${post.id}`} class="blog-card">
+        <a href={`/${locale}/blog/${slugOf(post.id)}`} class="blog-card">
           <div class="blog-card-body">
             <time class="blog-date" datetime={post.data.pubDate.toISOString()}>
               {post.data.pubDate.toLocaleDateString(localeDateFormat[locale], { year: 'numeric', month: 'long', day: 'numeric' })}
