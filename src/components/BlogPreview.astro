@@ -1,13 +1,4 @@
 ---
-/**
- * BlogPreview.astro
- * A főoldalon megjelenő blog előnézet szekció.
- * - hu locale: /blog oldalra mutat, hu cikkeket tölt
- * - en locale: /en/blog oldalra mutat, en cikkeket tölt
- * - ja / ko: nem renderel semmit (nincs elég tartalom)
- *
- * Tipográfia: pontosan illeszkedik a blog.astro fejléc stílusához.
- */
 import { getCollection } from 'astro:content';
 import type { Locale } from '../i18n/v3/index';
 
@@ -17,7 +8,6 @@ interface Props {
 
 const { locale } = Astro.props;
 
-// ja/ko: ne renderelj semmit
 if (locale === 'ja' || locale === 'ko') return;
 
 const slugOf = (id: string) => id.split('/').slice(1).join('/');
@@ -59,8 +49,8 @@ const l = labels[locale] ?? labels['hu'];
   <div class="bp-inner">
 
     <header class="bp-header">
-      <p class="bp-eyebrow">{l.eyebrow}</p>
-      <h2 class="bp-title">{l.heading}<em>{l.headingEm}</em>{l.headingEnd}</h2>
+      <span class="eyebrow">{l.eyebrow}</span>
+      <h2 class="bp-h2">{l.heading}<em>{l.headingEm}</em>{l.headingEnd}</h2>
       <p class="bp-sub">{l.sub}</p>
     </header>
 
@@ -103,69 +93,54 @@ const l = labels[locale] ?? labels['hu'];
 <style>
   .bp-section {
     background: var(--bg);
-    padding: clamp(4rem, 8vw, 6rem) var(--page-margin);
+    padding: 10px var(--page-margin) 1.4rem;
   }
 
   .bp-inner {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
-  /* ── Fejléc — 1:1 másolat a blog.astro .blog-header stílusából ── */
-  .bp-header {
-    text-align: center;
-    margin-bottom: 3rem;
+  .bp-header .eyebrow {
+    font-size: .525rem;
+    margin-bottom: .74rem;
   }
 
-  .bp-eyebrow {
-    font-family: var(--sans);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 0.75rem;
+  .bp-h2 {
+    font-size: var(--section-h2);
+    line-height: 1.08;
+    margin: 0 0 .45rem;
   }
 
-  .bp-title {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
-    color: var(--ink);
-    line-height: 1.15;
-    margin-bottom: 1rem;
-  }
-
-  .bp-title em {
+  .bp-h2 em {
     font-style: italic;
     color: var(--green);
   }
 
   .bp-sub {
-    font-family: var(--sans);
-    font-size: 1rem;
     color: var(--muted);
-    max-width: 50ch;
-    margin: 0 auto;
-    line-height: 1.6;
+    font-size: var(--section-sub);
+    line-height: 1.45;
+    max-width: 420px;
   }
 
-  /* ── Kártyarács — 1:1 másolat a blog.astro .blog-grid stílusából ── */
+  /* ── Kártyarács ── */
   .bp-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 1rem;
+    margin-top: 1.4rem;
   }
 
   .bp-card {
     background: #fff;
-    border-radius: 14px;
+    border-radius: 10px;
     border: 1px solid rgba(0,0,0,0.07);
-    padding: 1.75rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1.25rem;
+    gap: 1rem;
     text-decoration: none;
     color: inherit;
     transition: transform 0.22s cubic-bezier(0.16,1,0.3,1),
@@ -173,18 +148,18 @@ const l = labels[locale] ?? labels['hu'];
   }
   .bp-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(80,100,60,0.1);
+    box-shadow: 0 8px 24px rgba(80,100,60,0.09);
   }
 
   .bp-card-body {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.5rem;
   }
 
   .bp-date {
     font-family: var(--sans);
-    font-size: 0.7rem;
+    font-size: var(--section-label);
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -193,7 +168,7 @@ const l = labels[locale] ?? labels['hu'];
 
   .bp-card-title {
     font-family: var(--serif);
-    font-size: 1.25rem;
+    font-size: var(--section-body);
     font-weight: 500;
     color: var(--ink);
     line-height: 1.3;
@@ -201,9 +176,9 @@ const l = labels[locale] ?? labels['hu'];
 
   .bp-card-desc {
     font-family: var(--sans);
-    font-size: 0.875rem;
+    font-size: var(--section-label);
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.55;
   }
 
   .bp-card-cta {
@@ -211,17 +186,16 @@ const l = labels[locale] ?? labels['hu'];
     align-items: center;
     gap: 0.4rem;
     font-family: var(--sans);
-    font-size: 0.75rem;
+    font-size: var(--section-label);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--green);
   }
 
-  /* ── "Összes cikk" gomb alul, középen ── */
+  /* ── "Összes cikk" link ── */
   .bp-footer {
-    text-align: center;
-    margin-top: 2.5rem;
+    margin-top: 1.4rem;
   }
 
   .bp-cta {
@@ -229,7 +203,7 @@ const l = labels[locale] ?? labels['hu'];
     align-items: center;
     gap: 0.45rem;
     font-family: var(--sans);
-    font-size: 0.75rem;
+    font-size: var(--section-label);
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
