@@ -1,5 +1,6 @@
 ---
 import type { T } from '../i18n/v3/hu';
+import { CONTACT_LINKS } from '../i18n/v3/contact-links';
 const { tr } = Astro.props as { tr: T };
 const ct = tr.contact;
 ---
@@ -16,8 +17,8 @@ const ct = tr.contact;
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d={item.icon} stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            {item.href
-              ? <a href={item.href} class={`kapcsolat-link${i === 0 ? ' kapcsolat-link--address' : ''}`} target="_blank" rel="noopener noreferrer">{item.label}</a>
+            {CONTACT_LINKS[i]
+              ? <a href={CONTACT_LINKS[i]} class={`kapcsolat-link${i === 0 ? ' kapcsolat-link--address' : ''}`} target="_blank" rel="noopener noreferrer">{item.label}</a>
               : <span>{item.label}</span>
             }
           </li>
