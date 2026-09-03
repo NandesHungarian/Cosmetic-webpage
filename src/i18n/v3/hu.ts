@@ -114,7 +114,7 @@ export const hu = {
     netlifyFormName: 'contact-v3',
   },
   shop: {
-    eyebrow: 'Emellett',
+    eyebrow: 'Szépségtermékek',
     h2: 'A kedvenc termékeim',
     body: 'A szalonon túl MustHave Global partnerként olyan kozmetikumokat és wellness termékeket is ajánlok, amelyeket magam is szívesen használok. Nézd meg a kínálatot, és rendelj közvetlenül a webshopból.',
     cta: 'Ugrás a webshopba',

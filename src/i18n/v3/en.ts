@@ -116,7 +116,7 @@ export const en: T = {
     netlifyFormName: 'contact-v3-en',
   },
   shop: {
-    eyebrow: 'Beyond the salon',
+    eyebrow: 'Beauty products',
     h2: 'My favorite products',
     body: "Besides working as a beauty therapist, I'm also a MustHave Global partner, recommending skincare and wellness products I personally love. Browse the shop and order directly online.",
     cta: 'Visit the shop',

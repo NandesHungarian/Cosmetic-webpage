@@ -116,7 +116,7 @@ export const ko: T = {
     netlifyFormName: 'contact-v3-ko',
   },
   shop: {
-    eyebrow: '살롱 이외에도',
+    eyebrow: '뷰티 제품',
     h2: '제가 사랑하는 제품들',
     body: '코스메틱 살롱 운영 외에도, MustHave Global 파트너로서 제가 직접 사용하고 좋아하는 스킨케어 및 웰니스 제품을 소개하고 있습니다. 온라인 스토어에서 바로 주문하실 수 있습니다.',
     cta: '스토어 바로가기',
