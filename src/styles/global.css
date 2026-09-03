@@ -13,6 +13,7 @@
   --section-sub:   13px;
   --section-body:  13px;
   --section-label: 11px;
+  --eyebrow-size:  .64rem;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -56,7 +57,7 @@ a{text-decoration:none;color:inherit;}
   .scroll-exit.exiting{opacity:1;transform:none;filter:none;}
 }
 
-.eyebrow{display:block;font-size:.64rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem;line-height:1.6;}
+.eyebrow{display:block;font-size:var(--eyebrow-size);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem;line-height:1.6;}
 .brush{display:block;width:59px;height:9px;margin:.15rem 0 .8rem;}
 .brush-dev{width:65px;margin:19px 0 1rem;}
 
