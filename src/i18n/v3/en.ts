@@ -115,11 +115,18 @@ export const en: T = {
     submit: 'Send',
     netlifyFormName: 'contact-v3-en',
   },
+  shop: {
+    eyebrow: 'Beyond the salon',
+    h2: 'My favorite products',
+    body: "Besides working as a beauty therapist, I'm also a MustHave Global partner, recommending skincare and wellness products I personally love. Browse the shop and order directly online.",
+    cta: 'Visit the shop',
+  },
   footer: {
     brandBold: 'beauty',
     brandRest: 'therapist',
     tagline: 'The power of science, the intelligence of nature.',
     copy: '© 2026 szepsegterapeuta · Budapest',
     logoAlt: 'Beauty therapist logo',
+    shopLabel: 'My favorite products',
   },
 };

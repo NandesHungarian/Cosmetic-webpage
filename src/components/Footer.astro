@@ -1,5 +1,6 @@
 ---
 import type { T } from '../i18n/v3/hu';
+import { SHOP_URL } from '../i18n/v3/shop-link';
 const { tr, locale } = Astro.props as { tr: T; locale?: string };
 const homeHref = locale && locale !== 'hu' ? `/${locale}` : '/';
 ---
@@ -10,7 +11,11 @@ const homeHref = locale && locale !== 'hu' ? `/${locale}` : '/';
       <span class="foot-name"><b>{tr.footer.brandBold}</b>{tr.footer.brandRest}</span>
     </a>
     <span class="foot-tag">{tr.footer.tagline}</span>
-    <span class="foot-copy">{tr.footer.copy}</span>
+    <span class="foot-copy">
+      {tr.footer.copy}
+      <span class="foot-dot" aria-hidden="true">·</span>
+      <a href={SHOP_URL} class="foot-shop" target="_blank" rel="noopener noreferrer sponsored">{tr.footer.shopLabel}</a>
+    </span>
   </div>
 </footer>
 <style>
@@ -22,4 +27,7 @@ const homeHref = locale && locale !== 'hu' ? `/${locale}` : '/';
   .foot-name b{font-weight:600;color:var(--green);}
   .foot-tag{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:.88rem;margin:.3rem 0 1rem;}
   .foot-copy{font-size:var(--section-label);color:var(--muted);opacity:.6;}
+  .foot-dot{margin:0 .35rem;}
+  .foot-shop{color:inherit;text-decoration:underline;text-underline-offset:2px;}
+  .foot-shop:hover{color:var(--green);}
 </style>

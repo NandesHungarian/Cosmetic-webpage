@@ -115,11 +115,18 @@ export const ja: T = {
     submit: '送信',
     netlifyFormName: 'contact-v3-ja',
   },
+  shop: {
+    eyebrow: 'サロン以外にも',
+    h2: 'お気に入りの製品',
+    body: 'サロンでの仕事に加えて、MustHave Globalのパートナーとして、自分が実際に愛用しているスキンケアやウェルネス製品もご紹介しています。ぜひオンラインショップをご覧ください。',
+    cta: 'ショップを見る',
+  },
   footer: {
     brandBold: 'ビューティー',
     brandRest: 'セラピスト',
     tagline: '科学のチカラ、自然のインテリジェンス。',
     copy: '© 2026 szepsegterapeuta · Budapest',
     logoAlt: 'ビューティーセラピストのロゴ',
+    shopLabel: 'お気に入りの製品',
   },
 };

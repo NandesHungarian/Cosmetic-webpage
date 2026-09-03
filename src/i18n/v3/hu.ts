@@ -113,12 +113,19 @@ export const hu = {
     submit: 'Küldés',
     netlifyFormName: 'contact-v3',
   },
+  shop: {
+    eyebrow: 'Emellett',
+    h2: 'A kedvenc termékeim',
+    body: 'A szalonon túl MustHave Global partnerként olyan kozmetikumokat és wellness termékeket is ajánlok, amelyeket magam is szívesen használok. Nézd meg a kínálatot, és rendelj közvetlenül a webshopból.',
+    cta: 'Ugrás a webshopba',
+  },
   footer: {
     brandBold: 'szépség',
     brandRest: 'terapeuta',
     tagline: 'A tudomány ereje, a természet intelligenciája.',
     copy: '© 2026 szépségterapeuta · Budapest',
     logoAlt: 'Szépségterapeuta logó',
+    shopLabel: 'Kedvenc termékeim',
   },
 };
 
