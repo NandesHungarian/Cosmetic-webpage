@@ -68,8 +68,10 @@ const alts = alternateUrls('/');
 
 <body>
   <Nav tr={tr} locale={locale} />
-  <Hero tr={tr} />
-  <Kartyak tr={tr} />
+  <div class="hero-cards-wrap">
+    <Hero tr={tr} />
+    <Kartyak tr={tr} />
+  </div>
   <Fejlesztunk tr={tr} />
   <Kezelesek tr={tr} />
   <Rolam tr={tr} />

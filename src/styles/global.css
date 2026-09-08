@@ -68,3 +68,10 @@ a{text-decoration:none;color:inherit;}
     --section-label: .8rem;
   }
 }
+
+/* Hero + Kartyak közös pozícionálási keret — desktopon a kártyasáv ebbe
+   van abszolút pozícionálva a Hero bal oszlopa alá (lásd Kartyak.astro). */
+.hero-cards-wrap{position:relative;}
+@media (min-width:1024px){
+  .hero-cards-wrap{max-width:1400px;margin:0 auto;}
+}

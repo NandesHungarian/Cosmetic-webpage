@@ -32,10 +32,29 @@ const { tr } = Astro.props as { tr: T };
   @media (min-width:760px){
     .cards{max-width:1000px;margin-left:auto;margin-right:auto;}
   }
+  /* ── Asztali nézet: a sáv kilép a dokumentum-áramlásból, a Hero bal
+     (szöveges) oszlopa alá kerül — a kép jobb oldalon önálló marad. ── */
   @media (min-width:1024px){
-    /* A -224px-es felhúzás változatlan marad (a Fejlesztunk szekció -230px-es
-       margin-topja erre épül) — a Hero.astro-ban nő a magasság, hogy ez az
-       átfedés a videó aljába essen, ne a hero szövegére/CTA-jára. */
-    .cards{max-width:1200px;}
+    .cards-band{
+      position:absolute;left:var(--page-margin);bottom:0;
+      width:calc((100% - 6.3rem)/2); /* 6.3rem = 2×page-margin + hero grid gap(3.5rem) */
+      padding:0;margin:0;z-index:5;
+    }
+    .cards{
+      max-width:none;width:100%;transform:none;
+      display:grid;grid-template-columns:44px 1fr;grid-auto-rows:auto;
+      column-gap:1rem;row-gap:1.1rem;
+      background:rgba(20,23,21,.75);border:1px solid rgba(255,255,255,0.18);
+      border-radius:16px;padding:1.3rem 1.4rem;box-shadow:0 26px 54px -26px rgba(0,0,0,.4);
+    }
+    .card-ic-wrap{position:static;width:44px;height:44px;}
+    .ic1{grid-column:1;grid-row:1;transform:none;}
+    .ic2{grid-column:1;grid-row:2;transform:none;}
+    .ic3{grid-column:1;grid-row:3;transform:none;}
+    .card{grid-column:2;text-align:left;padding:0;}
+    .card:nth-child(4){grid-row:1;}
+    .card:nth-child(5){grid-row:2;}
+    .card:nth-child(6){grid-row:3;}
+    .card::after{display:none;}
   }
 </style>

@@ -28,4 +28,10 @@ const { tr } = Astro.props as { tr: T };
     .develop-text{position:relative;transform:none;}
     .dev-p{max-width:420px;}
   }
+  @media (min-width:1024px){
+    /* A -230px a Kartyak flow-beli "szellem helyét" húzta be; a kártyasáv
+       innentől abszolút pozícionált (l. hero-cards-wrap), így itt normál,
+       pozitív térköz kell a Hero alja után. */
+    .develop{margin-top:0;padding-top:4rem;max-width:1400px;}
+  }
 </style>
