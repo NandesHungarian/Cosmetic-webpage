@@ -125,7 +125,7 @@ export const en: T = {
     brandBold: 'beauty',
     brandRest: 'therapist',
     tagline: 'The power of science, the intelligence of nature.',
-    copy: '© 2026 szepsegterapeuta · Budapest',
+    copy: '© 2026 beauty therapist · Budapest',
     logoAlt: 'Beauty therapist logo',
     shopLabel: 'My favorite products',
   },

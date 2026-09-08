@@ -125,7 +125,7 @@ export const ja: T = {
     brandBold: 'ビューティー',
     brandRest: 'セラピスト',
     tagline: '科学のチカラ、自然のインテリジェンス。',
-    copy: '© 2026 szepsegterapeuta · Budapest',
+    copy: '© 2026 ビューティーセラピスト · Budapest',
     logoAlt: 'ビューティーセラピストのロゴ',
     shopLabel: 'お気に入りの製品',
   },

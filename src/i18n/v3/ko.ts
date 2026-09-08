@@ -125,7 +125,7 @@ export const ko: T = {
     brandBold: '뷰티',
     brandRest: '테라피스트',
     tagline: '과학의 힘, 자연의 지혜.',
-    copy: '© 2026 szepsegterapeuta · Budapest',
+    copy: '© 2026 뷰티 테라피스트 · Budapest',
     logoAlt: '뷰티 테라피스트 로고',
     shopLabel: '즐겨찾는 제품',
   },
