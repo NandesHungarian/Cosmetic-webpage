@@ -20,6 +20,10 @@ const langLabels: Record<Locale, string> = {
     <span class="brand-name"><b>{tr.nav.brandBold}</b>{tr.nav.brand.slice(tr.nav.brandBold.length)}</span>
   </a>
 
+  <nav class="desktop-links" aria-label="Főnavigáció">
+    {tr.nav.links.map(l => <a href={l.href}>{l.label}</a>)}
+  </nav>
+
   <div class="nav-right">
     <!-- Nyelválasztó a fejlécben -->
     <div class="lang-switcher" aria-label="Nyelv választása">
@@ -34,6 +38,8 @@ const langLabels: Record<Locale, string> = {
         </a>
       ))}
     </div>
+
+    <a href="#kapcsolat" class="desktop-cta" aria-label={tr.nav.ctaAriaLabel}>{tr.nav.cta}</a>
 
     <button class="burger" id="burger" aria-label="Menü"><span></span><span></span><span></span></button>
   </div>
@@ -60,6 +66,10 @@ const langLabels: Record<Locale, string> = {
   .brand-name b{font-weight:600;color:var(--green);}
   .nav-right{display:flex;align-items:center;gap:.55rem;flex-shrink:0;}
 
+  /* Desktop navigáció — mobilon rejtve, csak a hamburger drawer aktív */
+  .desktop-links{display:none;}
+  .desktop-cta{display:none;}
+
   /* Nyelválasztó */
   .lang-switcher{display:flex;align-items:center;gap:2px;background:rgba(0,0,0,.05);border-radius:8px;padding:3px;}
   .lang-btn{font-size:.62rem;font-weight:700;letter-spacing:.08em;color:var(--muted);padding:.3rem .45rem;border-radius:6px;transition:all .2s;line-height:1;}
@@ -82,4 +92,20 @@ const langLabels: Record<Locale, string> = {
   /* Időpont gomb a drawer-ben */
   .drawer-book{display:flex;align-items:center;gap:.5rem;margin:.5rem 1rem .6rem;padding:.7rem 1.2rem !important;background:var(--green);color:#fff !important;border-radius:9px;justify-content:center;letter-spacing:.06em !important;}
   .drawer-book:hover{background:var(--green-deep) !important;}
+
+  /* ── Asztali nézet: vízszintes menü, hamburger eltűnik ── */
+  @media (min-width:1024px){
+    .nav{height:74px;padding:0 2.4rem;}
+    .brand-mark{height:36px;}
+    .brand-name{font-size:1rem;}
+
+    .desktop-links{display:flex;align-items:center;gap:2rem;margin-left:1.5rem;margin-right:auto;}
+    .desktop-links a{font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .2s;}
+    .desktop-links a:hover{color:var(--green-deep);}
+
+    .desktop-cta{display:inline-flex;align-items:center;background:var(--green);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.65rem 1.3rem;border-radius:9px;transition:background .2s;}
+    .desktop-cta:hover{background:var(--green-deep);}
+
+    .burger,.drawer{display:none;}
+  }
 </style>

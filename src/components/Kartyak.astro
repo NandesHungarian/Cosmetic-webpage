@@ -32,4 +32,10 @@ const { tr } = Astro.props as { tr: T };
   @media (min-width:760px){
     .cards{max-width:1000px;margin-left:auto;margin-right:auto;}
   }
+  @media (min-width:1024px){
+    /* A -224px-es felhúzás változatlan marad (a Fejlesztunk szekció -230px-es
+       margin-topja erre épül) — a Hero.astro-ban nő a magasság, hogy ez az
+       átfedés a videó aljába essen, ne a hero szövegére/CTA-jára. */
+    .cards{max-width:1200px;}
+  }
 </style>
