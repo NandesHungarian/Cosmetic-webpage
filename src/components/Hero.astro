@@ -68,7 +68,15 @@ const { tr } = Astro.props as { tr: T };
       padding:4.5rem var(--page-margin) 12rem;
       overflow:visible;
     }
-    .hero-media{position:relative;top:auto;left:auto;width:min(430px,100%);height:720px;order:2;margin-left:auto;}
+    .hero-media{
+      position:relative;top:auto;left:auto;width:min(430px,100%);height:720px;order:2;margin-left:auto;
+      border-radius:0;
+      -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 9%,#000 88%,transparent 100%),radial-gradient(82% 82% at 50% 46%,#000 68%,transparent 97%);
+      -webkit-mask-composite:source-in;
+      mask-image:linear-gradient(to bottom,transparent 0%,#000 9%,#000 88%,transparent 100%),radial-gradient(82% 82% at 50% 46%,#000 68%,transparent 97%);
+      mask-composite:intersect;
+    }
+    .hero-video{filter:saturate(.9) sepia(.035) brightness(1.01);}
     .hero-left-fade{display:none;}
     .hero-text{
       position:relative;top:auto;left:auto;transform:none;
