@@ -63,13 +63,13 @@ const { tr } = Astro.props as { tr: T };
   @media (min-width:1024px){
     .hero{
       height:auto;min-height:860px;margin-top:74px;
-      display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:3.5rem;
-      max-width:1400px;margin-left:auto;margin-right:auto;
+      display:grid;grid-template-columns:minmax(0,1fr) min(520px,42%);align-items:start;gap:3.5rem;
+      max-width:1300px;margin-left:auto;margin-right:auto;
       padding:4.5rem var(--page-margin) 12rem;
       overflow:visible;
     }
     .hero-media{
-      position:relative;top:auto;left:auto;width:min(430px,100%);height:720px;order:2;margin-left:auto;
+      position:relative;top:auto;left:auto;width:100%;height:min(780px,72vh);order:2;
       border-radius:0;
       -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 9%,#000 88%,transparent 100%),radial-gradient(82% 82% at 50% 46%,#000 68%,transparent 97%);
       -webkit-mask-composite:source-in;
